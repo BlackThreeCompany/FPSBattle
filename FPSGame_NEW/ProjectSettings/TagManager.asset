@@ -10,6 +10,8 @@ TagManager:
   - Bullet
   - MyPlayer
   - ElsePlayer
+  - Item
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -17,14 +19,14 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Item
+  - Grenade
   - PlayerHitTigger
   - Map
   - MyPlayer
   - ElsePlayer
   - Bullet
-  - 
+  - Player
   - 
   - 
   - 

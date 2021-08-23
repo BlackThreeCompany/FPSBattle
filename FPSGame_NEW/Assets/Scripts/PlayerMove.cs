@@ -58,6 +58,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         {
             Cam = Camera.main.gameObject;
             this.gameObject.tag = "MyPlayer";
+            this.gameObject.layer = 13;
             StatManager.instance.GetViewId(pv.ViewID);
         }
         else
