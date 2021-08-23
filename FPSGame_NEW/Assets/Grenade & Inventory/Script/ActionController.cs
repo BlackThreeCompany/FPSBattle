@@ -46,7 +46,7 @@ public class ActionController : MonoBehaviour
             CheckItem();
             CanPickUp();
         }
-        if (Input.GetButtonDown("ThrowGrenade")) //&& !throwGrenade)
+        if (Input.GetButtonDown("ThrowGrenade") && !throwGrenade)
         {
             throwGrenade = true;
             SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
@@ -55,7 +55,7 @@ public class ActionController : MonoBehaviour
             CloneGrenade = Instantiate(grenade, tr.position, tr.rotation);
             CloneGrenade.layer = 7;
         }
-        if (Input.GetButtonDown("ThrowSmokeGrenade")) //&& !throwGrenade)
+        if (Input.GetButtonDown("ThrowSmokeGrenade") && !throwGrenade)
         {
             throwGrenade = true;
             SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);

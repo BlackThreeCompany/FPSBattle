@@ -5,18 +5,18 @@ using UnityEngine;
 public class SmokeGrenade : MonoBehaviour
 {
     public float ThrowPower;
-    public float Timer;
     public float BoomTimer;
 
-
     bool isGround = false;
-    bool isBoom = false;
 
     Rigidbody rbody;
     Transform tr;
 
+    public int cnt = 1;
+
     public GameObject SmokeEft;
     public static SmokeGrenade instance;
+
     private void Awake()
     {
         instance = this;
@@ -33,34 +33,15 @@ public class SmokeGrenade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ActionController.instance.throwGrenade)
+        if (ActionController.instance.throwGrenade && cnt == 1)
         {
-            if (Timer < BoomTimer)
-            {
-                StartCoroutine(BoomCnt());
-            }
-            else if (Timer >= BoomTimer)
-            {
-                Boom();
-            }
-        }
-
-    }
-
-    IEnumerator BoomCnt()
-    {
-        if (!isBoom)
-        {
-            isBoom = true;
-            yield return new WaitForSeconds(0.5f);
-            Timer += 0.5f;
-            isBoom = false;
+            cnt = 0;
+            Invoke("Boom", BoomTimer);
         }
     }
 
     void Boom()
     {
-        Timer = 0;
         SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.SmokegrenadeBoom, 0, SoundManager.instance.sfxVolum * 0.8f);
         Destroy(tr.gameObject, SoundManager.instance.SmokegrenadeBoom.length);
         Instantiate(SmokeEft, tr.position, tr.rotation);

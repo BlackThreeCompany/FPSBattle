@@ -5,12 +5,10 @@ using UnityEngine;
 public class Grenade : MonoBehaviour
 {
     public float ThrowPower;
-    public float Timer;
     public float BoomTimer;
 
 
     bool isGround = false;
-    bool isBoom = false;
 
     Rigidbody rbody;
     Transform tr;
@@ -33,29 +31,11 @@ public class Grenade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ActionController.instance.throwGrenade)
+        if (ActionController.instance.throwGrenade)
         {
-            if(Timer < BoomTimer)
-            {
-                StartCoroutine(BoomCnt());
-            }
-            else if (Timer >= BoomTimer)
-            {
-                Boom();
-            }
+            Invoke("Boom", BoomTimer);
         }
-        
-    }
 
-    IEnumerator BoomCnt()
-    {
-        if(!isBoom)
-        {
-            isBoom = true;
-            yield return new WaitForSeconds(0.5f);
-            Timer += 0.5f;
-            isBoom = false;
-        }
     }
 
     void Boom()

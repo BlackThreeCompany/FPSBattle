@@ -27,7 +27,11 @@ public class CFX_AutoDestructShuriken : MonoBehaviour
 					#endif
 				}
 				else
+                {
 					GameObject.Destroy(this.gameObject);
+					SmokeGrenade.instance.cnt = 1;
+				}
+
 				break;
 			}
 		}
