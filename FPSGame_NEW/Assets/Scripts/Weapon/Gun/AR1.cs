@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-public class PlayerGunShoot : MonoBehaviourPunCallbacks
+public class AR1 : MonoBehaviourPunCallbacks
 {
 
     public LayerMask IgnoreMe;
