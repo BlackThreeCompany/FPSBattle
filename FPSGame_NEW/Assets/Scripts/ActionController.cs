@@ -76,6 +76,8 @@ public class ActionController : MonoBehaviour
                 theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
                 Destroy(hitInfo.transform.gameObject);
                 InfoDisappear();
+                    
+                
             }
         }
     }
@@ -84,7 +86,7 @@ public class ActionController : MonoBehaviour
     {
         if (Physics.Raycast(tr.position, tr.TransformDirection(Vector3.forward), out hitInfo, range, layerMask)) //tr.TransformDirection(Vector3.forward) == tr.forward
         {
-            if (hitInfo.transform.tag == "Item")
+            if (hitInfo.transform.tag == "Item" || hitInfo.transform.tag == "Equipment")
             {
                 ItemInfoAppear();
             }

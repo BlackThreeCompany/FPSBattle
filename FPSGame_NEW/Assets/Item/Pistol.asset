@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd07e341785925643840bde4e6fbfae5, type: 3}
-  m_Name: Grenade
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  itemName: Grenade
-  itemImage: {fileID: 21300000, guid: 194c5953aaf9af747a6d73bfd39ba54c, type: 3}
-  itemPrefab: {fileID: 8414854629451895517, guid: 80f5d061b794a5e4a85a14982abaee83, type: 3}
-  itemType: 7
+  itemName: Pistol
+  itemImage: {fileID: 21300000, guid: d6e4dc2ab496ac845a119b14c5abbb91, type: 3}
+  itemPrefab: {fileID: 1669814075106190, guid: ea530e89dc913d14480baec0a57c7801, type: 3}
+  itemType: 3

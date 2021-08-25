@@ -10,6 +10,7 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
                                    ,IBeginDragHandler,IDragHandler,IEndDragHandler,IDropHandler
 {
 
+
     public Item item; // 획득한 아이템
     public int itemCnt;
     public Image itemImage;
@@ -24,15 +25,15 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
         color.a = _alpha;
         itemImage.color = color;
     }
-    
+
     //아이템 획득
-    public void AddItem(Item _item,int _count = 1)
+    public void AddItem(Item _item, int _count = 1)
     {
         item = _item;
         itemCnt = _count;
         itemImage.sprite = item.itemImage;
 
-        if(item.itemType != Item.ItemType.Equipment)
+        if(item.itemType != Item.ItemType.Equipment && !(Item.ItemType.Pistol == item.itemType || Item.ItemType.Weapon == item.itemType || Item.ItemType.Knife == item.itemType || Item.ItemType.Armor == item.itemType))
         {
             CntImage.SetActive(true);
             text_cnt.text = itemCnt.ToString();
@@ -76,7 +77,7 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
         {
             if(item != null)
             {
-                if(item.itemType == Item.ItemType.Equipment)
+                if(item.itemType == Item.ItemType.Equipment )
                 {
                     //장착
                 }
@@ -92,13 +93,17 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if(item != null)
+        if (item != null)
         {
-            DragSlot.instance.dragSlot = this;
-            DragSlot.instance.DragSetImage(itemImage);
-            DragSlot.instance.SetColor(1);
+            if(Item.ItemType.Weapon != item.itemType && Item.ItemType.Pistol != item.itemType && Item.ItemType.Knife != item.itemType && Item.ItemType.Armor != item.itemType)
+            {
+                DragSlot.instance.dragSlot = this;
+                DragSlot.instance.DragSetImage(itemImage);
+                DragSlot.instance.SetColor(1);
 
-            DragSlot.instance.transform.position = eventData.position;
+                DragSlot.instance.transform.position = eventData.position;
+            }
+            
         }
     }
 
@@ -106,7 +111,10 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
     {
         if (item != null)
         {
-            DragSlot.instance.transform.position = eventData.position;
+            if (Item.ItemType.Weapon != item.itemType && Item.ItemType.Pistol != item.itemType && Item.ItemType.Knife != item.itemType && Item.ItemType.Armor != item.itemType)
+            {
+                DragSlot.instance.transform.position = eventData.position;
+            }
         }
     }
 
@@ -128,12 +136,13 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
 
     void ChangeSloat()
     {
+        
         Item _tempItem = item;
         int _tempItemCount = itemCnt;
 
         AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCnt);
 
-        if(_tempItem != null)
+        if (_tempItem != null)
         {
             DragSlot.instance.dragSlot.AddItem(_tempItem, _tempItemCount);
         }
@@ -141,5 +150,8 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
         {
             DragSlot.instance.dragSlot.claerSloat();
         }
+
+
     }
 }
+

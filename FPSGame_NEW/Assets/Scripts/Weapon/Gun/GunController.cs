@@ -28,7 +28,7 @@ public class GunController : MonoBehaviourPunCallbacks
 
     public PhotonView pv;
 
-    bool isSingle = false;
+    bool isSingle;
 
     public int GunHoleNum=0;
 
@@ -93,11 +93,10 @@ public class GunController : MonoBehaviourPunCallbacks
             {
                 if (StatManager.instance.CanGunShoot)
                 {
-                    if (ShootDebugTime >= WeaponManager.instance.FireSpeed)
+                    if (ShootDebugTime >= WeaponManager.instance.FireSpeed && WeaponManager.instance.isCanFireAR)
                     {
                         ShootDebugTime = 0;
                         //Instantiate(Bullet, GunHole.transform.position, Quaternion.LookRotation(Gundir));
-
                         PhotonNetwork.Instantiate("Bullet", GunHole[GunHoleNum].transform.position, Quaternion.LookRotation(Gundir));
                         //pv.RPC("PlayerShoot", RpcTarget.All, GunHole.transform.position, Quaternion.LookRotation(Gundir));
 
@@ -113,7 +112,7 @@ public class GunController : MonoBehaviourPunCallbacks
             {
                 if (StatManager.instance.CanGunShoot)
                 {
-                    if (ShootDebugTime >= WeaponManager.instance.FireSpeed)
+                    if (ShootDebugTime >= WeaponManager.instance.FireSpeed && WeaponManager.instance.isCanFirePistol)
                     {
                         ShootDebugTime = 0;
                         //Instantiate(Bullet, GunHole.transform.position, Quaternion.LookRotation(Gundir));
@@ -139,20 +138,20 @@ public class GunController : MonoBehaviourPunCallbacks
 
     void GunChange()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Alpha1) && WeaponManager.instance.WeaponSloat.item != null)
         {
             HandGun.SetActive(false);
             AR1.SetActive(true);
             GunHoleNum = 0;
             //
             WeaponManager.instance.damage = 25;
-            WeaponManager.instance.FireSpeed = 0.1f;
+            WeaponManager.instance.FireSpeed = 0.25f;
             //
             StatManager.instance.PlayerMoveSpeed = 4f;
             //
             isSingle = false;
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
+        if(Input.GetKeyDown(KeyCode.Alpha2) && WeaponManager.instance.PistolSloat.item != null)
         {
             HandGun.SetActive(true);
             AR1.SetActive(false);

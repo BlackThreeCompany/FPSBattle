@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6155701844715842149}
   m_Layer: 0
-  m_Name: Hole
+  m_Name: Pistol_Hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 2565984860312414135}
   - component: {fileID: 2574437884821880753}
   m_Layer: 0
-  m_Name: Handgun_01
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,12 +370,12 @@ GameObject:
   - component: {fileID: 7018354314233238533}
   - component: {fileID: 7011111835018039643}
   m_Layer: 0
-  m_Name: Assault_Rifle_01
+  m_Name: Assault_Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6994402052866297515
 Transform:
   m_ObjectHideFlags: 0
@@ -1059,7 +1059,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6998236652841961781}
   m_Layer: 0
-  m_Name: Hole
+  m_Name: Assault_Rifle_Hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1073,7 +1073,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6998236652841961782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0112, z: 0.431}
+  m_LocalPosition: {x: 0.002, y: 0.008, z: 0.452}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6994402052866297515}
