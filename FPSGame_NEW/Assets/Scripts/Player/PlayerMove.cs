@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
     CharacterController cc;
 
-    public PlayerGunShoot gunShoot;
+    public AR1 gunShoot;
 
     public float hmove;
     public float vmove;
@@ -52,7 +52,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     void Awake()
     {
         cc = GetComponent<CharacterController>();
-        gunShoot = GetComponent<PlayerGunShoot>();
+        gunShoot = GetComponent<AR1>();
 
         if (pv.IsMine)
         {
