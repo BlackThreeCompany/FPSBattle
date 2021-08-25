@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float FireSpeed;
+    public int damage;
 
-    // Update is called once per frame
-    void Update()
+    public static WeaponManager instance;
+
+    private void Awake()
     {
-        
+        instance = this;    
     }
 }
