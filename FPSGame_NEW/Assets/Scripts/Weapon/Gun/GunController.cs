@@ -17,6 +17,7 @@ public class GunController : MonoBehaviourPunCallbacks
     public GameObject[] GunHole;
 
     public GameObject AR1;
+    public GameObject AR2;
     public GameObject HandGun;
     public GameObject Grenade;
     public GameObject SmokeGrenade;
@@ -29,13 +30,14 @@ public class GunController : MonoBehaviourPunCallbacks
 
     public GameObject Bullet;
 
-    public int CurrentHand; // Hand : 0      AR : 1      Pistol : 2       Grenade : 3        SmokeGrenade : 4
+    public int CurrentHand; // Hand : 0      AR : 1    AR : 2    Pistol : 3       Grenade : 4        SmokeGrenade : 5
 
     public float ShootDelay = 0.1f;
     public float ShootDebugTime = 1f;
 
     public PhotonView pv;
     Transform tr;
+
 
     bool isSingle;
 
@@ -98,11 +100,11 @@ public class GunController : MonoBehaviourPunCallbacks
 
     void Shoot()
     {
-        if(CurrentHand == 3 || CurrentHand == 4)
+        if(CurrentHand == 4 || CurrentHand == 5)
         {
             if (Input.GetMouseButton(0) && !ActionController.instance.throwGrenade)
             {
-                if(CurrentHand == 3)
+                if(CurrentHand == 4)
                 {
                     ActionController.instance.throwGrenade = true;
                     SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
@@ -113,7 +115,7 @@ public class GunController : MonoBehaviourPunCallbacks
                     WeaponManager.instance.GrenadeCnt--;
                     CloneGrenade.layer = 7;
                 }
-                else if(CurrentHand == 4)
+                else if(CurrentHand == 5)
                 {
                     ActionController.instance.throwGrenade = true;
                     SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
@@ -176,30 +178,24 @@ public class GunController : MonoBehaviourPunCallbacks
     {
         if(Input.GetKeyDown(KeyCode.Alpha1) && WeaponManager.instance.WeaponSloat.item != null)
         {
-            HandGun.SetActive(false);
-            AR1.SetActive(true);
-            Grenade.SetActive(false);
-            SmokeGrenade.SetActive(false);
-            GunHoleNum = 0;
-            //
-            CurrentHand = 1;
-            //
-            WeaponManager.instance.damage = 25;
-            WeaponManager.instance.FireSpeed = 0.25f;
-            //
-            StatManager.instance.PlayerMoveSpeed = 4f;
-            //
-            isSingle = false;
+            WeaponChnage();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && WeaponManager.instance.PistolSloat.item != null)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && WeaponManager.instance.WeaponSloat2.item != null)
+        {
+
+            ChangeWeapon2();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) && WeaponManager.instance.PistolSloat.item != null)
         {
             HandGun.SetActive(true);
             AR1.SetActive(false);
+            AR2.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
             GunHoleNum = 1;
             //
-            CurrentHand = 2;
+            CurrentHand = 3;
+            Inventory.instnace.CurrentHand = CurrentHand;
             //
             WeaponManager.instance.damage = 10;
             WeaponManager.instance.FireSpeed = 0f;
@@ -214,10 +210,12 @@ public class GunController : MonoBehaviourPunCallbacks
             {
                 HandGun.SetActive(false);
                 AR1.SetActive(false);
+                AR2.SetActive(false);
                 Grenade.SetActive(true);
                 SmokeGrenade.SetActive(false);
                 //
-                CurrentHand = 3;
+                CurrentHand = 4;
+                Inventory.instnace.CurrentHand = CurrentHand;
                 //
                 WeaponManager.instance.damage = 10;
                 WeaponManager.instance.FireSpeed = 0f;
@@ -230,10 +228,12 @@ public class GunController : MonoBehaviourPunCallbacks
             {
                 HandGun.SetActive(false);
                 AR1.SetActive(false);
+                AR2.SetActive(false);
                 Grenade.SetActive(false);
                 SmokeGrenade.SetActive(true);
                 //
-                CurrentHand = 4;
+                CurrentHand = 5;
+                Inventory.instnace.CurrentHand = CurrentHand;
                 //
                 WeaponManager.instance.damage = 10;
                 WeaponManager.instance.FireSpeed = 0f;
@@ -244,6 +244,94 @@ public class GunController : MonoBehaviourPunCallbacks
             }
             
         }
+    }
+
+    public void WeaponChnage()
+    {
+        if (WeaponManager.instance.WeaponName == "AK-47")
+        {
+            HandGun.SetActive(false);
+            AR1.SetActive(true);
+            AR2.SetActive(false);
+            Grenade.SetActive(false);
+            SmokeGrenade.SetActive(false);
+            GunHoleNum = 0;
+            //
+            CurrentHand = 1;
+            Inventory.instnace.CurrentHand = CurrentHand;
+            //
+            WeaponManager.instance.damage = 25;
+            WeaponManager.instance.FireSpeed = 0.25f;
+            //
+            StatManager.instance.PlayerMoveSpeed = 4f;
+            //
+            isSingle = false;
+        }
+        else if (WeaponManager.instance.WeaponName == "AKM")
+        {
+            HandGun.SetActive(false);
+            AR1.SetActive(false);
+            AR2.SetActive(true);
+            Grenade.SetActive(false);
+            SmokeGrenade.SetActive(false);
+            GunHoleNum = 0;
+            //
+            CurrentHand = 1;
+            Inventory.instnace.CurrentHand = CurrentHand;
+            //
+            WeaponManager.instance.damage = 35;
+            WeaponManager.instance.FireSpeed = 0.35f;
+            //
+            StatManager.instance.PlayerMoveSpeed = 4f;
+            //
+            isSingle = false;
+        }
+    }
+
+
+    public void ChangeWeapon2()
+    {
+        if (WeaponManager.instance.WeaponName2 == "AK-47")
+        {
+
+            HandGun.SetActive(false);
+            AR1.SetActive(true);
+            AR2.SetActive(false);
+            Grenade.SetActive(false);
+            SmokeGrenade.SetActive(false);
+            GunHoleNum = 0;
+            //
+            CurrentHand = 2;
+            Inventory.instnace.CurrentHand = CurrentHand;
+            //
+            WeaponManager.instance.damage = 25;
+            WeaponManager.instance.FireSpeed = 0.25f;
+            //
+            StatManager.instance.PlayerMoveSpeed = 4f;
+            //
+            isSingle = false;
+        }
+        else if (WeaponManager.instance.WeaponName2 == "AKM")
+        {
+            HandGun.SetActive(false);
+            AR1.SetActive(false);
+            AR2.SetActive(true);
+            Grenade.SetActive(false);
+            SmokeGrenade.SetActive(false);
+            GunHoleNum = 0;
+            //
+
+            CurrentHand = 2;
+            Inventory.instnace.CurrentHand = CurrentHand;
+            //
+            WeaponManager.instance.damage = 35;
+            WeaponManager.instance.FireSpeed = 0.35f;
+            //
+            StatManager.instance.PlayerMoveSpeed = 4f;
+            //
+            isSingle = false;
+        }
+
     }
 
 }

@@ -6,6 +6,7 @@ public class Inventory : MonoBehaviour
 {
     public static bool inventoryActivated = false;
 
+    public int CurrentHand;
     int cnt;
 
     public GameObject InventoryBG;
@@ -15,10 +16,19 @@ public class Inventory : MonoBehaviour
     //슬롯듯
     Sloat[] slots;
     public Equipment WeaponSlots;
+    public Equipment WeaponSlots2;
     public Equipment PistolSlots;
     public Equipment KnifeSlots;
     public Equipment ArmorSlots;
 
+    
+
+    public static Inventory instnace;
+
+    private void Awake()
+    {
+        instnace = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +84,26 @@ public class Inventory : MonoBehaviour
             {
                 WeaponSlots.AddItem(_item, _count);
                 return;
+            }
+            else if(WeaponSlots2.item == null)
+            {
+                WeaponSlots2.AddItem(_item, _count);
+                return;
+            }
+            else
+            {
+                if(CurrentHand == 1)
+                {
+                    WeaponSlots.AddItem(_item, _count);
+                    SendMessage("WeaponChnage",SendMessageOptions.DontRequireReceiver);
+                    return;
+                }
+                else if(CurrentHand == 2)
+                {
+                    WeaponSlots2.AddItem(_item, _count);
+                    SendMessage("ChangeWeapon2",SendMessageOptions.DontRequireReceiver);
+                    return;
+                }
             }
         }
         else if (Item.ItemType.Pistol == _item.itemType)

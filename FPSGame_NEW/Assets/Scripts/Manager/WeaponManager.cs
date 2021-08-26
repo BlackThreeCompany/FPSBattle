@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     public Equipment WeaponSloat;
+    public Equipment WeaponSloat2;
     public Equipment PistolSloat;
 
     public bool isCanFireAR = false;
@@ -20,6 +21,12 @@ public class WeaponManager : MonoBehaviour
 
     public static WeaponManager instance;
 
+    public string WeaponName;
+     public string WeaponName2;
+
+    public string PistolName;
+
+
     private void Awake()
     {
         instance = this;    
@@ -27,9 +34,34 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        if(WeaponSloat.item != null)
+        if (WeaponSloat.item != null)
         {
             isCanFireAR = true;
+            if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AKM")
+            {
+                WeaponName = "AKM";
+            }
+            else if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AK-47")
+            {
+                WeaponName = "AK-47";
+            }
+        }
+        else
+        {
+            isCanFireAR = false;
+        }
+
+        if (WeaponSloat2.item != null)
+        {
+            isCanFireAR = true;
+            if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AKM")
+            {
+                WeaponName2 = "AKM";
+            }
+            else if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AK-47")
+            {
+                WeaponName2 = "AK-47";
+            }
         }
         else
         {
@@ -62,6 +94,7 @@ public class WeaponManager : MonoBehaviour
         {
             isCanThrowSmokeGrenade = false;
         }
+
 
     }
 }
