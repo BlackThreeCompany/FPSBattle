@@ -18,15 +18,24 @@ public class GunController : MonoBehaviourPunCallbacks
 
     public GameObject AR1;
     public GameObject HandGun;
+    public GameObject Grenade;
+    public GameObject SmokeGrenade;
+
+    public GameObject ThrowGrenade;
+    public GameObject ThrowSmokeGrenade;
 
     public Vector3 Gundir;
     public float GunHitDist;
 
     public GameObject Bullet;
+
+    public int CurrentHand; // Hand : 0      AR : 1      Pistol : 2       Grenade : 3        SmokeGrenade : 4
+
     public float ShootDelay = 0.1f;
     public float ShootDebugTime = 1f;
 
     public PhotonView pv;
+    Transform tr;
 
     bool isSingle;
 
@@ -39,6 +48,8 @@ public class GunController : MonoBehaviourPunCallbacks
             Cam = Camera.main.gameObject;
             HitPoint = GameObject.Find("hitpoint");
         }
+
+        tr = GetComponent<Transform>();
     }
     void Start()
     {
@@ -87,11 +98,41 @@ public class GunController : MonoBehaviourPunCallbacks
 
     void Shoot()
     {
-        if(!isSingle)
+        if(CurrentHand == 3 || CurrentHand == 4)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && !ActionController.instance.throwGrenade)
             {
-                if (StatManager.instance.CanGunShoot)
+                if(CurrentHand == 3)
+                {
+                    ActionController.instance.throwGrenade = true;
+                    SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
+                    GameObject CloneGrenade = ThrowGrenade;
+                    //CloneGrenade = Instantiate(Smokegrenade, tr.position, tr.rotation);
+                    CloneGrenade = Instantiate(ThrowGrenade, tr.position, tr.rotation);
+                    CloneGrenade.GetComponent<Grenade>().isBoom = true;
+                    WeaponManager.instance.GrenadeCnt--;
+                    CloneGrenade.layer = 7;
+                }
+                else if(CurrentHand == 4)
+                {
+                    ActionController.instance.throwGrenade = true;
+                    SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
+                    GameObject CloneGrenade = ThrowSmokeGrenade;
+                    //CloneGrenade = Instantiate(grenade, tr.position, tr.rotation);
+                    CloneGrenade = Instantiate(ThrowSmokeGrenade, tr.position, tr.rotation);
+                    CloneGrenade.GetComponent<SmokeGrenade>().isBoom = true;
+                    WeaponManager.instance.Smoke_GrenadeCnt--;
+                    CloneGrenade.layer = 7;
+                }
+
+            }
+        }
+
+        else
+        {
+            if (!isSingle)
+            {
+                if (Input.GetMouseButton(0) )
                 {
                     if (ShootDebugTime >= WeaponManager.instance.FireSpeed && WeaponManager.instance.isCanFireAR)
                     {
@@ -101,16 +142,11 @@ public class GunController : MonoBehaviourPunCallbacks
                         //pv.RPC("PlayerShoot", RpcTarget.All, GunHole.transform.position, Quaternion.LookRotation(Gundir));
 
                     }
-
                 }
-
             }
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(0))
+            else
             {
-                if (StatManager.instance.CanGunShoot)
+                if (Input.GetMouseButtonDown(0))
                 {
                     if (ShootDebugTime >= WeaponManager.instance.FireSpeed && WeaponManager.instance.isCanFirePistol)
                     {
@@ -121,11 +157,11 @@ public class GunController : MonoBehaviourPunCallbacks
                         //pv.RPC("PlayerShoot", RpcTarget.All, GunHole.transform.position, Quaternion.LookRotation(Gundir));
 
                     }
-
                 }
-
             }
         }
+
+       
         
         ShootDebugTime += Time.deltaTime;
     }
@@ -142,7 +178,11 @@ public class GunController : MonoBehaviourPunCallbacks
         {
             HandGun.SetActive(false);
             AR1.SetActive(true);
+            Grenade.SetActive(false);
+            SmokeGrenade.SetActive(false);
             GunHoleNum = 0;
+            //
+            CurrentHand = 1;
             //
             WeaponManager.instance.damage = 25;
             WeaponManager.instance.FireSpeed = 0.25f;
@@ -151,11 +191,15 @@ public class GunController : MonoBehaviourPunCallbacks
             //
             isSingle = false;
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2) && WeaponManager.instance.PistolSloat.item != null)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && WeaponManager.instance.PistolSloat.item != null)
         {
             HandGun.SetActive(true);
             AR1.SetActive(false);
+            Grenade.SetActive(false);
+            SmokeGrenade.SetActive(false);
             GunHoleNum = 1;
+            //
+            CurrentHand = 2;
             //
             WeaponManager.instance.damage = 10;
             WeaponManager.instance.FireSpeed = 0f;
@@ -163,6 +207,42 @@ public class GunController : MonoBehaviourPunCallbacks
             StatManager.instance.PlayerMoveSpeed = 5f;
             //
             isSingle = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if(WeaponManager.instance.isCanThrowGrenade)
+            {
+                HandGun.SetActive(false);
+                AR1.SetActive(false);
+                Grenade.SetActive(true);
+                SmokeGrenade.SetActive(false);
+                //
+                CurrentHand = 3;
+                //
+                WeaponManager.instance.damage = 10;
+                WeaponManager.instance.FireSpeed = 0f;
+                //
+                StatManager.instance.PlayerMoveSpeed = 5f;
+                //
+                isSingle = true;
+            }
+            else if(WeaponManager.instance.isCanThrowSmokeGrenade)
+            {
+                HandGun.SetActive(false);
+                AR1.SetActive(false);
+                Grenade.SetActive(false);
+                SmokeGrenade.SetActive(true);
+                //
+                CurrentHand = 4;
+                //
+                WeaponManager.instance.damage = 10;
+                WeaponManager.instance.FireSpeed = 0f;
+                //
+                StatManager.instance.PlayerMoveSpeed = 5f;
+                //
+                isSingle = true;
+            }
+            
         }
     }
 

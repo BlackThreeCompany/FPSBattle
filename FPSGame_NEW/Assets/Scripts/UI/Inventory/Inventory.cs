@@ -6,6 +6,8 @@ public class Inventory : MonoBehaviour
 {
     public static bool inventoryActivated = false;
 
+    int cnt;
+
     public GameObject InventoryBG;
     public GameObject EquipmentBG;
     public GameObject SlotsParent;
@@ -28,6 +30,7 @@ public class Inventory : MonoBehaviour
     void Update()
     {
         TryOpenInventory();
+        //CheckGrenade();
     }
 
     void TryOpenInventory()
@@ -121,6 +124,5 @@ public class Inventory : MonoBehaviour
         }
         
     }
-
 
 }

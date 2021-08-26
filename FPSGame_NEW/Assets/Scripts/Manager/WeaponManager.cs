@@ -9,6 +9,11 @@ public class WeaponManager : MonoBehaviour
 
     public bool isCanFireAR = false;
     public bool isCanFirePistol = false;
+    public bool isCanThrowGrenade = false;
+    public bool isCanThrowSmokeGrenade = false;
+
+    public int GrenadeCnt;
+    public int Smoke_GrenadeCnt;
 
     public float FireSpeed;
     public int damage;
@@ -39,5 +44,24 @@ public class WeaponManager : MonoBehaviour
         {
             isCanFirePistol = false;
         }
+
+        if(GrenadeCnt > 0)
+        {
+            isCanThrowGrenade = true;
+        }
+        else
+        {
+            isCanThrowGrenade = false;
+        }
+
+        if (Smoke_GrenadeCnt > 0)
+        {
+            isCanThrowSmokeGrenade = true;
+        }
+        else
+        {
+            isCanThrowSmokeGrenade = false;
+        }
+
     }
 }

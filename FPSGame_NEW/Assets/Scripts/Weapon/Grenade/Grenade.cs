@@ -7,7 +7,7 @@ public class Grenade : MonoBehaviour
     public float ThrowPower;
     public float BoomTimer;
 
-
+    public bool isBoom=false;
     bool isGround = false;
 
     Rigidbody rbody;
@@ -31,11 +31,11 @@ public class Grenade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ActionController.instance.throwGrenade)
+        if (isBoom)
         {
-            Invoke("Boom", BoomTimer);
+            isBoom = false;
+            Invoke("Boom", 5.0f);
         }
-
     }
 
     void Boom()

@@ -46,24 +46,28 @@ public class ActionController : MonoBehaviour
             CheckItem();
             CanPickUp();
         }
-        if (Input.GetButtonDown("ThrowGrenade") && !throwGrenade)
-        {
-            throwGrenade = true;
-            SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
-            GameObject CloneGrenade = grenade;
-            //CloneGrenade = Instantiate(Smokegrenade, tr.position, tr.rotation);
-            CloneGrenade = Instantiate(grenade, tr.position, tr.rotation);
-            CloneGrenade.layer = 7;
-        }
-        if (Input.GetButtonDown("ThrowSmokeGrenade") && !throwGrenade)
-        {
-            throwGrenade = true;
-            SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
-            GameObject CloneGrenade = grenade;
-            CloneGrenade = Instantiate(Smokegrenade, tr.position, tr.rotation);
-            //CloneGrenade = Instantiate(grenade, tr.position, tr.rotation);
-            CloneGrenade.layer = 7;
-        }
+        //if (Input.GetButtonDown("ThrowGrenade") && !throwGrenade && WeaponManager.instance.isCanThrowGrenade)
+        //{
+        //    throwGrenade = true;
+        //    SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
+        //    GameObject CloneGrenade = grenade;
+        //    //CloneGrenade = Instantiate(Smokegrenade, tr.position, tr.rotation);
+        //    CloneGrenade = Instantiate(grenade, tr.position, tr.rotation);
+        //    CloneGrenade.GetComponent<Grenade>().isBoom = true;
+        //    WeaponManager.instance.GrenadeCnt--;
+        //    CloneGrenade.layer = 7;
+        //}
+        //if (Input.GetButtonDown("ThrowSmokeGrenade") && !throwGrenade && WeaponManager.instance.isCanThrowSmokeGrenade)
+        //{
+        //    throwGrenade = true;
+        //    SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
+        //    GameObject CloneGrenade = Smokegrenade;
+        //    //CloneGrenade = Instantiate(grenade, tr.position, tr.rotation);
+        //    CloneGrenade = Instantiate(Smokegrenade, tr.position, tr.rotation);
+        //    CloneGrenade.GetComponent<SmokeGrenade>().isBoom = true;
+        //    WeaponManager.instance.Smoke_GrenadeCnt--;
+        //    CloneGrenade.layer = 7;
+        //}
     }
 
     void CanPickUp()
@@ -73,6 +77,16 @@ public class ActionController : MonoBehaviour
             if(hitInfo.transform != null)
             {
                 //Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득했습니다");
+                if(hitInfo.transform.gameObject.GetComponent<ItemPickUp>().item.itemName == "Grenade")
+                {
+                    WeaponManager.instance.GrenadeCnt++;
+                }
+                if (hitInfo.transform.gameObject.GetComponent<ItemPickUp>().item.itemName == "Smoke Grenade")
+                {
+                    WeaponManager.instance.Smoke_GrenadeCnt++;
+
+                }
+
                 theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
                 Destroy(hitInfo.transform.gameObject);
                 InfoDisappear();
