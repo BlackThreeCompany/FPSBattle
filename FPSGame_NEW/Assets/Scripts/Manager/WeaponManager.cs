@@ -4,15 +4,97 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Equipment WeaponSloat;
+    public Equipment WeaponSloat2;
+    public Equipment PistolSloat;
+
+    public bool isCanFireAR = false;
+    public bool isCanFirePistol = false;
+    public bool isCanThrowGrenade = false;
+    public bool isCanThrowSmokeGrenade = false;
+
+    public int GrenadeCnt;
+    public int Smoke_GrenadeCnt;
+
+    public float FireSpeed;
+    public int damage;
+
+    public static WeaponManager instance;
+
+    public string WeaponName;
+     public string WeaponName2;
+
+    public string PistolName;
+
+
+    private void Awake()
     {
-        
+        instance = this;    
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (WeaponSloat.item != null)
+        {
+            isCanFireAR = true;
+            if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AKM")
+            {
+                WeaponName = "AKM";
+            }
+            else if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AK-47")
+            {
+                WeaponName = "AK-47";
+            }
+        }
+        else
+        {
+            isCanFireAR = false;
+        }
+
+        if (WeaponSloat2.item != null)
+        {
+            isCanFireAR = true;
+            if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AKM")
+            {
+                WeaponName2 = "AKM";
+            }
+            else if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AK-47")
+            {
+                WeaponName2 = "AK-47";
+            }
+        }
+        else
+        {
+            isCanFireAR = false;
+        }
+
+        if (PistolSloat.item != null)
+        {
+            isCanFirePistol = true;
+        }
+        else
+        {
+            isCanFirePistol = false;
+        }
+
+        if(GrenadeCnt > 0)
+        {
+            isCanThrowGrenade = true;
+        }
+        else
+        {
+            isCanThrowGrenade = false;
+        }
+
+        if (Smoke_GrenadeCnt > 0)
+        {
+            isCanThrowSmokeGrenade = true;
+        }
+        else
+        {
+            isCanThrowSmokeGrenade = false;
+        }
+
+
     }
 }

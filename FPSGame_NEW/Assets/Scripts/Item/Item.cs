@@ -11,12 +11,14 @@ public class Item : ScriptableObject //MonoBehaviour은 GameObject에 스크립�
     public Sprite itemImage; //Image는 캔버스가 필요, Sprite 캔버스 필요X
     public GameObject itemPrefab;
 
-
     public enum ItemType
     { 
         Equipment,
         Used,
         Weapon,
+        Pistol,
+        Armor,
+        Knife,
         Ammo,
         Grenade
     }

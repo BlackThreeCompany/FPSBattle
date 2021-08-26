@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
 
     CharacterController cc;
 
-    public PlayerGunShoot gunShoot;
+    public GunController gunShoot;
 
     public float hmove;
     public float vmove;
@@ -26,7 +26,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     public float JumpSpeed;
 
     
-    public GameObject Gun1;
     public GameObject GunArm;
 
     public GameObject CamPos;
@@ -52,7 +51,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
     void Awake()
     {
         cc = GetComponent<CharacterController>();
-        gunShoot = GetComponent<PlayerGunShoot>();
+        gunShoot = GetComponent<GunController>();
 
         if (pv.IsMine)
         {
@@ -122,7 +121,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         cc.Move(dirmove);
     }
     void Move()
-    {   
+    {
+        moveSpeed = StatManager.instance.PlayerMoveSpeed;
         hmove = Input.GetAxis("Horizontal");
         vmove = Input.GetAxis("Vertical");
         dirmove = new Vector3(hmove * moveSpeed, -GravitySpeed, vmove * moveSpeed);

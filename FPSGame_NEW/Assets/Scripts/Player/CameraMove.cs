@@ -39,8 +39,12 @@ public class CameraMove : MonoBehaviour
     }
     public void go()
     {
+        if(!Inventory.inventoryActivated)
+        {
+            Rotate();
+        }
         ToPlayer();
-        Rotate();
+
     }
     void ToPlayer()
     {
