@@ -98,20 +98,18 @@ public class ActionController : MonoBehaviour
                         CantPickUpTime = 0;
                         return;
                     }
-                    if(hitInfo.transform.gameObject.GetComponent<ItemPickUp>().item.itemType == Item.ItemType.Ammo)
-                    {
-                        Debug.Log("총알주움");
-                        theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item, 30);
-                    }
-                    else
-                    {
-                        theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
-                    }
-
+                    theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
                     Destroy(hitInfo.transform.gameObject);
                     InfoDisappear();
                 }
-                theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
+                if (hitInfo.transform.gameObject.GetComponent<ItemPickUp>().item.itemType == Item.ItemType.Ammo)
+                {
+                    theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item, 30);
+                }
+                else
+                {
+                    theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
+                }
                 Destroy(hitInfo.transform.gameObject);
                 InfoDisappear();
                     
