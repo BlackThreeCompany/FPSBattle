@@ -583,6 +583,7 @@ Transform:
   - {fileID: 1162199204042225604}
   - {fileID: 1162199204042243670}
   - {fileID: 1162199204042207468}
+  - {fileID: 6813682307902831971}
   m_Father: {fileID: 6998236652567122546}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1213,6 +1214,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2522863147923503074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6813682307902831971}
+  m_Layer: 6
+  m_Name: SmokeGrenadeHole
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6813682307902831971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2522863147923503074}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.058}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1162199204042207762}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2588449724387839787
 GameObject:
   m_ObjectHideFlags: 0
@@ -2432,6 +2463,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5285596426047290426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6226995660615913741}
+  m_Layer: 6
+  m_Name: GrenadeHole
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6226995660615913741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5285596426047290426}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7175764367598545126}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5337261935940957073
 GameObject:
   m_ObjectHideFlags: 0
@@ -3424,6 +3485,8 @@ MonoBehaviour:
   - {fileID: 6998236652841961782}
   - {fileID: 1301771447362696750}
   - {fileID: 1340875460566537038}
+  - {fileID: 5285596426047290426}
+  - {fileID: 2522863147923503074}
   AR1: {fileID: 6996518639311969173}
   AR2: {fileID: 5610095356761594652}
   HandGun: {fileID: 2588449724387839787}
@@ -4225,6 +4288,7 @@ Transform:
   - {fileID: 7175764367598545124}
   - {fileID: 7175764367598545122}
   - {fileID: 7175764367598545120}
+  - {fileID: 6226995660615913741}
   m_Father: {fileID: 6998236652567122546}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

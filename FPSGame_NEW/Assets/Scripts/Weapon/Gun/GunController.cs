@@ -70,7 +70,7 @@ public class GunController : MonoBehaviourPunCallbacks
     }
     void guntarget()
     {
-        if(CurrentHand == 0)
+        if(CurrentHand == 0 || CurrentHand == 4 || CurrentHand == 5)
         {
             return;
         }
@@ -112,7 +112,7 @@ public class GunController : MonoBehaviourPunCallbacks
                     SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
                     GameObject CloneGrenade = ThrowGrenade;
                     //CloneGrenade = Instantiate(ThrowGrenade, GunHole[GunHoleNum].transform.position, GunHole[GunHoleNum].transform.rotation);
-                    CloneGrenade = Instantiate(ThrowGrenade, tr.position, tr.rotation);
+                    CloneGrenade = Instantiate(ThrowGrenade, GunHole[CurrentHand].transform.position, GunHole[CurrentHand].transform.rotation);
                     CloneGrenade.layer = 7;
                     CloneGrenade.GetComponent<Grenade>().isBoom = true;
                     WeaponManager.instance.GrenadeCnt--;
@@ -130,7 +130,7 @@ public class GunController : MonoBehaviourPunCallbacks
                     SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
                     GameObject CloneGrenade = ThrowSmokeGrenade;
                     //CloneGrenade = Instantiate(ThrowSmokeGrenade, GunHole[GunHoleNum].transform.position, GunHole[GunHoleNum].transform.rotation);
-                    CloneGrenade = Instantiate(ThrowSmokeGrenade, tr.position, tr.rotation);
+                    CloneGrenade = Instantiate(ThrowSmokeGrenade, GunHole[CurrentHand].transform.position, GunHole[CurrentHand].transform.rotation);
                     CloneGrenade.layer = 7;
                     CloneGrenade.GetComponent<SmokeGrenade>().isBoom = true;
                     WeaponManager.instance.Smoke_GrenadeCnt--;
