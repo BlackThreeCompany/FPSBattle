@@ -250,6 +250,8 @@ MonoBehaviour:
   explosionGroundEft: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
   explosionEft: {fileID: 100006, guid: 4575df893a6e3f64a8283dee38413a34, type: 3}
   pv: {fileID: 1168011925595554846}
+  MyViewId: 0
+  Player: {fileID: 0}
 --- !u!114 &8932330770658465900
 MonoBehaviour:
   m_ObjectHideFlags: 0

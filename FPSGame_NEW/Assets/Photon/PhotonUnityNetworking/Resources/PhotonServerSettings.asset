@@ -46,6 +46,8 @@ MonoBehaviour:
   - Boom_RPC
   - BoomReady_RPC
   - Destory_RPC
+  - Boom_Damage
+  - DestoryGrenade_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

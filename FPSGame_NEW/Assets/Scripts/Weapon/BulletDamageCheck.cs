@@ -10,10 +10,17 @@ public class BulletDamageCheck : MonoBehaviourPunCallbacks
 
     public GameObject BulletObj;
     public Rigidbody Bulletrb;
+
+    public int Damage;
     // Start is called before the first frame update
     void Awake()
     {
         MyViewId = StatManager.instance.MyViewId;
+
+        if (pv.IsMine)
+        {
+            Damage = WeaponManager.instance.damage;
+        }
     }
 
     // Update is called once per frame
@@ -32,7 +39,7 @@ public class BulletDamageCheck : MonoBehaviourPunCallbacks
         if (collision.gameObject.layer == 8)
         {
             
-            pv.RPC("BulletHit", RpcTarget.AllBuffered, MyViewId, collision.gameObject.GetComponent<PlayerViewId>().ViewId, 10);
+            pv.RPC("BulletHit", RpcTarget.AllBuffered, MyViewId, collision.gameObject.GetComponent<PlayerViewId>().ViewId, Damage);
         }
 
         if (collision.gameObject.layer == 9)
