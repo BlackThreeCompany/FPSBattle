@@ -71,29 +71,30 @@ public class GunController : MonoBehaviourPunCallbacks
     }
     void guntarget()
     {
-        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit1,IgnoreMe))
-        {
+            if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit1, IgnoreMe))
+            {
 
-            HitPoint.SetActive(true);
+                HitPoint.SetActive(true);
 
 
-            Debug.DrawRay(Cam.transform.position, Cam.transform.forward * hit1.distance, Color.green);
-            HitPoint.transform.position = hit1.point;
+                Debug.DrawRay(Cam.transform.position, Cam.transform.forward * hit1.distance, Color.green);
+                HitPoint.transform.position = hit1.point;
 
-            Gundir = (hit1.point - GunHole[GunHoleNum].transform.position).normalized;
-            GunHitDist = Vector3.Distance(GunHole[GunHoleNum].transform.position, HitPoint.transform.position);
+                Gundir = (hit1.point - GunHole[GunHoleNum].transform.position).normalized;
+                GunHitDist = Vector3.Distance(GunHole[GunHoleNum].transform.position, HitPoint.transform.position);
 
-            Debug.DrawRay(GunHole[GunHoleNum].transform.position, Gundir * GunHitDist, Color.red);
+                Debug.DrawRay(GunHole[GunHoleNum].transform.position, Gundir * GunHitDist, Color.red);
 
-            //if(Physics.Raycast(GunHole.transform.position,))
-        }
-        else
-        {
-            Debug.DrawRay(Cam.transform.position, Cam.transform.forward * 1000f, Color.green);
-            HitPoint.SetActive(false);
+                //if(Physics.Raycast(GunHole.transform.position,))
+            }
+            else
+            {
+                Debug.DrawRay(Cam.transform.position, Cam.transform.forward * 1000f, Color.green);
+                HitPoint.SetActive(false);
 
-            Gundir = Cam.transform.forward;
-        }
+                Gundir = Cam.transform.forward;
+            }
+        
     }
 
     void Shoot()
@@ -107,8 +108,9 @@ public class GunController : MonoBehaviourPunCallbacks
                     ActionController.instance.throwGrenade = true;
                     SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
                     GameObject CloneGrenade = ThrowGrenade;
-                    //CloneGrenade = Instantiate(Smokegrenade, tr.position, tr.rotation);
+                    //CloneGrenade = Instantiate(ThrowGrenade, GunHole[GunHoleNum].transform.position, GunHole[GunHoleNum].transform.rotation);
                     CloneGrenade = Instantiate(ThrowGrenade, tr.position, tr.rotation);
+                    CloneGrenade.layer = 7;
                     CloneGrenade.GetComponent<Grenade>().isBoom = true;
                     WeaponManager.instance.GrenadeCnt--;
                     Inventory.instnace.DeleteGrenade();
@@ -117,15 +119,16 @@ public class GunController : MonoBehaviourPunCallbacks
                         TurnOff();
                         return;
                     }
-                    CloneGrenade.layer = 7;
+                    
                 }
                 else if(CurrentHand == 5)
                 {
                     ActionController.instance.throwGrenade = true;
                     SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
                     GameObject CloneGrenade = ThrowSmokeGrenade;
-                    //CloneGrenade = Instantiate(grenade, tr.position, tr.rotation);
+                    //CloneGrenade = Instantiate(ThrowSmokeGrenade, GunHole[GunHoleNum].transform.position, GunHole[GunHoleNum].transform.rotation);
                     CloneGrenade = Instantiate(ThrowSmokeGrenade, tr.position, tr.rotation);
+                    CloneGrenade.layer = 7;
                     CloneGrenade.GetComponent<SmokeGrenade>().isBoom = true;
                     WeaponManager.instance.Smoke_GrenadeCnt--;
                     Inventory.instnace.DeleteSmokeGrenade();
@@ -134,7 +137,6 @@ public class GunController : MonoBehaviourPunCallbacks
                         TurnOff();
                         return;
                     }
-                    CloneGrenade.layer = 7;
                 }
 
             }
@@ -304,7 +306,7 @@ public class GunController : MonoBehaviourPunCallbacks
             AR2.SetActive(true);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
-            GunHoleNum = 0;
+            GunHoleNum = 3;
             //
             CurrentHand = 1;
             Inventory.instnace.CurrentHand = CurrentHand;
@@ -348,7 +350,7 @@ public class GunController : MonoBehaviourPunCallbacks
             AR2.SetActive(true);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
-            GunHoleNum = 0;
+            GunHoleNum = 3;
             //
 
             CurrentHand = 2;
