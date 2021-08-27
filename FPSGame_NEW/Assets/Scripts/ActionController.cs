@@ -110,7 +110,11 @@ public class ActionController : MonoBehaviour
                 {
                     theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
                 }
-                Destroy(hitInfo.transform.gameObject);
+                
+                hitInfo.transform.gameObject.GetComponent<Item_Pun>().ToRPC_Destory();
+                
+
+                //Destroy(hitInfo.transform.gameObject);
                 InfoDisappear();
                     
                 

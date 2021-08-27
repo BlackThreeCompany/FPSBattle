@@ -13,6 +13,8 @@ public class Inventory : MonoBehaviour
     public GameObject EquipmentBG;
     public GameObject SlotsParent;
 
+
+    
     //슬롯듯
     Sloat[] slots;
     public Equipment WeaponSlots;

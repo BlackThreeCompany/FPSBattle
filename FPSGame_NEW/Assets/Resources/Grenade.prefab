@@ -175,6 +175,9 @@ GameObject:
   - component: {fileID: 8414854629451994232}
   - component: {fileID: 8932330770658465897}
   - component: {fileID: 8932330770658465900}
+  - component: {fileID: 1168011925595554846}
+  - component: {fileID: -6126954340581612958}
+  - component: {fileID: 7490353267577608548}
   m_Layer: 6
   m_Name: Grenade
   m_TagString: Item
@@ -246,6 +249,7 @@ MonoBehaviour:
   isBoom: 0
   explosionGroundEft: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
   explosionEft: {fileID: 100006, guid: 4575df893a6e3f64a8283dee38413a34, type: 3}
+  pv: {fileID: 1168011925595554846}
 --- !u!114 &8932330770658465900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +263,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: e62891d36486ce044a46b7ed4b61dc3a, type: 2}
+--- !u!114 &1168011925595554846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8414854629451895517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: -6126954340581612958}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-6126954340581612958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8414854629451895517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &7490353267577608548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8414854629451895517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8c6e01e06b6a24f8768f0645cd22f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pv: {fileID: 1168011925595554846}
 --- !u!1 &8414854629451895519
 GameObject:
   m_ObjectHideFlags: 0

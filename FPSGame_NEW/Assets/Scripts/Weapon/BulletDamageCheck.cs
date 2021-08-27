@@ -27,17 +27,17 @@ public class BulletDamageCheck : MonoBehaviourPunCallbacks
         {
             return;
         }
-        Bulletrb.isKinematic = true;
+        
 
         if (collision.gameObject.layer == 8)
         {
-            Bulletrb.isKinematic = true;
+            
             pv.RPC("BulletHit", RpcTarget.AllBuffered, MyViewId, collision.gameObject.GetComponent<PlayerViewId>().ViewId, 10);
         }
 
         if (collision.gameObject.layer == 9)
         {
-            Bulletrb.isKinematic = true;
+            
             pv.RPC("BulletDestory", RpcTarget.AllBuffered);
         }
         Debug.Log(collision.gameObject.name);

@@ -977,6 +977,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Smoke Grenade
       objectReference: {fileID: 0}
+    - target: {fileID: 7381556433835175175, guid: da6f94ed909f51a44b405b29b56a3b8d, type: 3}
+      propertyPath: sceneViewId
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381556433835175175, guid: da6f94ed909f51a44b405b29b56a3b8d, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da6f94ed909f51a44b405b29b56a3b8d, type: 3}
 --- !u!4 &252924928 stripped
@@ -1817,6 +1825,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Smoke Grenade (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7381556433835175175, guid: da6f94ed909f51a44b405b29b56a3b8d, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381556433835175175, guid: da6f94ed909f51a44b405b29b56a3b8d, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da6f94ed909f51a44b405b29b56a3b8d, type: 3}
 --- !u!1 &384218964
@@ -2280,6 +2296,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: -5484137342709997272, guid: 4ade564787728d746881e6e392a53d55, type: 3}
+      propertyPath: sceneViewId
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 420473327937203824, guid: 4ade564787728d746881e6e392a53d55, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -2692,6 +2712,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: -2813374424526379208, guid: 0a152fb8dc4c2c74ba3754900d17530f, type: 3}
+      propertyPath: sceneViewId
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 736153078684130647, guid: 0a152fb8dc4c2c74ba3754900d17530f, type: 3}
       propertyPath: m_Name
       value: 5.56mm
@@ -3608,6 +3632,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: -4140155948889889919, guid: 533db98be1317b345b02a4487b69e675, type: 3}
+      propertyPath: sceneViewId
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2027054013685062271, guid: 533db98be1317b345b02a4487b69e675, type: 3}
       propertyPath: m_Name
       value: AKM
@@ -4341,6 +4369,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: -4140155948889889919, guid: 533db98be1317b345b02a4487b69e675, type: 3}
+      propertyPath: sceneViewId
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2027054013685062271, guid: 533db98be1317b345b02a4487b69e675, type: 3}
       propertyPath: m_Name
       value: AKM (1)
@@ -4410,6 +4442,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: -5484137342709997272, guid: 4ade564787728d746881e6e392a53d55, type: 3}
+      propertyPath: sceneViewId
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 420473327937203824, guid: 4ade564787728d746881e6e392a53d55, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -5109,6 +5145,10 @@ PrefabInstance:
     - target: {fileID: 4398818239886518, guid: 33f6247810b654041bccca4adbd93f45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305504791357775144, guid: 33f6247810b654041bccca4adbd93f45, type: 3}
+      propertyPath: sceneViewId
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33f6247810b654041bccca4adbd93f45, type: 3}
@@ -6600,6 +6640,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: -2813374424526379208, guid: 0a152fb8dc4c2c74ba3754900d17530f, type: 3}
+      propertyPath: sceneViewId
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 736153078684130647, guid: 0a152fb8dc4c2c74ba3754900d17530f, type: 3}
       propertyPath: m_Name
       value: 5.56mm (2)
@@ -6958,6 +7002,8 @@ MonoBehaviour:
   isCanThrowSmokeGrenade: 0
   GrenadeCnt: 0
   Smoke_GrenadeCnt: 0
+  CurrentAmmo: 0
+  Ammo: 0
   FireSpeed: 0
   damage: 0
   WeaponName: 
@@ -8626,6 +8672,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: -2813374424526379208, guid: 0a152fb8dc4c2c74ba3754900d17530f, type: 3}
+      propertyPath: sceneViewId
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 736153078684130647, guid: 0a152fb8dc4c2c74ba3754900d17530f, type: 3}
       propertyPath: m_Name
       value: 5.56mm (1)
@@ -9269,6 +9319,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: 1168011925595554846, guid: 80f5d061b794a5e4a85a14982abaee83, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8414854629451895517, guid: 80f5d061b794a5e4a85a14982abaee83, type: 3}
       propertyPath: m_Name
       value: Grenade (2)
@@ -9295,7 +9349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8414854629452386045, guid: 80f5d061b794a5e4a85a14982abaee83, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5485538
+      value: 0.758
       objectReference: {fileID: 0}
     - target: {fileID: 8414854629452386045, guid: 80f5d061b794a5e4a85a14982abaee83, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9418,6 +9472,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: -5484137342709997272, guid: 4ade564787728d746881e6e392a53d55, type: 3}
+      propertyPath: sceneViewId
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 420473327937203824, guid: 4ade564787728d746881e6e392a53d55, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -9551,6 +9609,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Smoke Grenade (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7381556433835175175, guid: da6f94ed909f51a44b405b29b56a3b8d, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381556433835175175, guid: da6f94ed909f51a44b405b29b56a3b8d, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da6f94ed909f51a44b405b29b56a3b8d, type: 3}
 --- !u!1001 &1806706689
@@ -9560,6 +9626,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: 1168011925595554846, guid: 80f5d061b794a5e4a85a14982abaee83, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8414854629451895517, guid: 80f5d061b794a5e4a85a14982abaee83, type: 3}
       propertyPath: m_Name
       value: Grenade (1)
@@ -10068,6 +10138,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790928442}
     m_Modifications:
+    - target: {fileID: 1168011925595554846, guid: 80f5d061b794a5e4a85a14982abaee83, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8414854629451895517, guid: 80f5d061b794a5e4a85a14982abaee83, type: 3}
       propertyPath: m_Name
       value: Grenade
@@ -10604,6 +10678,10 @@ PrefabInstance:
     - target: {fileID: 4389320645946552, guid: ea530e89dc913d14480baec0a57c7801, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952020567753388376, guid: ea530e89dc913d14480baec0a57c7801, type: 3}
+      propertyPath: sceneViewId
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea530e89dc913d14480baec0a57c7801, type: 3}

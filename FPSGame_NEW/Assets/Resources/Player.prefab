@@ -611,7 +611,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301771447362696750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.96, y: 1.84, z: -9.5}
+  m_LocalPosition: {x: -0.038, y: 1.564, z: -10.112}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8899194056555440399}
@@ -3381,6 +3381,7 @@ GameObject:
   - component: {fileID: 6998236651481174747}
   - component: {fileID: -2863723951195069346}
   - component: {fileID: 3245389529714434400}
+  - component: {fileID: -7823554727665734536}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3478,6 +3479,7 @@ MonoBehaviour:
   IgnoreMe:
     serializedVersion: 2
     m_Bits: 4096
+  playerPun: {fileID: 0}
   Cam: {fileID: 0}
   HitPoint: {fileID: 0}
   GunHole:
@@ -3536,6 +3538,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cb4f6c73d73b8440805219d8d2e9ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7823554727665734536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998236651481174749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e492abe86be91ef4da87f59521dd9af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunController: {fileID: 6998236651481174747}
+  CurrentHand: 0
+  LastCurrentHand: 0
+  pv: {fileID: -2863723951195069346}
 --- !u!1 &6998236651736849476
 GameObject:
   m_ObjectHideFlags: 0
