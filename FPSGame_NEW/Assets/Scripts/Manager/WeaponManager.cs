@@ -37,6 +37,7 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
+
         if (WeaponSloat.item != null)
         {
             if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AKM")
@@ -65,7 +66,7 @@ public class WeaponManager : MonoBehaviour
                 isCanFireAR = true;
             }
         }
-        if (WeaponSloat.item == null && WeaponSloat2.item == null) isCanFireAR = false;
+        if(WeaponSloat.item == null && WeaponSloat2.item == null) isCanFireAR = false;
 
         if (PistolSloat.item != null)
         {
