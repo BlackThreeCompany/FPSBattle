@@ -176,6 +176,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
+            if (slots[i].item == null) continue;
             if (slots[i].item.itemName == "Grenade")
             {
                 slots[i].SetSloatCount(-1);
@@ -188,6 +189,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
+            if (slots[i].item == null) continue;
             if (slots[i].item.itemName == "Smoke Grenade")
             {
                 slots[i].SetSloatCount(-1);
