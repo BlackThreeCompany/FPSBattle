@@ -41,7 +41,6 @@ public class GunController : MonoBehaviourPunCallbacks
 
     bool isSingle;
 
-    public int GunHoleNum=0;
 
     private void Awake()
     {
@@ -71,30 +70,34 @@ public class GunController : MonoBehaviourPunCallbacks
     }
     void guntarget()
     {
-            if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit1, IgnoreMe))
-            {
+        if(CurrentHand == 0)
+        {
+            return;
+        }
 
-                HitPoint.SetActive(true);
+        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit1, IgnoreMe))
+        {
+
+            HitPoint.SetActive(true);
 
 
-                Debug.DrawRay(Cam.transform.position, Cam.transform.forward * hit1.distance, Color.green);
-                HitPoint.transform.position = hit1.point;
+            Debug.DrawRay(Cam.transform.position, Cam.transform.forward * hit1.distance, Color.green);
+            HitPoint.transform.position = hit1.point;
+            Gundir = (hit1.point - GunHole[CurrentHand].transform.position).normalized;
+            GunHitDist = Vector3.Distance(GunHole[CurrentHand].transform.position, HitPoint.transform.position);
 
-                Gundir = (hit1.point - GunHole[GunHoleNum].transform.position).normalized;
-                GunHitDist = Vector3.Distance(GunHole[GunHoleNum].transform.position, HitPoint.transform.position);
+            Debug.DrawRay(GunHole[CurrentHand].transform.position, Gundir * GunHitDist, Color.red);
 
-                Debug.DrawRay(GunHole[GunHoleNum].transform.position, Gundir * GunHitDist, Color.red);
+            //if(Physics.Raycast(GunHole.transform.position,))
+        }
+        else
+        {
+            Debug.DrawRay(Cam.transform.position, Cam.transform.forward * 1000f, Color.green);
+            HitPoint.SetActive(false);
 
-                //if(Physics.Raycast(GunHole.transform.position,))
-            }
-            else
-            {
-                Debug.DrawRay(Cam.transform.position, Cam.transform.forward * 1000f, Color.green);
-                HitPoint.SetActive(false);
+            Gundir = Cam.transform.forward;
+        }
 
-                Gundir = Cam.transform.forward;
-            }
-        
     }
 
     void Shoot()
@@ -152,7 +155,7 @@ public class GunController : MonoBehaviourPunCallbacks
                     {
                         ShootDebugTime = 0;
                         //Instantiate(Bullet, GunHole.transform.position, Quaternion.LookRotation(Gundir));
-                        PhotonNetwork.Instantiate("Bullet", GunHole[GunHoleNum].transform.position, Quaternion.LookRotation(Gundir));
+                        PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
                         //pv.RPC("PlayerShoot", RpcTarget.All, GunHole.transform.position, Quaternion.LookRotation(Gundir));
 
                     }
@@ -167,7 +170,8 @@ public class GunController : MonoBehaviourPunCallbacks
                         ShootDebugTime = 0;
                         //Instantiate(Bullet, GunHole.transform.position, Quaternion.LookRotation(Gundir));
 
-                        PhotonNetwork.Instantiate("Bullet", GunHole[GunHoleNum].transform.position, Quaternion.LookRotation(Gundir));
+                        PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
+                        Debug.Log(CurrentHand);
                         //pv.RPC("PlayerShoot", RpcTarget.All, GunHole.transform.position, Quaternion.LookRotation(Gundir));
 
                     }
@@ -208,13 +212,13 @@ public class GunController : MonoBehaviourPunCallbacks
             AR2.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
-            GunHoleNum = 1;
             //
             CurrentHand = 3;
             Inventory.instnace.CurrentHand = CurrentHand;
             //
             WeaponManager.instance.damage = 10;
             WeaponManager.instance.FireSpeed = 0f;
+            WeaponManager.instance.Ammo = 10;
             //
             StatManager.instance.PlayerMoveSpeed = 5f;
             //
@@ -235,6 +239,7 @@ public class GunController : MonoBehaviourPunCallbacks
                 //
                 WeaponManager.instance.damage = 10;
                 WeaponManager.instance.FireSpeed = 0f;
+                WeaponManager.instance.Ammo = 0;
                 //
                 StatManager.instance.PlayerMoveSpeed = 5f;
                 //
@@ -253,6 +258,7 @@ public class GunController : MonoBehaviourPunCallbacks
                 //
                 WeaponManager.instance.damage = 10;
                 WeaponManager.instance.FireSpeed = 0f;
+                WeaponManager.instance.Ammo = 0;
                 //
                 StatManager.instance.PlayerMoveSpeed = 5f;
                 //
@@ -270,8 +276,9 @@ public class GunController : MonoBehaviourPunCallbacks
         CurrentHand = 0;
         Inventory.instnace.CurrentHand = CurrentHand;
         //
-        WeaponManager.instance.damage = 10;
+        WeaponManager.instance.damage = 0;
         WeaponManager.instance.FireSpeed = 0f;
+        WeaponManager.instance.Ammo = 0;
         //
         StatManager.instance.PlayerMoveSpeed = 6f;
         //
@@ -287,13 +294,13 @@ public class GunController : MonoBehaviourPunCallbacks
             AR2.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
-            GunHoleNum = 0;
             //
             CurrentHand = 1;
             Inventory.instnace.CurrentHand = CurrentHand;
             //
             WeaponManager.instance.damage = 25;
             WeaponManager.instance.FireSpeed = 0.25f;
+            WeaponManager.instance.Ammo = 30;
             //
             StatManager.instance.PlayerMoveSpeed = 4f;
             //
@@ -306,13 +313,13 @@ public class GunController : MonoBehaviourPunCallbacks
             AR2.SetActive(true);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
-            GunHoleNum = 3;
             //
-            CurrentHand = 1;
+            CurrentHand = 2;
             Inventory.instnace.CurrentHand = CurrentHand;
             //
             WeaponManager.instance.damage = 35;
             WeaponManager.instance.FireSpeed = 0.35f;
+            WeaponManager.instance.Ammo = 25;
             //
             StatManager.instance.PlayerMoveSpeed = 4f;
             //
@@ -331,13 +338,13 @@ public class GunController : MonoBehaviourPunCallbacks
             AR2.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
-            GunHoleNum = 0;
             //
-            CurrentHand = 2;
+            CurrentHand = 1;
             Inventory.instnace.CurrentHand = CurrentHand;
             //
             WeaponManager.instance.damage = 25;
             WeaponManager.instance.FireSpeed = 0.25f;
+            WeaponManager.instance.Ammo = 30;
             //
             StatManager.instance.PlayerMoveSpeed = 4f;
             //
@@ -350,14 +357,13 @@ public class GunController : MonoBehaviourPunCallbacks
             AR2.SetActive(true);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
-            GunHoleNum = 3;
             //
-
             CurrentHand = 2;
             Inventory.instnace.CurrentHand = CurrentHand;
             //
             WeaponManager.instance.damage = 35;
             WeaponManager.instance.FireSpeed = 0.35f;
+            WeaponManager.instance.Ammo = 25;
             //
             StatManager.instance.PlayerMoveSpeed = 4f;
             //

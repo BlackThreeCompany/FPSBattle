@@ -610,7 +610,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301771447362696750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.96, y: 1.84, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8899194056555440399}
@@ -3420,9 +3420,10 @@ MonoBehaviour:
   Cam: {fileID: 0}
   HitPoint: {fileID: 0}
   GunHole:
+  - {fileID: 0}
   - {fileID: 6998236652841961782}
-  - {fileID: 1340875460566537038}
   - {fileID: 1301771447362696750}
+  - {fileID: 1340875460566537038}
   AR1: {fileID: 6996518639311969173}
   AR2: {fileID: 5610095356761594652}
   HandGun: {fileID: 2588449724387839787}
@@ -3437,7 +3438,6 @@ MonoBehaviour:
   ShootDelay: 0.1
   ShootDebugTime: 1
   pv: {fileID: -2863723951195069346}
-  GunHoleNum: 0
 --- !u!114 &-2863723951195069346
 MonoBehaviour:
   m_ObjectHideFlags: 0
