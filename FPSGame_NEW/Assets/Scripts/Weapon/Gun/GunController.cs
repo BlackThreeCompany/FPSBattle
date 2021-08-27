@@ -149,7 +149,7 @@ public class GunController : MonoBehaviourPunCallbacks
         {
             if (!isSingle)
             {
-                if (Input.GetMouseButton(0) )
+                if (Input.GetMouseButton(0) && CurrentHand != 0)
                 {
                     if (ShootDebugTime >= WeaponManager.instance.FireSpeed && WeaponManager.instance.isCanFireAR)
                     {
@@ -244,6 +244,7 @@ public class GunController : MonoBehaviourPunCallbacks
                 StatManager.instance.PlayerMoveSpeed = 5f;
                 //
                 isSingle = true;
+                
             }
             else if(WeaponManager.instance.isCanThrowSmokeGrenade)
             {
@@ -270,6 +271,9 @@ public class GunController : MonoBehaviourPunCallbacks
 
     void TurnOff()
     {
+        HandGun.SetActive(false);
+        AR1.SetActive(false);
+        AR2.SetActive(false);
         Grenade.SetActive(false);
         SmokeGrenade.SetActive(false);
         //
@@ -277,12 +281,14 @@ public class GunController : MonoBehaviourPunCallbacks
         Inventory.instnace.CurrentHand = CurrentHand;
         //
         WeaponManager.instance.damage = 0;
-        WeaponManager.instance.FireSpeed = 0f;
+        WeaponManager.instance.FireSpeed = 0;
         WeaponManager.instance.Ammo = 0;
         //
         StatManager.instance.PlayerMoveSpeed = 6f;
         //
         isSingle = false;
+
+
     }
 
     public void WeaponChnage()
@@ -371,5 +377,6 @@ public class GunController : MonoBehaviourPunCallbacks
         }
 
     }
+
 
 }
