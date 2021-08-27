@@ -100,7 +100,7 @@ public class ActionController : MonoBehaviour
                     }
                     theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
                     Destroy(hitInfo.transform.gameObject);
-                    InfoDisappear();
+                    InfoDisappear(); 
                 }
                 if (hitInfo.transform.gameObject.GetComponent<ItemPickUp>().item.itemType == Item.ItemType.Ammo)
                 {
