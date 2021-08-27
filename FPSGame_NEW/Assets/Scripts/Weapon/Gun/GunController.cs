@@ -8,6 +8,7 @@ public class GunController : MonoBehaviourPunCallbacks
 
     public LayerMask IgnoreMe;
 
+    public Player_Pun playerPun;
 
     public GameObject Cam;
     RaycastHit hit1;
@@ -112,7 +113,7 @@ public class GunController : MonoBehaviourPunCallbacks
                     SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
                     GameObject CloneGrenade = ThrowGrenade;
                     //CloneGrenade = Instantiate(ThrowGrenade, GunHole[GunHoleNum].transform.position, GunHole[GunHoleNum].transform.rotation);
-                    CloneGrenade = Instantiate(ThrowGrenade, GunHole[CurrentHand].transform.position, GunHole[CurrentHand].transform.rotation);
+                    CloneGrenade = PhotonNetwork.Instantiate("Grenade", GunHole[CurrentHand].transform.position, GunHole[CurrentHand].transform.rotation);
                     CloneGrenade.layer = 7;
                     CloneGrenade.GetComponent<Grenade>().isBoom = true;
                     WeaponManager.instance.GrenadeCnt--;
@@ -130,7 +131,7 @@ public class GunController : MonoBehaviourPunCallbacks
                     SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
                     GameObject CloneGrenade = ThrowSmokeGrenade;
                     //CloneGrenade = Instantiate(ThrowSmokeGrenade, GunHole[GunHoleNum].transform.position, GunHole[GunHoleNum].transform.rotation);
-                    CloneGrenade = Instantiate(ThrowSmokeGrenade, GunHole[CurrentHand].transform.position, GunHole[CurrentHand].transform.rotation);
+                    CloneGrenade = PhotonNetwork.Instantiate("Smoke Grenade", GunHole[CurrentHand].transform.position, GunHole[CurrentHand].transform.rotation);
                     CloneGrenade.layer = 7;
                     CloneGrenade.GetComponent<SmokeGrenade>().isBoom = true;
                     WeaponManager.instance.Smoke_GrenadeCnt--;
@@ -347,6 +348,7 @@ public class GunController : MonoBehaviourPunCallbacks
             //
             CurrentHand = 1;
             Inventory.instnace.CurrentHand = CurrentHand;
+            
             //
             WeaponManager.instance.damage = 25;
             WeaponManager.instance.FireSpeed = 0.25f;

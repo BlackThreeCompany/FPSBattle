@@ -337,6 +337,9 @@ GameObject:
   - component: {fileID: 2333734622239975709}
   - component: {fileID: 2333734622239975710}
   - component: {fileID: 1517054973760823912}
+  - component: {fileID: 7381556433835175175}
+  - component: {fileID: 1695679488080579644}
+  - component: {fileID: 8301808315849852511}
   m_Layer: 6
   m_Name: Smoke Grenade
   m_TagString: Item
@@ -419,5 +422,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ThrowPower: 8
   BoomTimer: 6
+  isBoom: 0
   cnt: 1
   SmokeEft: {fileID: 8450195207188184274, guid: 02006e347dfb5064d972ddc6aafb0508, type: 3}
+  pv: {fileID: 7381556433835175175}
+--- !u!114 &7381556433835175175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333734622588249812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 1695679488080579644}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &1695679488080579644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333734622588249812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &8301808315849852511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333734622588249812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8c6e01e06b6a24f8768f0645cd22f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pv: {fileID: 7381556433835175175}
