@@ -33,7 +33,7 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
         itemCnt = _count;
         itemImage.sprite = item.itemImage;
 
-        if(item.itemType != Item.ItemType.Equipment && !(Item.ItemType.Pistol == item.itemType || Item.ItemType.Weapon == item.itemType || Item.ItemType.Knife == item.itemType || Item.ItemType.Armor == item.itemType))
+        if(item.itemType != Item.ItemType.Equipment && !(Item.ItemType.Pistol == item.itemType || Item.ItemType.Weapon == item.itemType || Item.ItemType.Knife == item.itemType || Item.ItemType.Armor == item.itemType || Item.ItemType.Grenade == item.itemType))
         {
             CntImage.SetActive(true);
             text_cnt.text = itemCnt.ToString();
@@ -151,7 +151,8 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
             DragSlot.instance.dragSlot.claerSloat();
         }
 
-
     }
+
+    
 }
 
