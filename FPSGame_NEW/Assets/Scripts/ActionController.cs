@@ -14,7 +14,8 @@ public class ActionController : MonoBehaviour
     public LayerMask layerMask; //땅을 보고있는데 아이템을 획득하면 안되기 때문에 아이템 레이어에만 반응 하게 할려고 마스크 설정
 
     public Text actionText;
-    
+    public Text CantPickUpTxt;
+    public float CantPickUpTime = 10;
     //Inventory 스크립트 함수 가져올수 있음
     public Inventory theInventory;
 
@@ -37,6 +38,8 @@ public class ActionController : MonoBehaviour
     {
         CheckItem();
         TryAction();
+        CantPickUpTime += Time.deltaTime;
+        if(CantPickUpTime >=3) CantPickUpTxt.gameObject.SetActive(false);
     }
 
     void TryAction()
@@ -72,7 +75,8 @@ public class ActionController : MonoBehaviour
 
     void CanPickUp()
     {
-        if(pickupActivated)
+       
+        if (pickupActivated)
         {
             if(hitInfo.transform != null)
             {
@@ -84,9 +88,20 @@ public class ActionController : MonoBehaviour
                 if (hitInfo.transform.gameObject.GetComponent<ItemPickUp>().item.itemName == "Smoke Grenade")
                 {
                     WeaponManager.instance.Smoke_GrenadeCnt++;
-
                 }
-
+                if ((Inventory.instnace.CurrentHand == 4 || Inventory.instnace.CurrentHand == 5))
+                {
+                    if(hitInfo.transform.gameObject.GetComponent<ItemPickUp>().item.itemType != Item.ItemType.Grenade)
+                    {
+                        CantPickUpTxt.gameObject.SetActive(true);
+                        InfoDisappear();
+                        CantPickUpTime = 0;
+                        return;
+                    }
+                    theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
+                    Destroy(hitInfo.transform.gameObject);
+                    InfoDisappear();
+                }
                 theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
                 Destroy(hitInfo.transform.gameObject);
                 InfoDisappear();
@@ -102,6 +117,7 @@ public class ActionController : MonoBehaviour
         {
             if (hitInfo.transform.tag == "Item" || hitInfo.transform.tag == "Equipment")
             {
+                if(CantPickUpTxt.gameObject.activeSelf == false)
                 ItemInfoAppear();
             }
         }
@@ -110,9 +126,9 @@ public class ActionController : MonoBehaviour
 
     void ItemInfoAppear()
     {
-        pickupActivated = true;
-        actionText.gameObject.SetActive(true);
-        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 " + "<color=yellow> " + "(F)" + "</color>";
+            pickupActivated = true;
+            actionText.gameObject.SetActive(true);
+            actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 " + "<color=yellow> " + "(F)" + "</color>";
     }
 
     void InfoDisappear()

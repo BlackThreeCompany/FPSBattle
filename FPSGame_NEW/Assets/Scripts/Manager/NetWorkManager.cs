@@ -12,7 +12,7 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
     public Button JoinBt;
     public Text StatTx;
     public Text PingTx;
-
+    public GameObject Player;
     public bool isJoined = false;
 
     public static NetWorkManager instance;
@@ -54,7 +54,8 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
 
         isJoined = true;
 
-        PhotonNetwork.Instantiate("Player", new Vector3(0, 10, 0),Quaternion.Euler(0,0,0));
+        Player = PhotonNetwork.Instantiate("Player", new Vector3(0, 10, 0),Quaternion.Euler(0,0,0));
+        Inventory.instnace.Player = Player;
     }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {

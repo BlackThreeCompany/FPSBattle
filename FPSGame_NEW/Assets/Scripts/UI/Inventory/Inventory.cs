@@ -21,7 +21,8 @@ public class Inventory : MonoBehaviour
     public Equipment KnifeSlots;
     public Equipment ArmorSlots;
 
-    
+    public GameObject Player;
+    public GunController MyGunController;
 
     public static Inventory instnace;
 
@@ -39,6 +40,14 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if(MyGunController == null)
+        {
+            if(Player != null)
+            {
+                MyGunController = Player.GetComponent<GunController>();
+            }
+        }
         TryOpenInventory();
         //CheckGrenade();
     }
@@ -80,6 +89,7 @@ public class Inventory : MonoBehaviour
 
         if(Item.ItemType.Weapon == _item.itemType)
         {
+                     
             if (WeaponSlots.item == null)
             {
                 WeaponSlots.AddItem(_item, _count);
@@ -95,13 +105,15 @@ public class Inventory : MonoBehaviour
                 if(CurrentHand == 1)
                 {
                     WeaponSlots.AddItem(_item, _count);
-                    SendMessage("WeaponChnage",SendMessageOptions.DontRequireReceiver);
+                    MyGunController.ChangeWeapon2();
+
                     return;
                 }
                 else if(CurrentHand == 2)
                 {
                     WeaponSlots2.AddItem(_item, _count);
-                    SendMessage("ChangeWeapon2",SendMessageOptions.DontRequireReceiver);
+                    MyGunController.WeaponChnage();
+
                     return;
                 }
             }
@@ -132,17 +144,22 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < slots.Length; i++)
+            if (Item.ItemType.Grenade != _item.itemType)
             {
-                if (slots[i].item != null)
+                for (int i = 0; i < slots.Length; i++)
                 {
-                    if (slots[i].item.itemName == _item.itemName)
+                    if (slots[i].item != null)
                     {
-                        slots[i].SetSloatCount(_count);
-                        return;
+                        if (slots[i].item.itemName == _item.itemName)
+                        {
+                            slots[i].SetSloatCount(_count);
+                            return;
+                        }
                     }
+
                 }
             }
+
             for (int i = 0; i < slots.Length; i++)
             {
                 if (slots[i].item == null)
@@ -153,6 +170,30 @@ public class Inventory : MonoBehaviour
             }
         }
         
+    }
+
+    public void DeleteGrenade()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item.itemName == "Grenade")
+            {
+                slots[i].SetSloatCount(-1);
+                return;
+            }
+        }
+        
+    }
+    public void DeleteSmokeGrenade()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item.itemName == "Smoke Grenade")
+            {
+                slots[i].SetSloatCount(-1);
+                return;
+            }
+        }
     }
 
 }

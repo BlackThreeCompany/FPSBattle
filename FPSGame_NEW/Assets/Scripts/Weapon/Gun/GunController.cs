@@ -62,8 +62,6 @@ public class GunController : MonoBehaviourPunCallbacks
     void Update()
     {
         
-
-        
     }
     public void GunShootUpdate()
     {
@@ -113,6 +111,12 @@ public class GunController : MonoBehaviourPunCallbacks
                     CloneGrenade = Instantiate(ThrowGrenade, tr.position, tr.rotation);
                     CloneGrenade.GetComponent<Grenade>().isBoom = true;
                     WeaponManager.instance.GrenadeCnt--;
+                    Inventory.instnace.DeleteGrenade();
+                    if (WeaponManager.instance.GrenadeCnt == 0)
+                    {
+                        TurnOff();
+                        return;
+                    }
                     CloneGrenade.layer = 7;
                 }
                 else if(CurrentHand == 5)
@@ -124,6 +128,12 @@ public class GunController : MonoBehaviourPunCallbacks
                     CloneGrenade = Instantiate(ThrowSmokeGrenade, tr.position, tr.rotation);
                     CloneGrenade.GetComponent<SmokeGrenade>().isBoom = true;
                     WeaponManager.instance.Smoke_GrenadeCnt--;
+                    Inventory.instnace.DeleteSmokeGrenade();
+                    if (WeaponManager.instance.Smoke_GrenadeCnt == 0)
+                    {
+                        TurnOff();
+                        return;
+                    }
                     CloneGrenade.layer = 7;
                 }
 
@@ -176,6 +186,10 @@ public class GunController : MonoBehaviourPunCallbacks
 
     void GunChange()
     {
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            TurnOff();
+        }
         if(Input.GetKeyDown(KeyCode.Alpha1) && WeaponManager.instance.WeaponSloat.item != null)
         {
             WeaponChnage();
@@ -244,6 +258,22 @@ public class GunController : MonoBehaviourPunCallbacks
             }
             
         }
+    }
+
+    void TurnOff()
+    {
+        Grenade.SetActive(false);
+        SmokeGrenade.SetActive(false);
+        //
+        CurrentHand = 0;
+        Inventory.instnace.CurrentHand = CurrentHand;
+        //
+        WeaponManager.instance.damage = 10;
+        WeaponManager.instance.FireSpeed = 0f;
+        //
+        StatManager.instance.PlayerMoveSpeed = 6f;
+        //
+        isSingle = false;
     }
 
     public void WeaponChnage()
