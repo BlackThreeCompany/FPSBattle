@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public int LogCount = 0;
     public Text KillLogTx;
     public Text HPTx;
+    public Text ArmorTx;
     void Awake()
     {
         instance = this;
@@ -22,6 +23,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (NetWorkManager.instance.isJoined)
         {
             HPTx.text = "HP : " + StatManager.instance.HP;
+            if(WeaponManager.instance.isHasArmor)
+            {
+                ArmorTx.text = "AP : " + StatManager.instance.AP;
+            }
+            else
+            {
+                ArmorTx.text = "";
+            }
         }
     }
     public void KillLog(int From_id,int To_id, int Damage, int Killtype) // Killtype 1-shoot 2-damage 3-else
@@ -36,7 +45,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             KillLogTx.color = Color.red;
 
-            StatManager.instance.HP -= Damage;
+            if(WeaponManager.instance.isHasArmor)
+            {
+                StatManager.instance.HP -= (int)(Damage*0.4);
+                StatManager.instance.AP -= (int)(Damage * 0.6);
+            }
 
             KillLogTx.text = "[GUN] " + "[ Damage : " + Damage + " ] " + From_id + " -> " + To_id + " ( " + LogCount + " )  ";
         }
@@ -54,7 +67,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             KillLogTx.color = Color.red;
 
-            StatManager.instance.HP -= Damage;
+            StatManager.instance.HP -= (int)(Damage * 0.4);
+            StatManager.instance.AP -= (int)(Damage * 0.6);
 
             KillLogTx.text = "[Grenade] " + "[ Damage : " + Damage + " ] " + From_id + " -> " + To_id + " ( " + LogCount + " )  ";
         }

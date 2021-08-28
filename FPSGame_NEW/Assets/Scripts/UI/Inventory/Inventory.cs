@@ -17,7 +17,6 @@ public class Inventory : MonoBehaviour
     public GameObject EquipmentBG;
     public GameObject SlotsParent;
 
-
     
     //슬롯듯
     Sloat[] slots;
@@ -164,9 +163,21 @@ public class Inventory : MonoBehaviour
         }
         else if (Item.ItemType.Armor == _item.itemType)
         {
-            if (ArmorSlots.item == null)
+            //if (ArmorSlots.item == null)
             {
                 ArmorSlots.AddItem(_item, _count);
+                if(ArmorSlots.item.itemName == "Armor1")
+                {
+                    StatManager.instance.AP = 25;
+                }
+                else if (ArmorSlots.item.itemName == "Armor2")
+                {
+                    StatManager.instance.AP = 50;
+                }
+                else if (ArmorSlots.item.itemName == "Armor3")
+                {
+                    StatManager.instance.AP = 100;
+                }
                 return;
             }
         }

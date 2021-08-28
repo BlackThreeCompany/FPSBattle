@@ -58,7 +58,7 @@ public class Equipment : MonoBehaviour
     }
 
     //ΩΩ∑‘ √ ±‚»≠
-    void claerSloat()
+    public void claerSloat()
     {
         item = null;
         itemCnt = 0;

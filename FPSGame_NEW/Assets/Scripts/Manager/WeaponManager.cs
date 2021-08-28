@@ -8,11 +8,13 @@ public class WeaponManager : MonoBehaviour
     public Equipment WeaponSloat;
     public Equipment WeaponSloat2;
     public Equipment PistolSloat;
+    public Equipment ArmorSloat;
 
     public bool isCanFireAR = false;
     public bool isCanFirePistol = false;
     public bool isCanThrowGrenade = false;
     public bool isCanThrowSmokeGrenade = false;
+    public bool isHasArmor = false;
 
     public int GrenadeCnt;
     public int Smoke_GrenadeCnt;
@@ -24,7 +26,6 @@ public class WeaponManager : MonoBehaviour
     public int have5mm;
     public int have7mm;
     public int have9mm;
-
 
     public float FireSpeed;
     public int damage;
@@ -82,8 +83,21 @@ public class WeaponManager : MonoBehaviour
                 CurrentAmmotxt.text = CurrentAmmo3.ToString();
             }
         }
+        
+        if(StatManager.instance.AP < 0)
+        {
+            ArmorSloat.claerSloat();
+            StatManager.instance.AP = 0;
+        }
 
-
+        if(ArmorSloat.item != null)
+        {
+            isHasArmor = true;
+        }
+        else
+        {
+            isHasArmor = false;
+        }
 
         if (WeaponSloat.item != null)
         {
@@ -97,6 +111,7 @@ public class WeaponManager : MonoBehaviour
             }
         }
         
+
 
         if (WeaponSloat2.item != null)
         {
