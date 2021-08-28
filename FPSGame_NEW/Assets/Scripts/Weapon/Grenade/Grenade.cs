@@ -18,10 +18,15 @@ public class Grenade : MonoBehaviourPunCallbacks
     public GameObject explosionEft;
 
     public PhotonView pv;
+    public int MyViewId;
+
+    public GameObject Player;
     private void Awake()
     {
         rbody = GetComponent<Rigidbody>();
         tr = GetComponent<Transform>();
+        MyViewId = StatManager.instance.MyViewId;
+        Player = NetWorkManager.instance.Player;
     }
 
     // Start is called before the first frame update
@@ -64,12 +69,36 @@ public class Grenade : MonoBehaviourPunCallbacks
 
         RaycastHit[] rayHits = Physics.SphereCastAll(tr.position, 10, Vector3.up, 0f, LayerMask.GetMask("Player"));
 
+        int hitcnt = 0;
         foreach(RaycastHit hitObj in rayHits)
         {
-            hitObj.transform.GetComponent<PlayerState>().HitByGrenade(transform.position);
-        }
+            if (!pv.IsMine) continue;
+            //hitObj.transform.GetComponent<PlayerState>().HitByGrenade(transform.position);
 
-        Destroy(tr.gameObject);
+            int Damage = 0;
+            float distance = Vector3.Distance(transform.position, hitObj.transform.gameObject.transform.position);
+            
+            if (distance >= 0 && distance <= 3.7)
+            {
+                Damage = 100;
+                
+            }
+            else
+            {
+                Damage = Mathf.FloorToInt((1 / distance) * 300);
+
+            }
+            
+            Debug.Log("µ¥¹ÌÁö " + (int)Damage);
+            pv.RPC("Boom_Damage", RpcTarget.AllBuffered,StatManager.instance.MyViewId,hitObj.transform.gameObject.GetPhotonView().ViewID, Damage);
+            Debug.Log(hitObj);
+            hitcnt++;
+        }
+        if(hitcnt == 0 && pv.IsMine)
+        {
+            pv.RPC("DestoryGrenade_RPC", RpcTarget.AllBuffered);
+        }
+        //Destroy(tr.gameObject);
         ActionController.instance.throwGrenade = false;
     }
 
@@ -95,5 +124,36 @@ public class Grenade : MonoBehaviourPunCallbacks
     private void Boom_RPC()
     {
         Boom();
+    }
+
+    [PunRPC]
+    private void Boom_Damage(int From_id, int To_id,int Damage)
+    {
+
+
+
+        if (To_id == MyViewId)
+        {
+            GameManager.instance.KillLog(From_id, To_id, Damage, 5);
+        }
+
+        else if (From_id == MyViewId)
+        {
+            GameManager.instance.KillLog(From_id, To_id, Damage, 4);
+        }
+        
+        else
+        {
+            GameManager.instance.KillLog(From_id, To_id, Damage, 6);
+        }
+        Debug.Log("###");
+        Destroy(tr.gameObject);
+
+    }
+
+    [PunRPC]
+    private void DestoryGrenade_RPC()
+    {
+        Destroy(tr.gameObject);
     }
 }

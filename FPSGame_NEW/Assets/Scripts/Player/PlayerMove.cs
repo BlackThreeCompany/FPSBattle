@@ -53,11 +53,13 @@ public class PlayerMove : MonoBehaviourPunCallbacks, IPunObservable
         cc = GetComponent<CharacterController>();
         gunShoot = GetComponent<GunController>();
 
+
+        this.gameObject.layer = 13;
         if (pv.IsMine)
         {
             Cam = Camera.main.gameObject;
             this.gameObject.tag = "MyPlayer";
-            this.gameObject.layer = 13;
+            
             StatManager.instance.GetViewId(pv.ViewID);
         }
         else
