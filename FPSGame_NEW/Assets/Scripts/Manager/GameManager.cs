@@ -45,11 +45,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             KillLogTx.color = Color.red;
 
-            if(WeaponManager.instance.isHasArmor)
+            if (WeaponManager.instance.isHasArmor)
             {
-                StatManager.instance.HP -= (int)(Damage*0.4);
+                StatManager.instance.HP -= (int)(Damage * 0.4);
                 StatManager.instance.AP -= (int)(Damage * 0.6);
             }
+            else StatManager.instance.HP -= Damage;
 
             KillLogTx.text = "[GUN] " + "[ Damage : " + Damage + " ] " + From_id + " -> " + To_id + " ( " + LogCount + " )  ";
         }
@@ -67,8 +68,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             KillLogTx.color = Color.red;
 
-            StatManager.instance.HP -= (int)(Damage * 0.4);
-            StatManager.instance.AP -= (int)(Damage * 0.6);
+            if (WeaponManager.instance.isHasArmor)
+            {
+                StatManager.instance.HP -= (int)(Damage * 0.4);
+                StatManager.instance.AP -= (int)(Damage * 0.6);
+            }
+            else StatManager.instance.HP -= Damage;
 
             KillLogTx.text = "[Grenade] " + "[ Damage : " + Damage + " ] " + From_id + " -> " + To_id + " ( " + LogCount + " )  ";
         }

@@ -111,7 +111,7 @@ public class GunController : MonoBehaviourPunCallbacks
         {
             if (Input.GetMouseButton(0) && !ActionController.instance.throwGrenade)
             {
-                if(CurrentHand == 4)
+                if(CurrentHand == 4 && WeaponManager.instance.isCanThrowGrenade)
                 {
                     ActionController.instance.throwGrenade = true;
                     SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
@@ -129,7 +129,7 @@ public class GunController : MonoBehaviourPunCallbacks
                     }
                     
                 }
-                else if(CurrentHand == 5)
+                else if(CurrentHand == 5 && WeaponManager.instance.isCanThrowSmokeGrenade)
                 {
                     ActionController.instance.throwGrenade = true;
                     SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);

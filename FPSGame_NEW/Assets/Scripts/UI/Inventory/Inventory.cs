@@ -112,11 +112,13 @@ public class Inventory : MonoBehaviour
                     if (WeaponManager.instance.WeaponSloat.item.itemName == "AK-47") //5.56mm 탄창
                     {
                         WeaponManager.instance.have5mm += WeaponManager.instance.CurrentAmmo;
+                        DeleteAmmo5(-WeaponManager.instance.CurrentAmmo);
                         WeaponManager.instance.CurrentAmmo = 0;
                     }
                     else if (WeaponManager.instance.WeaponSloat.item.itemName == "AKM") //7.62mm 탄창
                     {
                         WeaponManager.instance.have7mm += WeaponManager.instance.CurrentAmmo;
+                        DeleteAmmo7(-WeaponManager.instance.CurrentAmmo);
                         WeaponManager.instance.CurrentAmmo = 0;
                     }
                     WeaponSlots.AddItem(_item, _count);
@@ -130,11 +132,13 @@ public class Inventory : MonoBehaviour
                     if (WeaponManager.instance.WeaponSloat2.item.itemName == "AK-47") //5.56mm 탄창
                     {
                         WeaponManager.instance.have5mm += WeaponManager.instance.CurrentAmmo2;
+                        DeleteAmmo5(-WeaponManager.instance.CurrentAmmo2);
                         WeaponManager.instance.CurrentAmmo2 = 0;
                     }
                     else if (WeaponManager.instance.WeaponSloat2.item.itemName == "AKM") //7.62mm 탄창
                     {
                         WeaponManager.instance.have7mm += WeaponManager.instance.CurrentAmmo2;
+                        DeleteAmmo7(-WeaponManager.instance.CurrentAmmo2);
                         WeaponManager.instance.CurrentAmmo2 = 0;
                     }
                     WeaponSlots2.AddItem(_item, _count);
@@ -232,7 +236,6 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        
     }
 
     public void DeleteAmmo5(int cnt)
