@@ -48,6 +48,7 @@ public class WeaponManager : MonoBehaviour
     private void Update()
     {
 
+
         if (Inventory.instnace.isLift1)
         {
             if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AK-47") //5.56mmźâ
@@ -99,59 +100,71 @@ public class WeaponManager : MonoBehaviour
             isHasArmor = false;
         }
 
-        if (WeaponSloat.item != null)
+        if(!Inventory.inventoryActivated)
         {
-            if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AKM")
+            if (WeaponSloat.item != null)
             {
-                isCanFireAR = true;
+                if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AKM")
+                {
+                    isCanFireAR = true;
+                }
+                else if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AK-47")
+                {
+                    isCanFireAR = true;
+                }
             }
-            else if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AK-47")
-            {
-                isCanFireAR = true;
-            }
-        }
-        
 
 
-        if (WeaponSloat2.item != null)
-        {
-            if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AKM")
-            {
-                isCanFireAR = true;
-            }
-            else if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AK-47")
-            {
-                isCanFireAR = true;
-            }
-        }
-        if(WeaponSloat.item == null && WeaponSloat2.item == null) isCanFireAR = false;
 
-        if (PistolSloat.item != null)
-        {
-            isCanFirePistol = true;
+            if (WeaponSloat2.item != null)
+            {
+                if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AKM")
+                {
+                    isCanFireAR = true;
+                }
+                else if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AK-47")
+                {
+                    isCanFireAR = true;
+                }
+            }
+            if (WeaponSloat.item == null && WeaponSloat2.item == null) isCanFireAR = false;
+
+            if (PistolSloat.item != null)
+            {
+                isCanFirePistol = true;
+            }
+            else
+            {
+                isCanFirePistol = false;
+            }
+
+            if (GrenadeCnt > 0)
+            {
+                isCanThrowGrenade = true;
+            }
+            else
+            {
+                isCanThrowGrenade = false;
+            }
+
+            if (Smoke_GrenadeCnt > 0)
+            {
+                isCanThrowSmokeGrenade = true;
+            }
+            else
+            {
+                isCanThrowSmokeGrenade = false;
+            }
         }
         else
         {
+            isCanFireAR = false;
             isCanFirePistol = false;
-        }
-
-        if(GrenadeCnt > 0)
-        {
-            isCanThrowGrenade = true;
-        }
-        else
-        {
             isCanThrowGrenade = false;
-        }
-
-        if (Smoke_GrenadeCnt > 0)
-        {
-            isCanThrowSmokeGrenade = true;
-        }
-        else
-        {
             isCanThrowSmokeGrenade = false;
         }
+
+        
 
 
     }
