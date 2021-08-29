@@ -12,6 +12,7 @@ public class StatManager : MonoBehaviour
     public float BulletSpeed;
     public int MyViewId;
     public int HP = 100000;
+    public int AP;
 
     public Text MyViewIdTx;
     public static StatManager instance;

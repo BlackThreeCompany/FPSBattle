@@ -42,6 +42,10 @@ public class GunController : MonoBehaviourPunCallbacks
 
     bool isSingle;
 
+    bool isLift1 = false; //주무기 첫번째 슬롯 들고있을때(?)
+    bool isLift2 = false; //주무기 두번째 슬롯 들고있을때(?)
+    bool isLift3 = false; //권총 슬롯 들고있을때(?)
+
 
     private void Awake()
     {
@@ -61,7 +65,7 @@ public class GunController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void GunShootUpdate()
     {
@@ -154,9 +158,35 @@ public class GunController : MonoBehaviourPunCallbacks
                 {
                     if (ShootDebugTime >= WeaponManager.instance.FireSpeed && WeaponManager.instance.isCanFireAR)
                     {
-                        ShootDebugTime = 0;
-                        //Instantiate(Bullet, GunHole.transform.position, Quaternion.LookRotation(Gundir));
-                        PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
+                        
+                        if(isLift1)
+                        {
+                            if(WeaponManager.instance.CurrentAmmo > 0)
+                            {
+                                ShootDebugTime = 0;
+                                PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
+                                WeaponManager.instance.CurrentAmmo--;
+                            }
+                            
+                        }
+                        else if(isLift2)
+                        {
+                            if (WeaponManager.instance.CurrentAmmo2 > 0)
+                            {
+                                ShootDebugTime = 0;
+                                PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
+                                WeaponManager.instance.CurrentAmmo2--;
+                            }
+                        }
+                        else if(isLift3)
+                        {
+                            if (WeaponManager.instance.CurrentAmmo3 > 0)
+                            {
+                                ShootDebugTime = 0;
+                                PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
+                                WeaponManager.instance.CurrentAmmo3--;
+                            }
+                        }
                         //pv.RPC("PlayerShoot", RpcTarget.All, GunHole.transform.position, Quaternion.LookRotation(Gundir));
 
                     }
@@ -168,11 +198,35 @@ public class GunController : MonoBehaviourPunCallbacks
                 {
                     if (ShootDebugTime >= WeaponManager.instance.FireSpeed && WeaponManager.instance.isCanFirePistol)
                     {
-                        ShootDebugTime = 0;
-                        //Instantiate(Bullet, GunHole.transform.position, Quaternion.LookRotation(Gundir));
+                        if (isLift1)
+                        {
+                            if (WeaponManager.instance.CurrentAmmo > 0)
+                            {
+                                ShootDebugTime = 0;
+                                PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
+                                WeaponManager.instance.CurrentAmmo--;
+                            }
 
-                        PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
-                        Debug.Log(CurrentHand);
+                        }
+                        else if (isLift2)
+                        {
+                            if (WeaponManager.instance.CurrentAmmo2 > 0)
+                            {
+                                ShootDebugTime = 0;
+                                PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
+                                WeaponManager.instance.CurrentAmmo2--;
+                            }
+                        }
+                        else if (isLift3)
+                        {
+                            if (WeaponManager.instance.CurrentAmmo3 > 0)
+                            {
+                                ShootDebugTime = 0;
+                                PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
+                                WeaponManager.instance.CurrentAmmo3--;
+                            }
+                        }
+                        //Debug.Log(CurrentHand);
                         //pv.RPC("PlayerShoot", RpcTarget.All, GunHole.transform.position, Quaternion.LookRotation(Gundir));
 
                     }
@@ -214,12 +268,19 @@ public class GunController : MonoBehaviourPunCallbacks
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
             //
+            isLift1 = false;
+            isLift2 = false;
+            isLift3 = true;
+            Inventory.instnace.isLift1 = false;
+            Inventory.instnace.isLift2 = false;
+            Inventory.instnace.isLift3 = true;
+            //
             CurrentHand = 3;
             Inventory.instnace.CurrentHand = CurrentHand;
             //
             WeaponManager.instance.damage = 10;
             WeaponManager.instance.FireSpeed = 0f;
-            WeaponManager.instance.Ammo = 10;
+            WeaponManager.instance.Ammo = 8;
             //
             StatManager.instance.PlayerMoveSpeed = 5f;
             //
@@ -234,6 +295,13 @@ public class GunController : MonoBehaviourPunCallbacks
                 AR2.SetActive(false);
                 Grenade.SetActive(true);
                 SmokeGrenade.SetActive(false);
+                //
+                isLift1 = false;
+                isLift2 = false;
+                isLift3 = false;
+                Inventory.instnace.isLift1 = false;
+                Inventory.instnace.isLift2 = false;
+                Inventory.instnace.isLift3 = false;
                 //
                 CurrentHand = 4;
                 Inventory.instnace.CurrentHand = CurrentHand;
@@ -255,6 +323,13 @@ public class GunController : MonoBehaviourPunCallbacks
                 Grenade.SetActive(false);
                 SmokeGrenade.SetActive(true);
                 //
+                isLift1 = false;
+                isLift2 = false;
+                isLift3 = false;
+                Inventory.instnace.isLift1 = false;
+                Inventory.instnace.isLift2 = false;
+                Inventory.instnace.isLift3 = false;
+                //
                 CurrentHand = 5;
                 Inventory.instnace.CurrentHand = CurrentHand;
                 //
@@ -270,13 +345,20 @@ public class GunController : MonoBehaviourPunCallbacks
         }
     }
 
-    void TurnOff()
+    public void TurnOff()
     {
         HandGun.SetActive(false);
         AR1.SetActive(false);
         AR2.SetActive(false);
         Grenade.SetActive(false);
         SmokeGrenade.SetActive(false);
+        //
+        isLift1 = false;
+        isLift2 = false;
+        isLift3 = false;
+        Inventory.instnace.isLift1 = false;
+        Inventory.instnace.isLift2 = false;
+        Inventory.instnace.isLift3 = false;
         //
         CurrentHand = 0;
         Inventory.instnace.CurrentHand = CurrentHand;
@@ -294,13 +376,20 @@ public class GunController : MonoBehaviourPunCallbacks
 
     public void WeaponChnage()
     {
-        if (WeaponManager.instance.WeaponName == "AK-47")
+        if (WeaponManager.instance.WeaponSloat.item.itemName == "AK-47")
         {
             HandGun.SetActive(false);
             AR1.SetActive(true);
             AR2.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
+            //
+            isLift1 = true;
+            isLift2 = false;
+            isLift3 = false;
+            Inventory.instnace.isLift1 = true;
+            Inventory.instnace.isLift2 = false;
+            Inventory.instnace.isLift3 = false;
             //
             CurrentHand = 1;
             Inventory.instnace.CurrentHand = CurrentHand;
@@ -313,13 +402,20 @@ public class GunController : MonoBehaviourPunCallbacks
             //
             isSingle = false;
         }
-        else if (WeaponManager.instance.WeaponName == "AKM")
+        else if (WeaponManager.instance.WeaponSloat.item.itemName == "AKM")
         {
             HandGun.SetActive(false);
             AR1.SetActive(false);
             AR2.SetActive(true);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
+            //
+            isLift1 = true;
+            isLift2 = false;
+            isLift3 = false;
+            Inventory.instnace.isLift1 = true;
+            Inventory.instnace.isLift2 = false;
+            Inventory.instnace.isLift3 = false;
             //
             CurrentHand = 2;
             Inventory.instnace.CurrentHand = CurrentHand;
@@ -337,7 +433,7 @@ public class GunController : MonoBehaviourPunCallbacks
 
     public void ChangeWeapon2()
     {
-        if (WeaponManager.instance.WeaponName2 == "AK-47")
+        if (WeaponManager.instance.WeaponSloat2.item.itemName == "AK-47")
         {
 
             HandGun.SetActive(false);
@@ -346,9 +442,15 @@ public class GunController : MonoBehaviourPunCallbacks
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
             //
+            isLift1 = false;
+            isLift2 = true;
+            isLift3 = false;
+            Inventory.instnace.isLift1 = false;
+            Inventory.instnace.isLift2 = true;
+            Inventory.instnace.isLift3 = false;
+            //
             CurrentHand = 1;
             Inventory.instnace.CurrentHand = CurrentHand;
-            
             //
             WeaponManager.instance.damage = 25;
             WeaponManager.instance.FireSpeed = 0.25f;
@@ -358,13 +460,20 @@ public class GunController : MonoBehaviourPunCallbacks
             //
             isSingle = false;
         }
-        else if (WeaponManager.instance.WeaponName2 == "AKM")
+        else if (WeaponManager.instance.WeaponSloat2.item.itemName == "AKM")
         {
             HandGun.SetActive(false);
             AR1.SetActive(false);
             AR2.SetActive(true);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
+            //
+            isLift1 = false;
+            isLift2 = true;
+            isLift3 = false;
+            Inventory.instnace.isLift1 = false;
+            Inventory.instnace.isLift2 = true;
+            Inventory.instnace.isLift3 = false;
             //
             CurrentHand = 2;
             Inventory.instnace.CurrentHand = CurrentHand;

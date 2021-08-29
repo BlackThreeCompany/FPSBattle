@@ -7,12 +7,15 @@ public class Inventory : MonoBehaviour
     public static bool inventoryActivated = false;
 
     public int CurrentHand;
+    public bool isLift1;
+    public bool isLift2;
+    public bool isLift3;
+
     int cnt;
 
     public GameObject InventoryBG;
     public GameObject EquipmentBG;
     public GameObject SlotsParent;
-
 
     
     //슬롯듯
@@ -104,17 +107,39 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                if(CurrentHand == 1)
+                if(isLift1)
                 {
+                    if (WeaponManager.instance.WeaponSloat.item.itemName == "AK-47") //5.56mm 탄창
+                    {
+                        WeaponManager.instance.have5mm += WeaponManager.instance.CurrentAmmo;
+                        WeaponManager.instance.CurrentAmmo = 0;
+                    }
+                    else if (WeaponManager.instance.WeaponSloat.item.itemName == "AKM") //7.62mm 탄창
+                    {
+                        WeaponManager.instance.have7mm += WeaponManager.instance.CurrentAmmo;
+                        WeaponManager.instance.CurrentAmmo = 0;
+                    }
                     WeaponSlots.AddItem(_item, _count);
-                    MyGunController.ChangeWeapon2();
+                    MyGunController.WeaponChnage();
+
 
                     return;
                 }
-                else if(CurrentHand == 2)
+                else if(isLift2)
                 {
+                    if (WeaponManager.instance.WeaponSloat2.item.itemName == "AK-47") //5.56mm 탄창
+                    {
+                        WeaponManager.instance.have5mm += WeaponManager.instance.CurrentAmmo2;
+                        WeaponManager.instance.CurrentAmmo2 = 0;
+                    }
+                    else if (WeaponManager.instance.WeaponSloat2.item.itemName == "AKM") //7.62mm 탄창
+                    {
+                        WeaponManager.instance.have7mm += WeaponManager.instance.CurrentAmmo2;
+                        WeaponManager.instance.CurrentAmmo2 = 0;
+                    }
                     WeaponSlots2.AddItem(_item, _count);
-                    MyGunController.WeaponChnage();
+                    MyGunController.ChangeWeapon2();
+
 
                     return;
                 }
@@ -138,9 +163,21 @@ public class Inventory : MonoBehaviour
         }
         else if (Item.ItemType.Armor == _item.itemType)
         {
-            if (ArmorSlots.item == null)
+            //if (ArmorSlots.item == null)
             {
                 ArmorSlots.AddItem(_item, _count);
+                if(ArmorSlots.item.itemName == "Armor1")
+                {
+                    StatManager.instance.AP = 25;
+                }
+                else if (ArmorSlots.item.itemName == "Armor2")
+                {
+                    StatManager.instance.AP = 50;
+                }
+                else if (ArmorSlots.item.itemName == "Armor3")
+                {
+                    StatManager.instance.AP = 100;
+                }
                 return;
             }
         }
@@ -155,6 +192,18 @@ public class Inventory : MonoBehaviour
                         if (slots[i].item.itemName == _item.itemName)
                         {
                             slots[i].SetSloatCount(_count);
+                            if(_item.itemName == "5.56mm")
+                            {
+                                WeaponManager.instance.have5mm += _count;
+                            }
+                            if(_item.itemName == "7.62mm")
+                            {
+                                WeaponManager.instance.have7mm += _count;
+                            }
+                            if (_item.itemName == "9mm")
+                            {
+                                WeaponManager.instance.have9mm += _count;
+                            }
                             return;
                         }
                     }
@@ -167,11 +216,62 @@ public class Inventory : MonoBehaviour
                 if (slots[i].item == null)
                 {
                     slots[i].AddItem(_item, _count);
+                    if (_item.itemName == "5.56mm")
+                    {
+                        WeaponManager.instance.have5mm += _count;
+                    }
+                    if (_item.itemName == "7.62mm")
+                    {
+                        WeaponManager.instance.have7mm += _count;
+                    }
+                    if (_item.itemName == "9mm")
+                    {
+                        WeaponManager.instance.have9mm += _count;
+                    }
                     return;
                 }
             }
         }
         
+    }
+
+    public void DeleteAmmo5(int cnt)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null) continue;
+            if (slots[i].item.itemName == "5.56mm")
+            {
+                slots[i].SetSloatCount(-cnt);
+                return;
+            }
+        }
+    }
+
+    public void DeleteAmmo7(int cnt)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null) continue;
+            if (slots[i].item.itemName == "7.62mm")
+            {
+                slots[i].SetSloatCount(-cnt);
+                return;
+            }
+        }
+    }
+
+    public void DeleteAmmo9(int cnt)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null) continue;
+            if (slots[i].item.itemName == "9mm")
+            {
+                slots[i].SetSloatCount(-cnt);
+                return;
+            }
+        }
     }
 
     public void DeleteGrenade()

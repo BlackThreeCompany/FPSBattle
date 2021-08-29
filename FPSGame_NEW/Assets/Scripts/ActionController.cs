@@ -24,6 +24,7 @@ public class ActionController : MonoBehaviour
     public GameObject Smokegrenade;
     public bool throwGrenade = false;
 
+
     Transform tr;
     public static ActionController instance;
 
@@ -42,35 +43,18 @@ public class ActionController : MonoBehaviour
         if(CantPickUpTime >=3) CantPickUpTxt.gameObject.SetActive(false);
     }
 
+
     void TryAction()
     {
-        if(Input.GetButton("PickUp"))
+        if(Input.GetButtonDown("PickUp"))
         {
             CheckItem();
             CanPickUp();
         }
-        //if (Input.GetButtonDown("ThrowGrenade") && !throwGrenade && WeaponManager.instance.isCanThrowGrenade)
-        //{
-        //    throwGrenade = true;
-        //    SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
-        //    GameObject CloneGrenade = grenade;
-        //    //CloneGrenade = Instantiate(Smokegrenade, tr.position, tr.rotation);
-        //    CloneGrenade = Instantiate(grenade, tr.position, tr.rotation);
-        //    CloneGrenade.GetComponent<Grenade>().isBoom = true;
-        //    WeaponManager.instance.GrenadeCnt--;
-        //    CloneGrenade.layer = 7;
-        //}
-        //if (Input.GetButtonDown("ThrowSmokeGrenade") && !throwGrenade && WeaponManager.instance.isCanThrowSmokeGrenade)
-        //{
-        //    throwGrenade = true;
-        //    SoundManager.instance.PlaySfx(tr.position, SoundManager.instance.ThrowGrenade, 0, SoundManager.instance.sfxVolum);
-        //    GameObject CloneGrenade = Smokegrenade;
-        //    //CloneGrenade = Instantiate(grenade, tr.position, tr.rotation);
-        //    CloneGrenade = Instantiate(Smokegrenade, tr.position, tr.rotation);
-        //    CloneGrenade.GetComponent<SmokeGrenade>().isBoom = true;
-        //    WeaponManager.instance.Smoke_GrenadeCnt--;
-        //    CloneGrenade.layer = 7;
-        //}
+        if(Input.GetButtonDown("Reload"))
+        {
+            Reload();
+        }
     }
 
     void CanPickUp()
@@ -105,6 +89,7 @@ public class ActionController : MonoBehaviour
                 if (hitInfo.transform.gameObject.GetComponent<ItemPickUp>().item.itemType == Item.ItemType.Ammo)
                 {
                     theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item, 30);
+
                 }
                 else
                 {
@@ -146,5 +131,153 @@ public class ActionController : MonoBehaviour
     {
         pickupActivated = false;
         actionText.gameObject.SetActive(false);
+    }
+
+    void Reload()
+    {
+        int temp;
+
+        if(Inventory.instnace.isLift1) //주무기 첫번째
+        {
+            if (WeaponManager.instance.WeaponSloat.GetComponent<Equipment>().item.itemName == "AK-47") //5.56mm 탄창
+            {
+                if (WeaponManager.instance.have5mm >= WeaponManager.instance.Ammo)
+                {
+                    Inventory.instnace.DeleteAmmo5(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo);
+                    temp = WeaponManager.instance.CurrentAmmo;
+                    WeaponManager.instance.CurrentAmmo = WeaponManager.instance.Ammo;
+                    WeaponManager.instance.have5mm = WeaponManager.instance.have5mm - (WeaponManager.instance.Ammo - temp);
+                }
+                else if (WeaponManager.instance.have5mm < WeaponManager.instance.Ammo)
+                {
+                    if (WeaponManager.instance.CurrentAmmo + WeaponManager.instance.have5mm > WeaponManager.instance.Ammo)
+                    {
+                        Inventory.instnace.DeleteAmmo5(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo);
+                        temp = WeaponManager.instance.CurrentAmmo;
+                        WeaponManager.instance.CurrentAmmo = WeaponManager.instance.Ammo;
+                        WeaponManager.instance.have5mm = WeaponManager.instance.have5mm - (WeaponManager.instance.Ammo - temp);
+                    }
+                    else
+                    {
+                        Inventory.instnace.DeleteAmmo5(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo);
+                        WeaponManager.instance.CurrentAmmo = WeaponManager.instance.CurrentAmmo + WeaponManager.instance.have5mm;
+                        WeaponManager.instance.have5mm = 0;
+                    }
+                }
+            }
+            else if (WeaponManager.instance.WeaponSloat.GetComponent<Equipment>().item.itemName == "AKM") //7.62mm 탄창
+            {
+                if (WeaponManager.instance.have7mm >= WeaponManager.instance.Ammo)
+                {
+                    Inventory.instnace.DeleteAmmo7(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo);
+                    temp = WeaponManager.instance.CurrentAmmo;
+                    WeaponManager.instance.CurrentAmmo = WeaponManager.instance.Ammo;
+                    WeaponManager.instance.have7mm = WeaponManager.instance.have7mm - (WeaponManager.instance.Ammo - temp);
+                }
+                else if (WeaponManager.instance.have7mm < WeaponManager.instance.Ammo)
+                {
+                    if (WeaponManager.instance.CurrentAmmo + WeaponManager.instance.have7mm > WeaponManager.instance.Ammo)
+                    {
+                        Inventory.instnace.DeleteAmmo7(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo);
+                        temp = WeaponManager.instance.CurrentAmmo;
+                        WeaponManager.instance.CurrentAmmo = WeaponManager.instance.Ammo;
+                        WeaponManager.instance.have7mm = WeaponManager.instance.have7mm - (WeaponManager.instance.Ammo - temp);
+                    }
+                    else
+                    {
+                        Inventory.instnace.DeleteAmmo7(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo);
+                        WeaponManager.instance.CurrentAmmo = WeaponManager.instance.CurrentAmmo + WeaponManager.instance.have7mm;
+                        WeaponManager.instance.have7mm = 0;
+                    }
+                }
+
+            }
+        }
+        else if(Inventory.instnace.isLift2) //주무기 2번째
+        {
+            if (WeaponManager.instance.WeaponSloat2.GetComponent<Equipment>().item.itemName == "AK-47") //5.56mm 탄창
+            {
+                if (WeaponManager.instance.have5mm >= WeaponManager.instance.Ammo)
+                {
+                    Inventory.instnace.DeleteAmmo5(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo2);
+                    temp = WeaponManager.instance.CurrentAmmo2;
+                    WeaponManager.instance.CurrentAmmo2 = WeaponManager.instance.Ammo;
+                    WeaponManager.instance.have5mm = WeaponManager.instance.have5mm - (WeaponManager.instance.Ammo - temp);
+                }
+                else if (WeaponManager.instance.have5mm < WeaponManager.instance.Ammo)
+                {
+                    if (WeaponManager.instance.CurrentAmmo2 + WeaponManager.instance.have5mm > WeaponManager.instance.Ammo)
+                    {
+                        Inventory.instnace.DeleteAmmo5(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo2);
+                        temp = WeaponManager.instance.CurrentAmmo2;
+                        WeaponManager.instance.CurrentAmmo2 = WeaponManager.instance.Ammo;
+                        WeaponManager.instance.have5mm = WeaponManager.instance.have5mm - (WeaponManager.instance.Ammo - temp);
+                    }
+                    else
+                    {
+                        Inventory.instnace.DeleteAmmo5(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo2);
+                        WeaponManager.instance.CurrentAmmo2 = WeaponManager.instance.CurrentAmmo2 + WeaponManager.instance.have5mm;
+                        WeaponManager.instance.have5mm = 0;
+                    }
+                }
+            }
+            else if (WeaponManager.instance.WeaponSloat2.GetComponent<Equipment>().item.itemName == "AKM") //7.62mm 탄창
+            {
+                if (WeaponManager.instance.have7mm >= WeaponManager.instance.Ammo)
+                {
+                    Inventory.instnace.DeleteAmmo7(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo2);
+                    temp = WeaponManager.instance.CurrentAmmo2;
+                    WeaponManager.instance.CurrentAmmo2 = WeaponManager.instance.Ammo;
+                    WeaponManager.instance.have7mm = WeaponManager.instance.have7mm - (WeaponManager.instance.Ammo - temp);
+                }
+                else if (WeaponManager.instance.have7mm < WeaponManager.instance.Ammo)
+                {
+                    if (WeaponManager.instance.CurrentAmmo2 + WeaponManager.instance.have7mm > WeaponManager.instance.Ammo)
+                    {
+                        Inventory.instnace.DeleteAmmo7(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo2);
+                        temp = WeaponManager.instance.CurrentAmmo2;
+                        WeaponManager.instance.CurrentAmmo2 = WeaponManager.instance.Ammo;
+                        WeaponManager.instance.have7mm = WeaponManager.instance.have7mm - (WeaponManager.instance.Ammo - temp);
+                    }
+                    else
+                    {
+                        Inventory.instnace.DeleteAmmo7(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo2);
+                        WeaponManager.instance.CurrentAmmo2 = WeaponManager.instance.CurrentAmmo2 + WeaponManager.instance.have7mm;
+                        WeaponManager.instance.have7mm = 0;
+                    }
+                }
+
+            }
+        }
+        else if(Inventory.instnace.isLift3) //권총
+        {
+            //if (WeaponManager.instance.PistolSloat.GetComponent<Equipment>().item.itemName == "Pistol") //9mm 탄창
+            {
+                if (WeaponManager.instance.have9mm >= WeaponManager.instance.Ammo)
+                {
+                    Inventory.instnace.DeleteAmmo9(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo3);
+                    temp = WeaponManager.instance.CurrentAmmo3;
+                    WeaponManager.instance.CurrentAmmo3 = WeaponManager.instance.Ammo;
+                    WeaponManager.instance.have9mm = WeaponManager.instance.have9mm - (WeaponManager.instance.Ammo - temp);
+                }
+                else if (WeaponManager.instance.have9mm < WeaponManager.instance.Ammo)
+                {
+                    if (WeaponManager.instance.CurrentAmmo3 + WeaponManager.instance.have9mm > WeaponManager.instance.Ammo)
+                    {
+                        Inventory.instnace.DeleteAmmo9(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo3);
+                        temp = WeaponManager.instance.CurrentAmmo3;
+                        WeaponManager.instance.CurrentAmmo3 = WeaponManager.instance.Ammo;
+                        WeaponManager.instance.have9mm = WeaponManager.instance.have9mm - (WeaponManager.instance.Ammo - temp);
+                    }
+                    else
+                    {
+                        Inventory.instnace.DeleteAmmo9(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo3);
+                        WeaponManager.instance.CurrentAmmo3 = WeaponManager.instance.CurrentAmmo3 + WeaponManager.instance.have9mm;
+                        WeaponManager.instance.have9mm = 0;
+                    }
+                }
+
+            }
+        }
     }
 }
