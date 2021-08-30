@@ -108,8 +108,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6131452271722102405}
   m_LocalRotation: {x: -0.707107, y: -0, z: -0, w: 0.7071066}
-  m_LocalPosition: {x: 0, y: -0, z: 1.31}
-  m_LocalScale: {x: 0.39, y: 0.05, z: 0.02}
+  m_LocalPosition: {x: 0, y: -0.00000061453, z: 0.97}
+  m_LocalScale: {x: 0.39, y: 0.02938, z: 0.02}
   m_Children: []
   m_Father: {fileID: 8581499606365535376}
   m_RootOrder: 1
@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 4541258744621508759}
   - component: {fileID: 7133858623172281768}
   - component: {fileID: 8898009552876961891}
+  - component: {fileID: 4525977007902796312}
   m_Layer: 12
   m_Name: Bullet
   m_TagString: Untagged
@@ -304,3 +305,17 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!136 &4525977007902796312
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133858623172281769}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 1.86}
