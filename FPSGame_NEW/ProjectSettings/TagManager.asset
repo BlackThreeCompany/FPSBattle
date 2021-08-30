@@ -27,9 +27,9 @@ TagManager:
   - ElsePlayer
   - Bullet
   - Player
-  - 
-  - 
-  - 
+  - PlayerHitTiggerHead
+  - PlayerHitTiggerBody
+  - PlayerHitTiggerLeg
   - 
   - 
   - 

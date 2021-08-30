@@ -14,7 +14,7 @@ public class BulletMove : MonoBehaviourPunCallbacks
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(StatManager.instance.BulletSpeed * transform.forward);
+        //rb.AddForce(StatManager.instance.BulletSpeed * transform.forward);
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class BulletMove : MonoBehaviourPunCallbacks
     void Move()
     {
         //transform.position += transform.forward * Time.deltaTime * StatManager.instance.BulletSpeed;
-        //rb.velocity = Time.fixedDeltaTime * StatManager.instance.BulletSpeed * transform.forward;
+        rb.velocity = Time.fixedDeltaTime * StatManager.instance.BulletSpeed * transform.forward;
         
     }
 }

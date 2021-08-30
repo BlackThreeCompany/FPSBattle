@@ -36,10 +36,18 @@ public class BulletDamageCheck : MonoBehaviourPunCallbacks
         }
         
 
-        if (collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == 14)
         {
             
+            pv.RPC("BulletHit", RpcTarget.AllBuffered, MyViewId, collision.gameObject.GetComponent<PlayerViewId>().ViewId, Damage*2);
+        }
+        else if(collision.gameObject.layer == 15)
+        {
             pv.RPC("BulletHit", RpcTarget.AllBuffered, MyViewId, collision.gameObject.GetComponent<PlayerViewId>().ViewId, Damage);
+        }
+        else if(collision.gameObject.layer == 16)
+        {
+            pv.RPC("BulletHit", RpcTarget.AllBuffered, MyViewId, collision.gameObject.GetComponent<PlayerViewId>().ViewId, (int)(Damage * 0.7f));
         }
 
         if (collision.gameObject.layer == 9)
@@ -58,14 +66,22 @@ public class BulletDamageCheck : MonoBehaviourPunCallbacks
         {
             return;
         }
-        
 
-        if (other.gameObject.layer == 8)
+
+        if (other.gameObject.layer == 14)
         {
 
-            pv.RPC("BulletHit", RpcTarget.AllBuffered, MyViewId, other.gameObject.GetComponent<PlayerViewId>().ViewId,10);
+            pv.RPC("BulletHit", RpcTarget.AllBuffered, MyViewId, other.gameObject.GetComponent<PlayerViewId>().ViewId, Damage * 2);
         }
-        
+        else if (other.gameObject.layer == 15)
+        {
+            pv.RPC("BulletHit", RpcTarget.AllBuffered, MyViewId, other.gameObject.GetComponent<PlayerViewId>().ViewId, Damage);
+        }
+        else if (other.gameObject.layer == 16)
+        {
+            pv.RPC("BulletHit", RpcTarget.AllBuffered, MyViewId, other.gameObject.GetComponent<PlayerViewId>().ViewId, (int)(Damage * 0.7f));
+        }
+
         Debug.Log(other.gameObject.name);
     }
 
