@@ -252,6 +252,9 @@ MonoBehaviour:
   pv: {fileID: 1168011925595554846}
   MyViewId: 0
   Player: {fileID: 0}
+  IgnoreMe:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &8932330770658465900
 MonoBehaviour:
   m_ObjectHideFlags: 0

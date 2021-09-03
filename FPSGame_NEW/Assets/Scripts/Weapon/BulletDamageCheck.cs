@@ -11,7 +11,10 @@ public class BulletDamageCheck : MonoBehaviourPunCallbacks
     public GameObject BulletObj;
     public Rigidbody Bulletrb;
 
+    public bool ishit = false;
     public int Damage;
+
+    public GameObject BulletHole;
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,7 +37,7 @@ public class BulletDamageCheck : MonoBehaviourPunCallbacks
         {
             return;
         }
-        
+        if (ishit) return;
 
         if (collision.gameObject.layer == 14)
         {
@@ -66,7 +69,7 @@ public class BulletDamageCheck : MonoBehaviourPunCallbacks
         {
             return;
         }
-
+        if (ishit) return;
 
         if (other.gameObject.layer == 14)
         {
@@ -89,15 +92,18 @@ public class BulletDamageCheck : MonoBehaviourPunCallbacks
    private void BulletDestory()
     {
         
-    
-       Destroy(BulletObj);
+        GameObject Eft = Instantiate(BulletHole,transform.position,transform.rotation);
+        Destroy(Eft, 3f);
+
+        Destroy(BulletObj);
     }
 
     [PunRPC]
     private void BulletHit(int From_id, int To_id,int Damage)
     {
+        ishit = true;
 
-        if(From_id == MyViewId)
+        if (From_id == MyViewId)
         {
             GameManager.instance.KillLog(From_id, To_id, Damage, 1);
         }

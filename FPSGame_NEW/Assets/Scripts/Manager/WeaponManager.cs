@@ -29,6 +29,9 @@ public class WeaponManager : MonoBehaviour
 
     public float FireSpeed;
     public int damage;
+    public float ReboundPower;
+
+    public Vector3 SpreadBullet;
 
     public static WeaponManager instance;
 
