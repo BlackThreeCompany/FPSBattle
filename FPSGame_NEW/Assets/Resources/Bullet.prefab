@@ -281,7 +281,9 @@ MonoBehaviour:
   MyViewId: 0
   BulletObj: {fileID: 7133858623172281769}
   Bulletrb: {fileID: 7644456330077223804}
+  ishit: 0
   Damage: 0
+  BulletHole: {fileID: 1133313454119596, guid: 79927c6543a058b4383885fac101fe2e, type: 3}
 --- !u!114 &8898009552876961891
 MonoBehaviour:
   m_ObjectHideFlags: 0

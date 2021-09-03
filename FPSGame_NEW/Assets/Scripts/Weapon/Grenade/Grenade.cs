@@ -21,6 +21,13 @@ public class Grenade : MonoBehaviourPunCallbacks
     public int MyViewId;
 
     public GameObject Player;
+
+
+    Vector3 HitPos;
+    RaycastHit hit1;
+    public LayerMask IgnoreMe;
+    float[,] RayRange = { { 0, 0, 0 }, { 0, 0.8f, 0 }, { 0, -0.8f, 0 }, { 0.4f, 0, 0 }, { -0.4f, 0, 0 }, { 0, 0, 0.4f }, { 0, 0, -0.4f } };
+    
     private void Awake()
     {
         rbody = GetComponent<Rigidbody>();
@@ -73,26 +80,50 @@ public class Grenade : MonoBehaviourPunCallbacks
         foreach(RaycastHit hitObj in rayHits)
         {
             if (!pv.IsMine) continue;
-            //hitObj.transform.GetComponent<PlayerState>().HitByGrenade(transform.position);
 
-            int Damage = 0;
-            float distance = Vector3.Distance(transform.position, hitObj.transform.gameObject.transform.position);
+            HitPos = hitObj.transform.position;
+            bool ishit = false;
             
-            if (distance >= 0 && distance <= 3.7)
+            for(int i = 0; i < 7; i++)
             {
-                Damage = 100;
-                
-            }
-            else
-            {
-                Damage = Mathf.FloorToInt((1 / distance) * 300);
+                Debug.Log(RayRange[i, 0]);
+                Vector3 GrenadeDir =  new Vector3(HitPos.x + RayRange[i, 0], HitPos.y + RayRange[i, 1], HitPos.z + RayRange[i, 2]) - this.gameObject.transform.position;
+                Debug.DrawRay(this.gameObject.transform.position,GrenadeDir * 100,Color.green,100);
 
+
+                if (Physics.Raycast(this.gameObject.transform.position, GrenadeDir, out hit1))
+                {
+                    if(hit1.transform.gameObject== hitObj.transform.gameObject)
+                    {
+                        ishit = true;
+                    }
+                }
+            }
+
+            if (ishit)
+            {
+                int Damage = 0;
+                float distance = Vector3.Distance(transform.position, hitObj.transform.gameObject.transform.position);
+
+                if (distance >= 0 && distance <= 3.7)
+                {
+                    Damage = 100;
+
+                }
+                else
+                {
+                    Damage = Mathf.FloorToInt((1 / distance) * 300);
+
+                }
+
+                Debug.Log("데미지 " + (int)Damage);
+                pv.RPC("Boom_Damage", RpcTarget.AllBuffered, StatManager.instance.MyViewId, hitObj.transform.gameObject.GetPhotonView().ViewID, Damage);
+                Debug.Log(hitObj);
+                hitcnt++;
             }
             
-            Debug.Log("데미지 " + (int)Damage);
-            pv.RPC("Boom_Damage", RpcTarget.AllBuffered,StatManager.instance.MyViewId,hitObj.transform.gameObject.GetPhotonView().ViewID, Damage);
-            Debug.Log(hitObj);
-            hitcnt++;
+
+
         }
         if(hitcnt == 0 && pv.IsMine)
         {
@@ -157,3 +188,28 @@ public class Grenade : MonoBehaviourPunCallbacks
         Destroy(tr.gameObject);
     }
 }
+
+/*
+ * 
+ * 
+ *  int Damage = 0;
+            float distance = Vector3.Distance(transform.position, hitObj.transform.gameObject.transform.position);
+            
+            if (distance >= 0 && distance <= 3.7)
+            {
+                Damage = 100;
+                
+            }
+            else
+            {
+                Damage = Mathf.FloorToInt((1 / distance) * 300);
+
+            }
+            
+            Debug.Log("데미지 " + (int)Damage);
+            pv.RPC("Boom_Damage", RpcTarget.AllBuffered,StatManager.instance.MyViewId,hitObj.transform.gameObject.GetPhotonView().ViewID, Damage);
+            Debug.Log(hitObj);
+            hitcnt++;
+
+ 
+ */

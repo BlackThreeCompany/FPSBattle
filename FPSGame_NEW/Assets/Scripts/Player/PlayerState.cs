@@ -15,22 +15,4 @@ public class PlayerState : MonoBehaviour
     {
         
     }
-
-    public void HitByGrenade(Vector3 explosionPos)
-    {
-        float distance = Vector3.Distance(explosionPos, transform.position);
-        //Debug.Log(distance);
-        if (distance >= 0 && distance <= 3.7)
-        {
-            StatManager.instance.HP -= 100;
-            //Debug.Log("데미지 100");
-        }
-        else
-        {
-            float damage = (1 / distance) * 300;
-            StatManager.instance.HP -= (int)damage;
-
-            //Debug.Log("데미지 " + (int)damage);
-        }
-    }
 }
