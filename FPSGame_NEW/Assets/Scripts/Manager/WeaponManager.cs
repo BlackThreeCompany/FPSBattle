@@ -38,16 +38,21 @@ public class WeaponManager : MonoBehaviour
     //public string WeaponName;
     //public string WeaponName2;
 
-
+    
 
     public Text HaveAmmotxt;
     public Text CurrentAmmotxt;
 
+    public Text AmmoTx;
     private void Awake()
     {
         instance = this;    
     }
 
+    private void Start()
+    {
+        
+    }
     private void Update()
     {
 
@@ -56,13 +61,15 @@ public class WeaponManager : MonoBehaviour
         {
             if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AK-47") //5.56mmźâ
             {
-                HaveAmmotxt.text = have5mm.ToString();
-                CurrentAmmotxt.text = CurrentAmmo.ToString();
+                //HaveAmmotxt.text = have5mm.ToString();
+                //CurrentAmmotxt.text = CurrentAmmo.ToString();
+                AmmoTx.text = CurrentAmmo.ToString() + " / " + have5mm.ToString();
             }
             if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AKM") //7.62mmźâ
             {
-                HaveAmmotxt.text = have7mm.ToString();
-                CurrentAmmotxt.text = CurrentAmmo.ToString();
+                //HaveAmmotxt.text = have7mm.ToString();
+                //CurrentAmmotxt.text = CurrentAmmo.ToString();
+                AmmoTx.text = CurrentAmmo.ToString() + " / " + have7mm.ToString();
             }
 
         }
@@ -70,21 +77,24 @@ public class WeaponManager : MonoBehaviour
         {
             if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AK-47") //5.56mmźâ
             {
-                HaveAmmotxt.text = have5mm.ToString();
-                CurrentAmmotxt.text = CurrentAmmo2.ToString();
+                //HaveAmmotxt.text = have5mm.ToString();
+                //CurrentAmmotxt.text = CurrentAmmo2.ToString();
+                AmmoTx.text = CurrentAmmo2.ToString() + " / " + have5mm.ToString();
             }
             if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AKM") //7.62mmźâ
             {
-                HaveAmmotxt.text = have7mm.ToString();
-                CurrentAmmotxt.text = CurrentAmmo2.ToString();
+                //HaveAmmotxt.text = have7mm.ToString();
+                //CurrentAmmotxt.text = CurrentAmmo2.ToString();
+                AmmoTx.text = CurrentAmmo2.ToString() + " / " + have7mm.ToString();
             }
         }
         else if(Inventory.instnace.isLift3)
         {
             //if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AK-47") //9mm
             {
-                HaveAmmotxt.text = have9mm.ToString();
-                CurrentAmmotxt.text = CurrentAmmo3.ToString();
+                //HaveAmmotxt.text = have9mm.ToString();
+                //CurrentAmmotxt.text = CurrentAmmo3.ToString();
+                AmmoTx.text = CurrentAmmo3.ToString() + " / " + have9mm.ToString();
             }
         }
         
