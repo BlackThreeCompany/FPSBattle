@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Photon.Pun;
 public class StatManager : MonoBehaviour
 {
     public float PlayerMoveSpeed;
@@ -24,7 +24,7 @@ public class StatManager : MonoBehaviour
     public void GetViewId(int ViewId)
     {
         MyViewId = ViewId;
-        MyViewIdTx.text = "ViewID : " + MyViewId;
+        MyViewIdTx.text = "ID : " + MyViewId +"  Name : "+PhotonNetwork.LocalPlayer.NickName;
         
     }
 }

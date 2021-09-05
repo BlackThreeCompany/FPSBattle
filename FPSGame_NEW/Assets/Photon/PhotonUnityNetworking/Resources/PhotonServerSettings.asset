@@ -48,6 +48,8 @@ MonoBehaviour:
   - Destory_RPC
   - Boom_Damage
   - DestoryGrenade_RPC
+  - OnMatched
+  - ToMap_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
