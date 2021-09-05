@@ -26,7 +26,7 @@ public class Grenade : MonoBehaviourPunCallbacks
     Vector3 HitPos;
     RaycastHit hit1;
     public LayerMask IgnoreMe;
-    float[,] RayRange = { { 0, 0, 0 }, { 0, 0.8f, 0 }, { 0, -0.8f, 0 }, { 0.4f, 0, 0 }, { -0.4f, 0, 0 }, { 0, 0, 0.4f }, { 0, 0, -0.4f } };
+    float[,] RayRange = { { 0, 0, 0 }, { 0, 0.8f, 0 }, { 0, -0.8f, 0 }, { 0.3f, 0, 0 }, { -0.3f, 0, 0 }, { 0, 0, 0.3f }, { 0, 0, -0.3f } };
     
     private void Awake()
     {

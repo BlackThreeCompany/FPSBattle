@@ -14,11 +14,15 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
     public Text PingTx;
     public GameObject Player;
     public bool isJoined = false;
+    public bool isRealGame = false;
 
     public static NetWorkManager instance;
     void Start()
     {
-        
+        if (isRealGame)
+        {
+            Player = PhotonNetwork.Instantiate("Player", new Vector3(0, 10, 0), Quaternion.Euler(0, 0, 0));
+        }
     }
     void Awake()
     {
@@ -26,11 +30,19 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.SendRate = 40;
         PhotonNetwork.SerializationRate = 40;
+        if (isRealGame)
+        {
+            isJoined = true;
+        }
     }
     // Update is called once per frame
     void Update()
     {
-        StatTx.text = PhotonNetwork.NetworkClientState.ToString();
+        if (!isRealGame)
+        {
+            StatTx.text = PhotonNetwork.NetworkClientState.ToString();
+        }
+        
         if (isJoined)
         {
             PingTx.text = "Ping : " + PhotonNetwork.GetPing().ToString();
@@ -39,16 +51,20 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
 
     public void JoinServer()
     {
+        if (isRealGame) return;
         JoinBt.interactable = false;
         PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnConnectedToMaster()
     {
+        if (isRealGame) return;
         PhotonNetwork.JoinRandomRoom();
     }
     public override void OnJoinedRoom()
     {
+        if (isRealGame) return;
+
         JoinPn.SetActive(false);
         InGamePn.SetActive(true);
 
@@ -59,12 +75,14 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
+        if (isRealGame) return;
         PhotonNetwork.CreateRoom("Room", new RoomOptions { MaxPlayers = 20 });
     }
     
 
     public override void OnDisconnected(DisconnectCause cause)
     {
+        if (isRealGame) return;
         isJoined = false;
 
         JoinPn.SetActive(true);
