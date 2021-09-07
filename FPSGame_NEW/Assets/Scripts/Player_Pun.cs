@@ -54,6 +54,7 @@ public class Player_Pun : MonoBehaviourPunCallbacks
         {
             gunController.AR1.SetActive(false);
             gunController.AR2.SetActive(false);
+            gunController.ShotGun1.SetActive(false);
             gunController.HandGun.SetActive(false);
             gunController.Grenade.SetActive(false);
             gunController.SmokeGrenade.SetActive(false);
@@ -62,6 +63,7 @@ public class Player_Pun : MonoBehaviourPunCallbacks
         {
             gunController.AR1.SetActive(true);
             gunController.AR2.SetActive(false);
+            gunController.ShotGun1.SetActive(false);
             gunController.HandGun.SetActive(false);
             gunController.Grenade.SetActive(false);
             gunController.SmokeGrenade.SetActive(false);
@@ -70,6 +72,7 @@ public class Player_Pun : MonoBehaviourPunCallbacks
         {
             gunController.AR1.SetActive(false);
             gunController.AR2.SetActive(true);
+            gunController.ShotGun1.SetActive(false);
             gunController.HandGun.SetActive(false);
             gunController.Grenade.SetActive(false);
             gunController.SmokeGrenade.SetActive(false);
@@ -78,6 +81,7 @@ public class Player_Pun : MonoBehaviourPunCallbacks
         {
             gunController.AR1.SetActive(false);
             gunController.AR2.SetActive(false);
+            gunController.ShotGun1.SetActive(false);
             gunController.HandGun.SetActive(true);
             gunController.Grenade.SetActive(false);
             gunController.SmokeGrenade.SetActive(false);
@@ -86,6 +90,7 @@ public class Player_Pun : MonoBehaviourPunCallbacks
         {
             gunController.AR1.SetActive(false);
             gunController.AR2.SetActive(false);
+            gunController.ShotGun1.SetActive(false);
             gunController.HandGun.SetActive(false);
             gunController.Grenade.SetActive(true);
             gunController.SmokeGrenade.SetActive(false);
@@ -94,6 +99,16 @@ public class Player_Pun : MonoBehaviourPunCallbacks
         {
             gunController.AR1.SetActive(false);
             gunController.AR2.SetActive(false);
+            gunController.ShotGun1.SetActive(false);
+            gunController.HandGun.SetActive(false);
+            gunController.Grenade.SetActive(false);
+            gunController.SmokeGrenade.SetActive(true);
+        }
+        if (CurrentHand == 6)
+        {
+            gunController.AR1.SetActive(false);
+            gunController.AR2.SetActive(false);
+            gunController.ShotGun1.SetActive(true);
             gunController.HandGun.SetActive(false);
             gunController.Grenade.SetActive(false);
             gunController.SmokeGrenade.SetActive(true);
