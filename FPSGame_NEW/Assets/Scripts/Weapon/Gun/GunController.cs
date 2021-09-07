@@ -606,19 +606,20 @@ public class GunController : MonoBehaviourPunCallbacks
 
     }
 
-    void ShotgunFire(int bulletCount)
+    void ShotgunFire()
     {
         float[] spread = new float[100];
         int idx = 0;
-        //float 
-        for(int i=0;i< bulletCount/2; i++)
+        float spdir = 0.99f;
+        for(int i=0;i< 20; i++)
         {
-
+            spread[i] = spdir + (0.001f) * i;
         }
-        for (int i = 0; i < bulletCount / 2; i++)
+        for(int i = 0; i < 20; i++)
         {
-
+            PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir * spread[i]));
         }
+        
     }
 
 
