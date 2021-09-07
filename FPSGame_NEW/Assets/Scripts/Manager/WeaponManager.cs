@@ -26,6 +26,7 @@ public class WeaponManager : MonoBehaviour
     public int have5mm;
     public int have7mm;
     public int have9mm;
+    public int ShotGunAmmo;
 
     public float FireSpeed;
     public int damage;
@@ -55,8 +56,6 @@ public class WeaponManager : MonoBehaviour
     }
     private void Update()
     {
-
-
         if (Inventory.instnace.isLift1)
         {
             if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AK-47") //5.56mmźâ
@@ -65,11 +64,18 @@ public class WeaponManager : MonoBehaviour
                 //CurrentAmmotxt.text = CurrentAmmo.ToString();
                 AmmoTx.text = CurrentAmmo.ToString() + " / " + have5mm.ToString();
             }
-            if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AKM") //7.62mmźâ
+            else if (WeaponSloat.GetComponent<Equipment>().item.itemName == "AKM") //7.62mmźâ
+            {
+                //HaveAmmotxt.text = have7mm.ToString();
+                //
+                //txt.text = CurrentAmmo.ToString();
+                AmmoTx.text = CurrentAmmo.ToString() + " / " + have7mm.ToString();
+            }
+            else if(WeaponSloat.GetComponent<Equipment>().item.itemName == "ShotGun") //샷건탄창
             {
                 //HaveAmmotxt.text = have7mm.ToString();
                 //CurrentAmmotxt.text = CurrentAmmo.ToString();
-                AmmoTx.text = CurrentAmmo.ToString() + " / " + have7mm.ToString();
+                AmmoTx.text = CurrentAmmo.ToString() + " / " + ShotGunAmmo.ToString();
             }
 
         }
@@ -81,11 +87,17 @@ public class WeaponManager : MonoBehaviour
                 //CurrentAmmotxt.text = CurrentAmmo2.ToString();
                 AmmoTx.text = CurrentAmmo2.ToString() + " / " + have5mm.ToString();
             }
-            if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AKM") //7.62mmźâ
+            else if(WeaponSloat2.GetComponent<Equipment>().item.itemName == "AKM") //7.62mmźâ
             {
                 //HaveAmmotxt.text = have7mm.ToString();
                 //CurrentAmmotxt.text = CurrentAmmo2.ToString();
                 AmmoTx.text = CurrentAmmo2.ToString() + " / " + have7mm.ToString();
+            }
+            else if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "ShotGun") //샷건탄창
+            {
+                //HaveAmmotxt.text = have7mm.ToString();
+                //CurrentAmmotxt.text = CurrentAmmo.ToString();
+                AmmoTx.text = CurrentAmmo2.ToString() + " / " + ShotGunAmmo.ToString();
             }
         }
         else if(Inventory.instnace.isLift3)
@@ -125,6 +137,10 @@ public class WeaponManager : MonoBehaviour
                 {
                     isCanFireAR = true;
                 }
+                else if (WeaponSloat.GetComponent<Equipment>().item.itemName == "ShotGun")
+                {
+                    isCanFireAR = true;
+                }
             }
 
 
@@ -136,6 +152,10 @@ public class WeaponManager : MonoBehaviour
                     isCanFireAR = true;
                 }
                 else if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "AK-47")
+                {
+                    isCanFireAR = true;
+                }
+                else if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "ShotGun")
                 {
                     isCanFireAR = true;
                 }

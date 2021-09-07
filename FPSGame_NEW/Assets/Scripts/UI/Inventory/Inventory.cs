@@ -45,8 +45,8 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(MyGunController == null)
+
+        if (MyGunController == null)
         {
             if(Player != null)
             {
@@ -121,6 +121,12 @@ public class Inventory : MonoBehaviour
                         DeleteAmmo7(-WeaponManager.instance.CurrentAmmo);
                         WeaponManager.instance.CurrentAmmo = 0;
                     }
+                    else if (WeaponManager.instance.WeaponSloat.item.itemName == "ShotGun") //샷건탄창
+                    {
+                        WeaponManager.instance.ShotGunAmmo += WeaponManager.instance.CurrentAmmo;
+                        DeleteShotGunAmmo(-WeaponManager.instance.CurrentAmmo);
+                        WeaponManager.instance.CurrentAmmo = 0;
+                    }
                     WeaponSlots.AddItem(_item, _count);
                     MyGunController.WeaponChnage();
 
@@ -139,6 +145,12 @@ public class Inventory : MonoBehaviour
                     {
                         WeaponManager.instance.have7mm += WeaponManager.instance.CurrentAmmo2;
                         DeleteAmmo7(-WeaponManager.instance.CurrentAmmo2);
+                        WeaponManager.instance.CurrentAmmo2 = 0;
+                    }
+                    else if (WeaponManager.instance.WeaponSloat2.item.itemName == "ShotGun") //샷건탄창
+                    {
+                        WeaponManager.instance.ShotGunAmmo += WeaponManager.instance.CurrentAmmo2;
+                        DeleteShotGunAmmo(-WeaponManager.instance.CurrentAmmo2);
                         WeaponManager.instance.CurrentAmmo2 = 0;
                     }
                     WeaponSlots2.AddItem(_item, _count);
@@ -208,6 +220,10 @@ public class Inventory : MonoBehaviour
                             {
                                 WeaponManager.instance.have9mm += _count;
                             }
+                            if (_item.itemName == "ShotGunAmmo")
+                            {
+                                WeaponManager.instance.ShotGunAmmo += _count;
+                            }
                             return;
                         }
                     }
@@ -231,6 +247,10 @@ public class Inventory : MonoBehaviour
                     if (_item.itemName == "9mm")
                     {
                         WeaponManager.instance.have9mm += _count;
+                    }
+                    if (_item.itemName == "ShotGunAmmo")
+                    {
+                        WeaponManager.instance.ShotGunAmmo += _count;
                     }
                     return;
                 }
@@ -257,6 +277,19 @@ public class Inventory : MonoBehaviour
         {
             if (slots[i].item == null) continue;
             if (slots[i].item.itemName == "7.62mm")
+            {
+                slots[i].SetSloatCount(-cnt);
+                return;
+            }
+        }
+    }
+
+    public void DeleteShotGunAmmo(int cnt)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null) continue;
+            if (slots[i].item.itemName == "ShotGunAmmo")
             {
                 slots[i].SetSloatCount(-cnt);
                 return;
