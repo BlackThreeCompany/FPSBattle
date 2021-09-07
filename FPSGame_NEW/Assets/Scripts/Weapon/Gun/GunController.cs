@@ -20,6 +20,7 @@ public class GunController : MonoBehaviourPunCallbacks
     public GameObject AR1;
     public GameObject AR2;
     public GameObject ShotGun1;
+    public GameObject Sniper1;
     public GameObject HandGun;
     public GameObject Grenade;
     public GameObject SmokeGrenade;
@@ -34,7 +35,7 @@ public class GunController : MonoBehaviourPunCallbacks
 
     public GameObject Bullet;
 
-    public int CurrentHand; // Hand : 0      AR : 1    AR : 2    Pistol : 3       Grenade : 4        SmokeGrenade : 5       ShotGun : 6
+    public int CurrentHand; // Hand : 0      AR : 1    AR : 2    Pistol : 3       Grenade : 4        SmokeGrenade : 5       ShotGun : 6         Sniper : 7
 
     public float ShootDelay = 0.1f;
     public float ShootDebugTime = 1f;
@@ -321,6 +322,7 @@ public class GunController : MonoBehaviourPunCallbacks
             AR1.SetActive(false);
             AR2.SetActive(false);
             ShotGun1.SetActive(false);
+            Sniper1.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
             //
@@ -350,6 +352,7 @@ public class GunController : MonoBehaviourPunCallbacks
                 AR1.SetActive(false);
                 AR2.SetActive(false);
                 ShotGun1.SetActive(false);
+                Sniper1.SetActive(false);
                 Grenade.SetActive(true);
                 SmokeGrenade.SetActive(false);
                 //
@@ -378,6 +381,7 @@ public class GunController : MonoBehaviourPunCallbacks
                 AR1.SetActive(false);
                 AR2.SetActive(false);
                 ShotGun1.SetActive(false);
+                Sniper1.SetActive(false);
                 Grenade.SetActive(false);
                 SmokeGrenade.SetActive(true);
                 //
@@ -409,6 +413,7 @@ public class GunController : MonoBehaviourPunCallbacks
         AR1.SetActive(false);
         AR2.SetActive(false);
         ShotGun1.SetActive(false);
+        Sniper1.SetActive(false);
         Grenade.SetActive(false);
         SmokeGrenade.SetActive(false);
         //
@@ -441,6 +446,7 @@ public class GunController : MonoBehaviourPunCallbacks
             AR1.SetActive(true);
             AR2.SetActive(false);
             ShotGun1.SetActive(false);
+            Sniper1.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
             //
@@ -468,6 +474,7 @@ public class GunController : MonoBehaviourPunCallbacks
             AR1.SetActive(false);
             AR2.SetActive(true);
             ShotGun1.SetActive(false);
+            Sniper1.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
             //
@@ -495,6 +502,7 @@ public class GunController : MonoBehaviourPunCallbacks
             AR1.SetActive(false);
             AR2.SetActive(false);
             ShotGun1.SetActive(true);
+            Sniper1.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
             //
@@ -516,6 +524,34 @@ public class GunController : MonoBehaviourPunCallbacks
             //
             isSingle = true;
         }
+        else if (WeaponManager.instance.WeaponSloat2.item.itemName == "Sniper")
+        {
+            HandGun.SetActive(false);
+            AR1.SetActive(false);
+            AR2.SetActive(false);
+            ShotGun1.SetActive(false);
+            Sniper1.SetActive(true);
+            Grenade.SetActive(false);
+            SmokeGrenade.SetActive(false);
+            //
+            isLift1 = true;
+            isLift2 = false;
+            isLift3 = false;
+            Inventory.instnace.isLift1 = true;
+            Inventory.instnace.isLift2 = false;
+            Inventory.instnace.isLift3 = false;
+            //
+            CurrentHand = 7;
+            Inventory.instnace.CurrentHand = CurrentHand;
+            //
+            WeaponManager.instance.damage = 50;
+            WeaponManager.instance.FireSpeed = 1.5f;
+            WeaponManager.instance.Ammo = 5;
+            //
+            StatManager.instance.PlayerMoveSpeed = 3f;
+            //
+            isSingle = true;
+        }
     }
 
 
@@ -528,6 +564,7 @@ public class GunController : MonoBehaviourPunCallbacks
             AR1.SetActive(true);
             AR2.SetActive(false);
             ShotGun1.SetActive(false);
+            Sniper1.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
             //
@@ -555,6 +592,7 @@ public class GunController : MonoBehaviourPunCallbacks
             AR1.SetActive(false);
             AR2.SetActive(true);
             ShotGun1.SetActive(false);
+            Sniper1.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
             //
@@ -582,6 +620,7 @@ public class GunController : MonoBehaviourPunCallbacks
             AR1.SetActive(false);
             AR2.SetActive(false);
             ShotGun1.SetActive(true);
+            Sniper1.SetActive(false);
             Grenade.SetActive(false);
             SmokeGrenade.SetActive(false);
             //
@@ -600,6 +639,34 @@ public class GunController : MonoBehaviourPunCallbacks
             WeaponManager.instance.Ammo = 8;
             //
             StatManager.instance.PlayerMoveSpeed = 4f;
+            //
+            isSingle = true;
+        }
+        else if (WeaponManager.instance.WeaponSloat2.item.itemName == "Sniper")
+        {
+            HandGun.SetActive(false);
+            AR1.SetActive(false);
+            AR2.SetActive(false);
+            ShotGun1.SetActive(false);
+            Sniper1.SetActive(true);
+            Grenade.SetActive(false);
+            SmokeGrenade.SetActive(false);
+            //
+            isLift1 = false;
+            isLift2 = true;
+            isLift3 = false;
+            Inventory.instnace.isLift1 = false;
+            Inventory.instnace.isLift2 = true;
+            Inventory.instnace.isLift3 = false;
+            //
+            CurrentHand = 7;
+            Inventory.instnace.CurrentHand = CurrentHand;
+            //
+            WeaponManager.instance.damage = 50;
+            WeaponManager.instance.FireSpeed = 1.5f;
+            WeaponManager.instance.Ammo = 5;
+            //
+            StatManager.instance.PlayerMoveSpeed = 3f;
             //
             isSingle = true;
         }
