@@ -50,6 +50,7 @@ MonoBehaviour:
   - DestoryGrenade_RPC
   - OnMatched
   - ToMap_RPC
+  - TeamSelectFinished
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
