@@ -1414,6 +1414,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610606999}
   m_CullTransparentMesh: 1
+--- !u!1 &681408710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 681408711}
+  - component: {fileID: 681408712}
+  - component: {fileID: 681408713}
+  m_Layer: 0
+  m_Name: RGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &681408711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681408710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4682706978655276334}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &681408712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681408710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6101b6ce2bbe744aa0e38e52d69545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawnpos:
+  - {fileID: 0}
+  PlayerFirstCheck: 0000000000000000000000
+  TeamABIdx: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  NowPlayerCnt: 0
+  isPunReceived: 0
+  pv: {fileID: 681408713}
+--- !u!114 &681408713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681408710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 16
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &824858130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3716,6 +3789,7 @@ MonoBehaviour:
   have5mm: 0
   have7mm: 0
   have9mm: 0
+  ShotGunAmmo: 0
   FireSpeed: 0
   damage: 0
   ReboundPower: 0
@@ -3806,6 +3880,7 @@ Transform:
   - {fileID: 4682706978694349997}
   - {fileID: 4682706977589090354}
   - {fileID: 4682706977640313657}
+  - {fileID: 681408711}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
