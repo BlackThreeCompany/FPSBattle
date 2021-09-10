@@ -6896,6 +6896,7 @@ MonoBehaviour:
   ShootDelay: 0.1
   ShootDebugTime: 1
   pv: {fileID: -2863723951195069346}
+  pellets: 0
 --- !u!114 &-2863723951195069346
 MonoBehaviour:
   m_ObjectHideFlags: 0

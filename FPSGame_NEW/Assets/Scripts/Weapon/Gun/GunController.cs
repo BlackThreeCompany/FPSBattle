@@ -51,7 +51,7 @@ public class GunController : MonoBehaviourPunCallbacks
     bool isLift3 = false; //권총 슬롯 들고있을때(?)
 
     //샷건
-
+    public int pellets;
 
     private void Awake()
     {
@@ -673,22 +673,27 @@ public class GunController : MonoBehaviourPunCallbacks
 
     }
 
+    //void ShotgunFire()
+    //{
+    //    float[,] spread = new float[100,2];
+    //    int idx = 0;
+    //    float spdir = -0.02f;
+    //    for(int i=0;i< 20; i++)
+    //    {
+    //        spread[i,0] = Mathf.Abs( spdir + ((0.002f) * i));
+    //        spread[i, 1] = Mathf.Sqrt(0.0004f - (spread[i, 0] * spread[i, 0]));
+            
+    //    }
+    //    for(int i = 0; i < 20; i++)
+    //    {
+    //        PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(new Vector3(Gundir.x + spread[i,0]- 0.02f, Gundir.y + spread[i, 1] - 0.02f, Gundir.z+ spread[i, 1] - 0.02f)));
+            
+    //    }
+        
+    //}
+
     void ShotgunFire()
     {
-        float[,] spread = new float[100,2];
-        int idx = 0;
-        float spdir = -0.02f;
-        for(int i=0;i< 20; i++)
-        {
-            spread[i,0] = Mathf.Abs( spdir + ((0.002f) * i));
-            spread[i, 1] = Mathf.Sqrt(0.0004f - (spread[i, 0] * spread[i, 0]));
-            
-        }
-        for(int i = 0; i < 20; i++)
-        {
-            PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(new Vector3(Gundir.x + spread[i,0]- 0.02f, Gundir.y + spread[i, 1] - 0.02f, Gundir.z+ spread[i, 1] - 0.02f)));
-            
-        }
         
     }
 
