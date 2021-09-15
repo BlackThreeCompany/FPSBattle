@@ -57,11 +57,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        PhotonNetwork.CreateRoom("개인전" + Random.Range(0,1000), new RoomOptions { MaxPlayers = 10 });
+        PhotonNetwork.CreateRoom("개인전" + Random.Range(0,1000), new RoomOptions { MaxPlayers = 10 ,PublishUserId = true});
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        PhotonNetwork.CreateRoom("개인전" + Random.Range(0, 1000), new RoomOptions { MaxPlayers = 10 });
+        PhotonNetwork.CreateRoom("개인전" + Random.Range(0, 1000), new RoomOptions { MaxPlayers = 10 , PublishUserId = true });
     }
     public override void OnJoinedRoom()
     {
