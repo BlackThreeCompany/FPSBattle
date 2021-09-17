@@ -34,12 +34,19 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public PhotonView pv;
 
+    public static RGame instance;
     // Start is called before the first frame update
 
 
     // -----------------------------------------------
     //시작, 모든 플레이어 STATE Manager-------------------------------------------
     //-----------------------------------------------
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         Random.seed = System.DateTime.Now.Millisecond;
@@ -62,7 +69,7 @@ public class RGame : MonoBehaviourPunCallbacks
             return;
         }
 
-        PlayerUpdate();
+        //PlayerUpdate();
     }
     public void SelectTeam()
     {
@@ -154,7 +161,7 @@ public class RGame : MonoBehaviourPunCallbacks
             }
         }
 
-        isPunReceived = true;
+        
     }
 
     [PunRPC]
@@ -257,6 +264,9 @@ public class RGame : MonoBehaviourPunCallbacks
 
             NetWorkManager.instance.Finished_PlayerSpawn(SpawnPos_CHD[MYTEAM_IDX].transform.position, Spawnpos[spawnB_RPC].transform.rotation);
         }
+
+
+        isPunReceived = true;
     }
 
 
@@ -273,6 +283,17 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        
+        for(int i = 0; i < 5; i++)
+        {
+            if(TeamPlayer_A[i] == otherPlayer)
+            {
+                TeamPlayerState_A[i] = 3;
+            }
+
+            if (TeamPlayer_B[i] == otherPlayer)
+            {
+                TeamPlayerState_B[i] = 3;
+            }
+        }
     }
 }
