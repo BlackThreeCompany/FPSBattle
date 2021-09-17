@@ -14,7 +14,7 @@ public class Player_Pun : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        
+        //GameManager.instance.MYPv = pv;
     }
 
     // Update is called once per frame

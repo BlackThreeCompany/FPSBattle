@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Text KillLogTx;
     public Text HPTx;
     public Text ArmorTx;
+
+    public PhotonView pv;
     void Awake()
     {
         instance = this;
@@ -53,6 +55,13 @@ public class GameManager : MonoBehaviourPunCallbacks
             else StatManager.instance.HP -= Damage;
 
             KillLogTx.text = "[GUN] " + "[ Damage : " + Damage + " ] " + From_id + " -> " + To_id + " ( " + LogCount + " )  ";
+
+            if (StatManager.instance.HP <= 0)
+            {
+                StatManager.instance.HP = 0;
+
+                pv.RPC("R_PLAYERKILLED", RpcTarget.AllBuffered, From_id, To_id,1,RGame.instance.MYTEAM,RGame.instance.MYTEAM_IDX);
+            }
         }
         else if (Killtype == 3)
         {
@@ -76,6 +85,15 @@ public class GameManager : MonoBehaviourPunCallbacks
             else StatManager.instance.HP -= Damage;
 
             KillLogTx.text = "[Grenade] " + "[ Damage : " + Damage + " ] " + From_id + " -> " + To_id + " ( " + LogCount + " )  ";
+
+            if (StatManager.instance.HP <= 0)
+            {
+                StatManager.instance.HP = 0;
+
+                pv.RPC("R_PLAYERKILLED", RpcTarget.AllBuffered, From_id, To_id, 2, RGame.instance.MYTEAM, RGame.instance.MYTEAM_IDX);
+            }
+
+
         }
         else if (Killtype == 6)
         {
@@ -85,4 +103,25 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     }
     
+    public void R_KilledBY(int KillMeID,int KillType) 
+    {
+       
+    }
+
+    [PunRPC]
+    private void R_PLAYERKILLED(int TOKILLID, int KilledID, int KillType, int KilledPL_Team, int KilledPL_T_Idx)// 1-shoot 2-Grenade
+    {
+        Player KilledPlayer = PhotonView.Find(KilledID).Owner;
+        Player ToKillPlayer = PhotonView.Find(TOKILLID).Owner;
+
+        if(KilledPL_Team == 0)
+        {
+            RGame.instance.TeamPlayerState_A[KilledPL_T_Idx] = 2;
+        }
+        else
+        {
+            RGame.instance.TeamPlayerState_B[KilledPL_T_Idx] = 2;
+        }
+        
+    }
 }

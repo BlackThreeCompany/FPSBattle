@@ -8,6 +8,9 @@ public class PlayerUpdate : MonoBehaviour
     public GameObject[] TeamB_UIState = new GameObject[6];
 
 
+    public GameObject[] TeamA_UIState_Death = new GameObject[6];
+    public GameObject[] TeamB_UIState_Death = new GameObject[6];
+
     // Update is called once per frame
     void Update()
     {
@@ -48,9 +51,15 @@ public class PlayerUpdate : MonoBehaviour
             {
                 TeamA_UIState[i].SetActive(true);
             }
+            else if(RGame.instance.TeamPlayerState_A[i] == 2)
+            {
+                TeamA_UIState[i].SetActive(false);
+                TeamA_UIState_Death[i].SetActive(true);
+            }
             else
             {
                 TeamA_UIState[i].SetActive(false);
+                TeamA_UIState_Death[i].SetActive(false);
             }
         }
 
@@ -62,9 +71,15 @@ public class PlayerUpdate : MonoBehaviour
             {
                 TeamB_UIState[i].SetActive(true);
             }
+            else if (RGame.instance.TeamPlayerState_B[i] == 2)
+            {
+                TeamB_UIState[i].SetActive(false);
+                TeamB_UIState_Death[i].SetActive(true);
+            }
             else
             {
                 TeamB_UIState[i].SetActive(false);
+                TeamB_UIState_Death[i].SetActive(false);
             }
         }
     }
