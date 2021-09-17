@@ -23,16 +23,31 @@ public class RGame : MonoBehaviourPunCallbacks
     public bool isPunReceived = false;
 
     public Text TeamLogTx;
+
+
+    public int MYTEAM_IDX;
     public int MYTEAM; // 0:A 1:B
+    public int spawnA, spawnB;
+
+    public GameObject[] SpawnPos_CHD = new GameObject[6];
+    public Transform[] SpawnPos_Trans = new Transform[6];
 
     public PhotonView pv;
 
     // Start is called before the first frame update
+
+
+    // -----------------------------------------------
+    //시작, 모든 플레이어 STATE Manager-------------------------------------------
+    //-----------------------------------------------
     void Start()
     {
+        Random.seed = System.DateTime.Now.Millisecond;
+
         if (pv.IsMine)
         {
             SelectTeam();
+            SelectSpawn();
             Debug.Log(")))))");
         }
         else
@@ -116,6 +131,7 @@ public class RGame : MonoBehaviourPunCallbacks
 
     }
 
+
     [PunRPC]
     private void TeamSelectFinished()
     {
@@ -161,6 +177,7 @@ public class RGame : MonoBehaviourPunCallbacks
                     if (Team_ID_RPC == PhotonNetwork.LocalPlayer.UserId)
                     {
                         MYTEAM = Team_RPC;
+                        MYTEAM_IDX = Idx_RPC;
                         if (Team_RPC == 0) TeamLogTx.text = "Team : A";
                         else TeamLogTx.text = "Team : B";
                     }
@@ -183,6 +200,7 @@ public class RGame : MonoBehaviourPunCallbacks
                     if (Team_ID_RPC == PhotonNetwork.LocalPlayer.UserId)
                     {
                         MYTEAM = Team_RPC;
+                        MYTEAM_IDX = Idx_RPC;
                         if (Team_RPC == 0) TeamLogTx.text = "Team : A";
                         else TeamLogTx.text = "Team : B";
                     }
@@ -193,6 +211,60 @@ public class RGame : MonoBehaviourPunCallbacks
             TeamPlayerState_B[Idx_RPC] = 1;
         }
     }
+
+
+
+
+    public void SelectSpawn()
+    {
+        
+
+        spawnA = Random.Range(0, Spawnpos.Length);
+        while (true)
+        {
+            spawnB = Random.Range(0, Spawnpos.Length);
+            Debug.Log("spawnB : " + spawnB);
+            if (spawnA != spawnB) break;
+        }
+
+        pv.RPC("TeamSpawnPosSend", RpcTarget.AllBuffered, spawnA, spawnB);
+    }
+
+
+    [PunRPC]
+    private void TeamSpawnPosSend(int spawnA_RPC, int spawnB_RPC)
+    {
+        
+
+
+        if(MYTEAM == 0)
+        {
+            SpawnPos_Trans = Spawnpos[spawnA_RPC].GetComponentsInChildren<Transform>();
+            for (int i = 0; i < 5; i++)
+            {
+                SpawnPos_CHD[i] = SpawnPos_Trans[i+1].gameObject;
+            }
+
+            NetWorkManager.instance.Finished_PlayerSpawn(SpawnPos_CHD[MYTEAM_IDX].transform.position, Spawnpos[spawnA_RPC].transform.rotation);
+        }
+        else
+        {
+            SpawnPos_Trans = Spawnpos[spawnB_RPC].GetComponentsInChildren<Transform>();
+            for (int i = 0; i < 5; i++)
+            {
+                SpawnPos_CHD[i] = SpawnPos_Trans[i + 1].gameObject;
+            }
+
+            NetWorkManager.instance.Finished_PlayerSpawn(SpawnPos_CHD[MYTEAM_IDX].transform.position, Spawnpos[spawnB_RPC].transform.rotation);
+        }
+    }
+
+
+
+
+
+
+
     public void PlayerUpdate()
     {
         NowPlayerCnt = PhotonNetwork.CurrentRoom.PlayerCount;
