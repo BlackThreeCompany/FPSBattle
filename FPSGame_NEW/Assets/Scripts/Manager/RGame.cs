@@ -85,6 +85,7 @@ public class RGame : MonoBehaviourPunCallbacks
 
         if (IsTimesend)
         {
+            if (RoundEnd == 1) return;
             TimeUpdate();
         }
         //PlayerUpdate();
