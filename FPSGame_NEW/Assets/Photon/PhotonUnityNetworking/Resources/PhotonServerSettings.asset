@@ -55,6 +55,7 @@ MonoBehaviour:
   - TeamSpawnPosSend
   - R_PLAYERKILLED
   - SendGameTime
+  - PlayerKilled_TimesUP
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

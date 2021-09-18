@@ -22,6 +22,11 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
         if (isRealGame)
         {
             //Player = PhotonNetwork.Instantiate("Player", new Vector3(0, 10, 0), Quaternion.Euler(0, 0, 0));
+            
+        }
+        else
+        {
+            PhotonNetwork.GameVersion = "0";
         }
     }
     void Awake()
