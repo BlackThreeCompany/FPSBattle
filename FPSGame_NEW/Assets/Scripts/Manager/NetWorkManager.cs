@@ -21,7 +21,7 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
     {
         if (isRealGame)
         {
-            Player = PhotonNetwork.Instantiate("Player", new Vector3(0, 10, 0), Quaternion.Euler(0, 0, 0));
+            //Player = PhotonNetwork.Instantiate("Player", new Vector3(0, 10, 0), Quaternion.Euler(0, 0, 0));
         }
     }
     void Awake()
@@ -88,5 +88,11 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
         JoinPn.SetActive(true);
         InGamePn.SetActive(false);
         JoinBt.interactable = true;
+    }
+
+
+    public void Finished_PlayerSpawn(Vector3 spawnPos, Quaternion spawnRot)
+    {
+        Player = PhotonNetwork.Instantiate("Player", spawnPos, spawnRot);
     }
 }

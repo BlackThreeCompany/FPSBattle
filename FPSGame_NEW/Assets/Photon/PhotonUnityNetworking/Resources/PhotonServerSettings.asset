@@ -52,6 +52,8 @@ MonoBehaviour:
   - ToMap_RPC
   - TeamSelectFinished
   - TeamSelectSend
+  - TeamSpawnPosSend
+  - R_PLAYERKILLED
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
