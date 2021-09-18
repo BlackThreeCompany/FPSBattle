@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerSafeCheck : MonoBehaviour
+public class PlayerSafeCheck : MonoBehaviourPunCallbacks
 {
+    public PhotonView pv;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,8 @@ public class PlayerSafeCheck : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        if (!pv.IsMine) return;
+
         if(other.gameObject.layer == 17)
         {
             StatManager.instance.SafeTx.SetActive(true);
@@ -26,6 +30,8 @@ public class PlayerSafeCheck : MonoBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
+        if (!pv.IsMine) return;
+
         if (other.gameObject.layer == 17)
         {
             StatManager.instance.SafeTx.SetActive(false);
