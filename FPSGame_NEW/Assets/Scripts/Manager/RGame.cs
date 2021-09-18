@@ -23,7 +23,7 @@ public class RGame : MonoBehaviourPunCallbacks
     public bool isPunReceived = false;
 
     public Text TeamLogTx;
-
+    
 
     public int MYTEAM_IDX;
     public int MYTEAM; // 0:A 1:B
@@ -33,6 +33,15 @@ public class RGame : MonoBehaviourPunCallbacks
     public Transform[] SpawnPos_Trans = new Transform[6];
 
     public PhotonView pv;
+
+    public Text GameTimeTx;
+    public bool IsTimesend = false;
+    public double NowGameTime;
+    public double StartGameTime;
+    public double GameTime;
+    public double NowGameTimer;
+    public int sec;
+    public float secelse;
 
     public static RGame instance;
     // Start is called before the first frame update
@@ -55,6 +64,8 @@ public class RGame : MonoBehaviourPunCallbacks
         {
             SelectTeam();
             SelectSpawn();
+
+            Invoke("EndTimeSet_M",Random.Range(5.0f,10.0f));
             Debug.Log(")))))");
         }
         else
@@ -69,6 +80,11 @@ public class RGame : MonoBehaviourPunCallbacks
             return;
         }
 
+
+        if (IsTimesend)
+        {
+            TimeUpdate();
+        }
         //PlayerUpdate();
     }
     public void SelectTeam()
@@ -295,5 +311,42 @@ public class RGame : MonoBehaviourPunCallbacks
                 TeamPlayerState_B[i] = 3;
             }
         }
+    }
+
+    public void EndTimeSet_M()
+    {
+        pv.RPC("SendGameTime", RpcTarget.AllBuffered, PhotonNetwork.Time, Random.Range(30.0f, 120.0f));
+    }
+    [PunRPC]
+    private void SendGameTime(double StartTime_rpc,float GameTime_rpc)
+    {
+        StartGameTime = StartTime_rpc;
+        GameTime = GameTime_rpc;
+        
+        IsTimesend = true;
+    }
+
+    public void TimeUpdate()
+    {
+        NowGameTime = PhotonNetwork.Time;
+        NowGameTimer = StartGameTime + GameTime - NowGameTime;
+
+        sec = Mathf.FloorToInt((float)NowGameTimer);
+        secelse = (float)(NowGameTimer - sec);
+        if(NowGameTimer < 0)
+        {
+            GameTimeTx.text = "0 . 000";
+            return;
+        }
+
+        if(sec < 10)
+        {
+            GameTimeTx.text = sec + " . " + Mathf.FloorToInt(secelse * 1000);
+        }
+        else
+        {
+            GameTimeTx.text = sec + " . " + Mathf.FloorToInt(secelse * 10);
+        }
+        
     }
 }
