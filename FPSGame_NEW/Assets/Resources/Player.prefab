@@ -7039,9 +7039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a61be31bb796bb64d88c02aa9f2add67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IgnoreMe:
-    serializedVersion: 2
-    m_Bits: 135168
   playerPun: {fileID: 0}
   Cam: {fileID: 0}
   HitPoint: {fileID: 0}
