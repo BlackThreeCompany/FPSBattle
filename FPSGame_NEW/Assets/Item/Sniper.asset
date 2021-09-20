@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Sniper
   itemImage: {fileID: 21300028, guid: db63fa1c2adceb141974024b30ffa6db, type: 3}
-  itemPrefab: {fileID: 6443058814185529369, guid: 5199657ba57d1cd43a4ad50654621e21, type: 3}
+  itemPrefab: {fileID: 7836294976809370745, guid: 222cd53563a7c9f47be38b0d4f8d7188, type: 3}
   itemType: 2

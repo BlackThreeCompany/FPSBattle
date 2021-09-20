@@ -42,7 +42,7 @@ public class GunController : MonoBehaviourPunCallbacks
 
     public PhotonView pv;
     Transform tr;
-
+    Animator sniperAni;
 
     bool isSingle;
 
@@ -51,10 +51,18 @@ public class GunController : MonoBehaviourPunCallbacks
     bool isLift3 = false; //권총 슬롯 들고있을때(?)
 
     //샷건
-    public int pellets;
+    public int pelletCount;
+    public float spreadAngle;
+    public float pelletFireVel;
+    List<Quaternion> pellets;
 
     private void Awake()
     {
+        pellets = new List<Quaternion>(pelletCount);
+        for (int i = 0; i < pelletCount; i++)
+        {
+            pellets.Add(Quaternion.Euler(Vector3.zero));
+        }
 
         if (pv.IsMine)
         {
@@ -64,6 +72,8 @@ public class GunController : MonoBehaviourPunCallbacks
 
         //
         tr = GetComponent<Transform>();
+        sniperAni = Sniper1.GetComponent<Animator>();
+
     }
     void Start()
     {
@@ -80,6 +90,7 @@ public class GunController : MonoBehaviourPunCallbacks
         GunChange();
         guntarget();
         Shoot();
+        Aim();
     }
     void guntarget()
     {
@@ -111,6 +122,36 @@ public class GunController : MonoBehaviourPunCallbacks
             Gundir = Cam.transform.forward;
         }
 
+    }
+
+    void Aim()
+    {
+        if(Input.GetMouseButton(1))
+        {
+            if (isLift1)
+            {
+                if (CurrentHand == 7)//스나이퍼
+                {
+                    sniperAni.SetBool("Aim", true);
+                    GameManager.instance.ScopeAimEnable();
+                    
+                }
+            }
+            else if (isLift2)
+            {
+
+            }
+            else if (isLift3)
+            {
+
+            }
+        }
+        else
+        {
+            sniperAni.SetBool("Aim", false);
+            GameManager.instance.ScopeAimDisable();
+        }
+        
     }
 
     void Shoot()
@@ -176,7 +217,11 @@ public class GunController : MonoBehaviourPunCallbacks
                                 
                                 if(CurrentHand == 6)
                                 {
-                                    ShotgunFire();
+                                    ShotGunFire();
+                                }
+                                else if (CurrentHand == 7)
+                                {
+                                    PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
                                 }
                                 else
                                 {
@@ -197,7 +242,11 @@ public class GunController : MonoBehaviourPunCallbacks
 
                                 if(CurrentHand == 6)
                                 {
-                                    ShotgunFire();
+                                    ShotGunFire();
+                                }
+                                else if(CurrentHand == 7)
+                                {
+                                    PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
                                 }
                                 else
                                 {
@@ -239,7 +288,11 @@ public class GunController : MonoBehaviourPunCallbacks
                                 ShootDebugTime = 0;
                                 if (CurrentHand == 6)
                                 {
-                                    ShotgunFire();
+                                    ShotGunFire();
+                                }
+                                else if (CurrentHand == 7)
+                                {
+                                    PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
                                 }
                                 else
                                 {
@@ -260,7 +313,11 @@ public class GunController : MonoBehaviourPunCallbacks
                                 ShootDebugTime = 0;
                                 if (CurrentHand == 6)
                                 {
-                                    ShotgunFire();
+                                    ShotGunFire();
+                                }
+                                else if (CurrentHand == 7)
+                                {
+                                    PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir));
                                 }
                                 else PhotonNetwork.Instantiate("Bullet", GunHole[CurrentHand].transform.position, Quaternion.LookRotation(Gundir + new Vector3(Random.Range(-WeaponManager.instance.SpreadBullet.x, WeaponManager.instance.SpreadBullet.x),
                                                                                                                                                         Random.Range(-WeaponManager.instance.SpreadBullet.y, WeaponManager.instance.SpreadBullet.y),
@@ -524,7 +581,7 @@ public class GunController : MonoBehaviourPunCallbacks
             //
             isSingle = true;
         }
-        else if (WeaponManager.instance.WeaponSloat2.item.itemName == "Sniper")
+        else if (WeaponManager.instance.WeaponSloat.item.itemName == "Sniper")
         {
             HandGun.SetActive(false);
             AR1.SetActive(false);
@@ -692,10 +749,14 @@ public class GunController : MonoBehaviourPunCallbacks
         
     //}
 
-    void ShotgunFire()
+    void ShotGunFire()
     {
-        
+        for (int i = 0; i < pelletCount; i++)
+        {
+            pellets[i] = Random.rotation;
+            PhotonNetwork.Instantiate("Bullet 1", GunHole[CurrentHand].transform.position, Quaternion.RotateTowards(transform.rotation, pellets[i], spreadAngle));
+            i++;
+        }
     }
-
 
 }
