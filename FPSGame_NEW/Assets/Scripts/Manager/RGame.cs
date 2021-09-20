@@ -398,19 +398,33 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public void PlayerSafeAreacheck()
     {
+
         if(StatManager.instance.isInSafeArea == false)
         {
+            
             StatManager.instance.HP = 0;
             pv.RPC("PlayerKilledORSafe_TimesUP",RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX,1); // Á×À½
         }
         else
         {
-            pv.RPC("PlayerKilledORSafe_TimesUP", RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX, 0); //»ýÁ¸
+            if (MYTEAM == 0 && TeamPlayerState_A[MYTEAM_IDX] == 2)
+            {
+                pv.RPC("PlayerKilledORSafe_TimesUP", RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX, 1); // Á×À½
+            }
+            else if(MYTEAM == 1 && TeamPlayerState_B[MYTEAM_IDX] == 2)
+            {
+                pv.RPC("PlayerKilledORSafe_TimesUP", RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX, 1); // Á×À½
+            }
+            else
+            {
+                pv.RPC("PlayerKilledORSafe_TimesUP", RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX, 0); //»ýÁ¸
+            }
+                
         }
     }
 
     [PunRPC]
-    private void PlayerKilled_TimesUP(int PL_Team,int PL_T_IDX, int SafeOrKilled)
+    private void PlayerKilledORSafe_TimesUP(int PL_Team,int PL_T_IDX, int SafeOrKilled)
     {
         if(SafeOrKilled == 1)
         {
