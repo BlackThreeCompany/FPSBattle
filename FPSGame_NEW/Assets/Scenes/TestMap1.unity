@@ -3350,6 +3350,7 @@ MonoBehaviour:
   - {fileID: 0}
   pv: {fileID: 681408713}
   GameTimeTx: {fileID: 204743583}
+  GameScoreTx: {fileID: 2031938345}
   IsTimesend: 0
   NowGameTime: 0
   StartGameTime: 0
@@ -3358,6 +3359,12 @@ MonoBehaviour:
   sec: 0
   secelse: 0
   RoundEnd: 0
+  GameOver_SendCnt: 0
+  GameOver_A_Safe: 0
+  GameOver_B_Safe: 0
+  ISGameOver_OKSend: 0
+  OK_Cnt: 0
+  IsOK_Send: 0
 --- !u!114 &681408713
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,6 +35,7 @@ public class RGame : MonoBehaviourPunCallbacks
     public PhotonView pv;
 
     public Text GameTimeTx;
+    public Text GameScoreTx;
     public bool IsTimesend = false;
     public double NowGameTime;
     public double StartGameTime;
@@ -54,6 +55,7 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public bool ISGameOver_OKSend = false;
     public int OK_Cnt = 0;
+    public bool IsOK_Send = false;
     // Start is called before the first frame update
 
 
@@ -65,6 +67,9 @@ public class RGame : MonoBehaviourPunCallbacks
     private void Awake()
     {
         instance = this;
+        Hashtable CP = PhotonNetwork.CurrentRoom.CustomProperties;
+
+        GameScoreTx.text = CP["RedScore"] + " : " + CP["BlueScore"];
     }
     void Start()
     {
@@ -97,16 +102,19 @@ public class RGame : MonoBehaviourPunCallbacks
                 pv.RPC("RoundOver_OK", RpcTarget.AllBuffered);
                 ISGameOver_OKSend = true;
             }
-            if (PhotonNetwork.IsMasterClient)
+            if (PhotonNetwork.IsMasterClient && !IsOK_Send)
             {
                 if(OK_Cnt == PhotonNetwork.CurrentRoom.PlayerCount)
                 {
+                    IsOK_Send = true;
                     Hashtable CP = PhotonNetwork.CurrentRoom.CustomProperties;
                     CP["RedSafe"] = GameOver_A_Safe;
                     CP["BlueSafe"] = GameOver_B_Safe;
 
                     CP["RedScore"] = int.Parse(CP["RedScore"].ToString()) + GameOver_A_Safe;
                     CP["BlueScore"] = int.Parse(CP["BlueScore"].ToString()) + GameOver_B_Safe;
+
+                    PhotonNetwork.CurrentRoom.SetCustomProperties(CP);
                     Invoke("TOSCORESCENE", 5f);
                 }
             }
@@ -359,7 +367,7 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public void EndTimeSet_M()
     {
-        pv.RPC("SendGameTime", RpcTarget.AllBuffered, PhotonNetwork.Time, Random.Range(30.0f, 120.0f));
+        pv.RPC("SendGameTime", RpcTarget.AllBuffered, PhotonNetwork.Time, Random.Range(10.0f, 20.0f));
     }
     [PunRPC]
     private void SendGameTime(double StartTime_rpc,float GameTime_rpc)

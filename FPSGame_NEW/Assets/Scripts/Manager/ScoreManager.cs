@@ -23,8 +23,14 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
         RED_SCORE.text = CP["RedScore"].ToString();
         BLUE_SCORE.text = CP["BlueScore"].ToString();
+
+        Invoke("GOGAMESCENE",5);
     }
 
+    public void GOGAMESCENE()
+    {
+        PhotonNetwork.LoadLevel("TestMap1");
+    }
 
 
 }
