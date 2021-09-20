@@ -14,6 +14,9 @@ public class StatManager : MonoBehaviour
     public int HP = 100000;
     public int AP;
 
+    public GameObject SafeTx;
+    public bool isInSafeArea = false;
+
     public Text MyViewIdTx;
     public static StatManager instance;
 

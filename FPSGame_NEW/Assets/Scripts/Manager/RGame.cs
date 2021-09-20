@@ -43,6 +43,8 @@ public class RGame : MonoBehaviourPunCallbacks
     public int sec;
     public float secelse;
 
+    public int RoundEnd = 0;
+
     public static RGame instance;
     // Start is called before the first frame update
 
@@ -83,6 +85,7 @@ public class RGame : MonoBehaviourPunCallbacks
 
         if (IsTimesend)
         {
+            if (RoundEnd == 1) return;
             TimeUpdate();
         }
         //PlayerUpdate();
@@ -336,6 +339,8 @@ public class RGame : MonoBehaviourPunCallbacks
         if(NowGameTimer < 0)
         {
             GameTimeTx.text = "0 . 000";
+            RoundEnd = 1;
+            PlayerSafeAreacheck();
             return;
         }
 
@@ -348,5 +353,27 @@ public class RGame : MonoBehaviourPunCallbacks
             GameTimeTx.text = sec + " . " + Mathf.FloorToInt(secelse * 10);
         }
         
+    }
+
+    public void PlayerSafeAreacheck()
+    {
+        if(StatManager.instance.isInSafeArea == false)
+        {
+            StatManager.instance.HP = 0;
+            pv.RPC("PlayerKilled_TimesUP",RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX);
+        }
+    }
+
+    [PunRPC]
+    private void PlayerKilled_TimesUP(int KilledPL_Team,int KilledPL_T_IDX)
+    {
+        if (KilledPL_Team == 0)
+        {
+            TeamPlayerState_A[KilledPL_T_IDX] = 2;
+        }
+        else
+        {
+            TeamPlayerState_B[KilledPL_T_IDX] = 2;
+        }
     }
 }
