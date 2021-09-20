@@ -27,6 +27,7 @@ public class WeaponManager : MonoBehaviour
     public int have7mm;
     public int have9mm;
     public int ShotGunAmmo;
+    public int sniperAmmo;
 
     public float FireSpeed;
     public int damage;
@@ -77,6 +78,12 @@ public class WeaponManager : MonoBehaviour
                 //CurrentAmmotxt.text = CurrentAmmo.ToString();
                 AmmoTx.text = CurrentAmmo.ToString() + " / " + ShotGunAmmo.ToString();
             }
+            else if (WeaponSloat.GetComponent<Equipment>().item.itemName == "Sniper") //스나이퍼탄창
+            {
+                //HaveAmmotxt.text = have7mm.ToString();
+                //CurrentAmmotxt.text = CurrentAmmo.ToString();
+                AmmoTx.text = CurrentAmmo.ToString() + " / " + sniperAmmo.ToString();
+            }
 
         }
         else if (Inventory.instnace.isLift2)
@@ -98,6 +105,12 @@ public class WeaponManager : MonoBehaviour
                 //HaveAmmotxt.text = have7mm.ToString();
                 //CurrentAmmotxt.text = CurrentAmmo.ToString();
                 AmmoTx.text = CurrentAmmo2.ToString() + " / " + ShotGunAmmo.ToString();
+            }
+            else if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "Sniper") //샷건탄창
+            {
+                //HaveAmmotxt.text = have7mm.ToString();
+                //CurrentAmmotxt.text = CurrentAmmo.ToString();
+                AmmoTx.text = CurrentAmmo2.ToString() + " / " + sniperAmmo.ToString();
             }
         }
         else if(Inventory.instnace.isLift3)
@@ -141,6 +154,10 @@ public class WeaponManager : MonoBehaviour
                 {
                     isCanFireAR = true;
                 }
+                else if (WeaponSloat.GetComponent<Equipment>().item.itemName == "Sniper")
+                {
+                    isCanFireAR = true;
+                }
             }
 
 
@@ -156,6 +173,10 @@ public class WeaponManager : MonoBehaviour
                     isCanFireAR = true;
                 }
                 else if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "ShotGun")
+                {
+                    isCanFireAR = true;
+                }
+                else if (WeaponSloat2.GetComponent<Equipment>().item.itemName == "Sniper")
                 {
                     isCanFireAR = true;
                 }

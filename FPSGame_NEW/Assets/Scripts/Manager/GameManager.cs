@@ -13,6 +13,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Text HPTx;
     public Text ArmorTx;
 
+    public GameObject Aim;
+    public GameObject ScopeAim;
+
+    bool isAim;
+
+    public GameObject WeaponCamera;
     public PhotonView pv;
     void Awake()
     {
@@ -123,5 +129,36 @@ public class GameManager : MonoBehaviourPunCallbacks
             RGame.instance.TeamPlayerState_B[KilledPL_T_Idx] = 2;
         }
         
+    }
+
+    public void AimDisable()
+    {
+        Aim.SetActive(false);
+    }
+
+    public void AimEnable()
+    {
+        Aim.SetActive(true);
+    }
+
+    IEnumerator OnScope()
+    {
+        yield return new WaitForSecondsRealtime(0.15f);
+
+        AimDisable();
+        WeaponCamera.SetActive(false);
+        ScopeAim.SetActive(true);
+    }
+
+    public void ScopeAimEnable()
+    {
+        StartCoroutine(OnScope());
+    }
+
+    public void ScopeAimDisable()
+    {
+        AimEnable();
+        WeaponCamera.SetActive(true);
+        ScopeAim.SetActive(false);
     }
 }

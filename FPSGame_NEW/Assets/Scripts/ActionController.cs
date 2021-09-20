@@ -92,6 +92,10 @@ public class ActionController : MonoBehaviour
                     {
                         theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item, 10);
                     }
+                    else if (hitInfo.transform.gameObject.GetComponent<ItemPickUp>().item.itemName == "SniperAmmo")
+                    {
+                        theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item, 5);
+                    }
                     else theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item, 30);
                 }
                 else
@@ -221,6 +225,32 @@ public class ActionController : MonoBehaviour
                     }
                 }
             }
+            else if (WeaponManager.instance.WeaponSloat.GetComponent<Equipment>().item.itemName == "Sniper") //스나이퍼 탄창
+            {
+                if (WeaponManager.instance.sniperAmmo >= WeaponManager.instance.Ammo)
+                {
+                    Inventory.instnace.DeleteSniperAmmo(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo);
+                    temp = WeaponManager.instance.CurrentAmmo;
+                    WeaponManager.instance.CurrentAmmo = WeaponManager.instance.Ammo;
+                    WeaponManager.instance.sniperAmmo = WeaponManager.instance.sniperAmmo - (WeaponManager.instance.Ammo - temp);
+                }
+                else if (WeaponManager.instance.sniperAmmo < WeaponManager.instance.Ammo)
+                {
+                    if (WeaponManager.instance.CurrentAmmo + WeaponManager.instance.sniperAmmo > WeaponManager.instance.Ammo)
+                    {
+                        Inventory.instnace.DeleteSniperAmmo(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo);
+                        temp = WeaponManager.instance.CurrentAmmo;
+                        WeaponManager.instance.CurrentAmmo = WeaponManager.instance.Ammo;
+                        WeaponManager.instance.sniperAmmo = WeaponManager.instance.sniperAmmo - (WeaponManager.instance.Ammo - temp);
+                    }
+                    else
+                    {
+                        Inventory.instnace.DeleteSniperAmmo(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo);
+                        WeaponManager.instance.CurrentAmmo = WeaponManager.instance.CurrentAmmo + WeaponManager.instance.sniperAmmo;
+                        WeaponManager.instance.sniperAmmo = 0;
+                    }
+                }
+            }
         }
         else if(Inventory.instnace.isLift2) //주무기 2번째
         {
@@ -301,6 +331,33 @@ public class ActionController : MonoBehaviour
                         Inventory.instnace.DeleteShotGunAmmo(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo2);
                         WeaponManager.instance.CurrentAmmo2 = WeaponManager.instance.CurrentAmmo2 + WeaponManager.instance.ShotGunAmmo;
                         WeaponManager.instance.ShotGunAmmo = 0;
+                    }
+                }
+
+            }
+            else if (WeaponManager.instance.WeaponSloat2.GetComponent<Equipment>().item.itemName == "Sniper") //샷건 탄창
+            {
+                if (WeaponManager.instance.sniperAmmo >= WeaponManager.instance.Ammo)
+                {
+                    Inventory.instnace.DeleteSniperAmmo(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo2);
+                    temp = WeaponManager.instance.CurrentAmmo2;
+                    WeaponManager.instance.CurrentAmmo2 = WeaponManager.instance.Ammo;
+                    WeaponManager.instance.sniperAmmo = WeaponManager.instance.sniperAmmo - (WeaponManager.instance.Ammo - temp);
+                }
+                else if (WeaponManager.instance.sniperAmmo < WeaponManager.instance.Ammo)
+                {
+                    if (WeaponManager.instance.CurrentAmmo2 + WeaponManager.instance.sniperAmmo > WeaponManager.instance.Ammo)
+                    {
+                        Inventory.instnace.DeleteSniperAmmo(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo2);
+                        temp = WeaponManager.instance.CurrentAmmo2;
+                        WeaponManager.instance.CurrentAmmo2 = WeaponManager.instance.Ammo;
+                        WeaponManager.instance.sniperAmmo = WeaponManager.instance.sniperAmmo - (WeaponManager.instance.Ammo - temp);
+                    }
+                    else
+                    {
+                        Inventory.instnace.DeleteSniperAmmo(WeaponManager.instance.Ammo - WeaponManager.instance.CurrentAmmo2);
+                        WeaponManager.instance.CurrentAmmo2 = WeaponManager.instance.CurrentAmmo2 + WeaponManager.instance.sniperAmmo;
+                        WeaponManager.instance.sniperAmmo = 0;
                     }
                 }
 

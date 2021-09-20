@@ -127,6 +127,12 @@ public class Inventory : MonoBehaviour
                         DeleteShotGunAmmo(-WeaponManager.instance.CurrentAmmo);
                         WeaponManager.instance.CurrentAmmo = 0;
                     }
+                    else if (WeaponManager.instance.WeaponSloat.item.itemName == "Sniper") //스나이퍼탄창
+                    {
+                        WeaponManager.instance.ShotGunAmmo += WeaponManager.instance.CurrentAmmo;
+                        DeleteSniperAmmo(-WeaponManager.instance.CurrentAmmo);
+                        WeaponManager.instance.CurrentAmmo = 0;
+                    }
                     WeaponSlots.AddItem(_item, _count);
                     MyGunController.WeaponChnage();
 
@@ -151,6 +157,12 @@ public class Inventory : MonoBehaviour
                     {
                         WeaponManager.instance.ShotGunAmmo += WeaponManager.instance.CurrentAmmo2;
                         DeleteShotGunAmmo(-WeaponManager.instance.CurrentAmmo2);
+                        WeaponManager.instance.CurrentAmmo2 = 0;
+                    }
+                    else if (WeaponManager.instance.WeaponSloat2.item.itemName == "Sniper") //스나이퍼탄창
+                    {
+                        WeaponManager.instance.ShotGunAmmo += WeaponManager.instance.CurrentAmmo2;
+                        DeleteSniperAmmo(-WeaponManager.instance.CurrentAmmo2);
                         WeaponManager.instance.CurrentAmmo2 = 0;
                     }
                     WeaponSlots2.AddItem(_item, _count);
@@ -224,6 +236,10 @@ public class Inventory : MonoBehaviour
                             {
                                 WeaponManager.instance.ShotGunAmmo += _count;
                             }
+                            if (_item.itemName == "SniperAmmo")
+                            {
+                                WeaponManager.instance.sniperAmmo += _count;
+                            }
                             return;
                         }
                     }
@@ -251,6 +267,10 @@ public class Inventory : MonoBehaviour
                     if (_item.itemName == "ShotGunAmmo")
                     {
                         WeaponManager.instance.ShotGunAmmo += _count;
+                    }
+                    if (_item.itemName == "SniperAmmo")
+                    {
+                        WeaponManager.instance.sniperAmmo += _count;
                     }
                     return;
                 }
@@ -290,6 +310,19 @@ public class Inventory : MonoBehaviour
         {
             if (slots[i].item == null) continue;
             if (slots[i].item.itemName == "ShotGunAmmo")
+            {
+                slots[i].SetSloatCount(-cnt);
+                return;
+            }
+        }
+    }
+
+    public void DeleteSniperAmmo(int cnt)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null) continue;
+            if (slots[i].item.itemName == "SniperAmmo")
             {
                 slots[i].SetSloatCount(-cnt);
                 return;
