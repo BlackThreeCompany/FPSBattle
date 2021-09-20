@@ -92,13 +92,16 @@ public class RGame : MonoBehaviourPunCallbacks
     {
         if (!isPunReceived)
         {
+            Debug.Log("##º¸³¿");
             return;
         }
-
+        
         if (RoundEnd == 1)
         {
-            if(GameOver_SendCnt == PhotonNetwork.CurrentRoom.PlayerCount && !ISGameOver_OKSend)
+            
+            if (GameOver_SendCnt == PhotonNetwork.CurrentRoom.PlayerCount && !ISGameOver_OKSend)
             {
+                Debug.Log("##º¸³¿");
                 pv.RPC("RoundOver_OK", RpcTarget.AllBuffered);
                 ISGameOver_OKSend = true;
             }
@@ -106,6 +109,7 @@ public class RGame : MonoBehaviourPunCallbacks
             {
                 if(OK_Cnt == PhotonNetwork.CurrentRoom.PlayerCount)
                 {
+                    Debug.Log("##º¸³¿");
                     IsOK_Send = true;
                     Hashtable CP = PhotonNetwork.CurrentRoom.CustomProperties;
                     CP["RedSafe"] = GameOver_A_Safe;
@@ -137,6 +141,7 @@ public class RGame : MonoBehaviourPunCallbacks
     [PunRPC]
     private void TOSCORESCENE_RPC()
     {
+        PhotonNetwork.OpCleanRpcBuffer(pv);
         PhotonNetwork.LoadLevel("ScoreScene");
     }
     public void SelectTeam()
@@ -210,7 +215,7 @@ public class RGame : MonoBehaviourPunCallbacks
     [PunRPC]
     private void TeamSelectFinished()
     {
-        
+        Debug.Log("##º¸³¿");
         Debug.Log("!!");
         for (int i = 0; i < PhotonNetwork.CurrentRoom.PlayerCount; i++)
         {
@@ -235,6 +240,7 @@ public class RGame : MonoBehaviourPunCallbacks
     [PunRPC]
     private void TeamSelectSend(int Team_RPC,string Team_ID_RPC,int Idx_RPC)
     {
+        Debug.Log("##º¸³¿");
         Debug.Log("Á¤º¸¹ÞÀ½" + Team_RPC + Team_ID_RPC + Idx_RPC);
 
 
@@ -292,7 +298,7 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public void SelectSpawn()
     {
-        
+        Debug.Log("##º¸³¿");
 
         spawnA = Random.Range(0, Spawnpos.Length);
         while (true)
@@ -309,10 +315,10 @@ public class RGame : MonoBehaviourPunCallbacks
     [PunRPC]
     private void TeamSpawnPosSend(int spawnA_RPC, int spawnB_RPC)
     {
-        
+        Debug.Log("##º¸³¿");
 
 
-        if(MYTEAM == 0)
+        if (MYTEAM == 0)
         {
             SpawnPos_Trans = Spawnpos[spawnA_RPC].GetComponentsInChildren<Transform>();
             for (int i = 0; i < 5; i++)
@@ -406,8 +412,8 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public void PlayerSafeAreacheck()
     {
-
-        if(StatManager.instance.isInSafeArea == false)
+        Debug.Log("##º¸³¿");
+        if (StatManager.instance.isInSafeArea == false)
         {
             
             StatManager.instance.HP = 0;
@@ -434,7 +440,8 @@ public class RGame : MonoBehaviourPunCallbacks
     [PunRPC]
     private void PlayerKilledORSafe_TimesUP(int PL_Team,int PL_T_IDX, int SafeOrKilled)
     {
-        if(SafeOrKilled == 1)
+        Debug.Log("##º¸³¿");
+        if (SafeOrKilled == 1)
         {
             if (PL_Team == 0)
             {
