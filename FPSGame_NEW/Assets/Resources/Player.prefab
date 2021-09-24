@@ -4051,12 +4051,9 @@ GameObject:
   - component: {fileID: 4164100495274169840}
   - component: {fileID: 4164100495274169841}
   - component: {fileID: 4164100495274169852}
-  - component: {fileID: 7366616524182277921}
-  - component: {fileID: 842749945065635134}
-  - component: {fileID: 7927314432398632428}
-  - component: {fileID: 7496007941109123196}
   - component: {fileID: 6333067272258796533}
   - component: {fileID: 1758939586877827891}
+  - component: {fileID: 6317152060632790656}
   m_Layer: 17
   m_Name: Sniper
   m_TagString: Untagged
@@ -4144,71 +4141,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5581774496011204090, guid: 6134906be4a768e439bb1783747646f6, type: 3}
---- !u!114 &7366616524182277921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4164100495274169853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cc8c1183aac4c7409a39e52ef2d9178, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 85b1aaabbffbe794c890060572c444fb, type: 2}
---- !u!114 &842749945065635134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4164100495274169853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb8c6e01e06b6a24f8768f0645cd22f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pv: {fileID: 7927314432398632428}
---- !u!114 &7927314432398632428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4164100495274169853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 7496007941109123196}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &7496007941109123196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4164100495274169853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!114 &6333067272258796533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4232,8 +4164,8 @@ MonoBehaviour:
   Recoil4: 50
   RecoilRotation: {x: -35, y: 4, z: 15}
   RecoilKickBack: {x: 0.2, y: 0.2, z: -0.3}
-  RecoilRotation_Aim: {x: 0, y: 0, z: 0}
-  RecoilKickBack_Aim: {x: 0, y: 0, z: 0}
+  RecoilRotation_Aim: {x: -50, y: -10, z: 20}
+  RecoilKickBack_Aim: {x: -100, y: 0, z: 0}
   CurrentRecoil1: {x: 0, y: 0, z: 0}
   CurrentRecoil2: {x: 0, y: 0, z: 0}
   CurrentRecoil3: {x: 0, y: 0, z: 0}
@@ -4259,6 +4191,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6317152060632790656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4164100495274169853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: Aim
+  - Type: 9
+    SynchronizeType: 1
+    Name: Fire
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &4164100495654678237
 GameObject:
   m_ObjectHideFlags: 0
@@ -7085,6 +7041,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6998236651481174746}
+  - {fileID: 6317152060632790656}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
