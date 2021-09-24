@@ -142,7 +142,8 @@ public class RGame : MonoBehaviourPunCallbacks
     private void TOSCORESCENE_RPC()
     {
         PhotonNetwork.OpCleanRpcBuffer(pv);
-        PhotonNetwork.LoadLevel("ScoreScene");
+        if(PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel("ScoreScene");
     }
     public void SelectTeam()
     {

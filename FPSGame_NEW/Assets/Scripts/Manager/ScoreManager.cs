@@ -26,7 +26,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
 
 
-        PhotonNetwork.AutomaticallySyncScene = true;
+        
 
         if (PhotonNetwork.IsMasterClient)
             Invoke("GOGAMESCENE",5);
