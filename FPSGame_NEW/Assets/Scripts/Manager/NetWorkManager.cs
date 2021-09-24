@@ -26,7 +26,7 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            PhotonNetwork.GameVersion = "0";
+            //PhotonNetwork.AppVersion("11");
         }
     }
     void Awake()
