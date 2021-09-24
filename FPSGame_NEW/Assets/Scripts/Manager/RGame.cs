@@ -77,7 +77,7 @@ public class RGame : MonoBehaviourPunCallbacks
 
         if (pv.IsMine)
         {
-            SelectTeam();
+            //SelectTeam();
             SelectSpawn();
 
             Invoke("EndTimeSet_M",Random.Range(5.0f,10.0f));
