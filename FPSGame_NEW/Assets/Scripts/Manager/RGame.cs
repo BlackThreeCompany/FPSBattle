@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
-
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class RGame : MonoBehaviourPunCallbacks
 {
     public GameObject[] Spawnpos;
@@ -35,6 +35,7 @@ public class RGame : MonoBehaviourPunCallbacks
     public PhotonView pv;
 
     public Text GameTimeTx;
+    public Text GameScoreTx;
     public bool IsTimesend = false;
     public double NowGameTime;
     public double StartGameTime;
@@ -46,6 +47,15 @@ public class RGame : MonoBehaviourPunCallbacks
     public int RoundEnd = 0;
 
     public static RGame instance;
+
+
+    public int GameOver_SendCnt = 0;
+    public int GameOver_A_Safe = 0;
+    public int GameOver_B_Safe = 0;
+
+    public bool ISGameOver_OKSend = false;
+    public int OK_Cnt = 0;
+    public bool IsOK_Send = false;
     // Start is called before the first frame update
 
 
@@ -57,6 +67,9 @@ public class RGame : MonoBehaviourPunCallbacks
     private void Awake()
     {
         instance = this;
+        Hashtable CP = PhotonNetwork.CurrentRoom.CustomProperties;
+
+        GameScoreTx.text = CP["RedScore"] + " : " + CP["BlueScore"];
     }
     void Start()
     {
@@ -79,16 +92,57 @@ public class RGame : MonoBehaviourPunCallbacks
     {
         if (!isPunReceived)
         {
+            Debug.Log("##º¸³¿");
             return;
         }
+        
+        if (RoundEnd == 1)
+        {
+            
+            if (GameOver_SendCnt == PhotonNetwork.CurrentRoom.PlayerCount && !ISGameOver_OKSend)
+            {
+                Debug.Log("##º¸³¿");
+                pv.RPC("RoundOver_OK", RpcTarget.AllBuffered);
+                ISGameOver_OKSend = true;
+            }
+            if (PhotonNetwork.IsMasterClient && !IsOK_Send)
+            {
+                if(OK_Cnt == PhotonNetwork.CurrentRoom.PlayerCount)
+                {
+                    Debug.Log("##º¸³¿");
+                    IsOK_Send = true;
+                    Hashtable CP = PhotonNetwork.CurrentRoom.CustomProperties;
+                    CP["RedSafe"] = GameOver_A_Safe;
+                    CP["BlueSafe"] = GameOver_B_Safe;
 
+                    CP["RedScore"] = int.Parse(CP["RedScore"].ToString()) + GameOver_A_Safe;
+                    CP["BlueScore"] = int.Parse(CP["BlueScore"].ToString()) + GameOver_B_Safe;
+
+                    PhotonNetwork.CurrentRoom.SetCustomProperties(CP);
+                    Invoke("TOSCORESCENE", 5f);
+                }
+            }
+        }
 
         if (IsTimesend)
         {
             if (RoundEnd == 1) return;
             TimeUpdate();
         }
+
+        
         //PlayerUpdate();
+    }
+
+    public void TOSCORESCENE()
+    {
+        pv.RPC("TOSCORESCENE_RPC", RpcTarget.AllBuffered);
+    }
+    [PunRPC]
+    private void TOSCORESCENE_RPC()
+    {
+        PhotonNetwork.OpCleanRpcBuffer(pv);
+        PhotonNetwork.LoadLevel("ScoreScene");
     }
     public void SelectTeam()
     {
@@ -161,7 +215,7 @@ public class RGame : MonoBehaviourPunCallbacks
     [PunRPC]
     private void TeamSelectFinished()
     {
-        
+        Debug.Log("##º¸³¿");
         Debug.Log("!!");
         for (int i = 0; i < PhotonNetwork.CurrentRoom.PlayerCount; i++)
         {
@@ -186,6 +240,7 @@ public class RGame : MonoBehaviourPunCallbacks
     [PunRPC]
     private void TeamSelectSend(int Team_RPC,string Team_ID_RPC,int Idx_RPC)
     {
+        Debug.Log("##º¸³¿");
         Debug.Log("Á¤º¸¹ÞÀ½" + Team_RPC + Team_ID_RPC + Idx_RPC);
 
 
@@ -243,7 +298,7 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public void SelectSpawn()
     {
-        
+        Debug.Log("##º¸³¿");
 
         spawnA = Random.Range(0, Spawnpos.Length);
         while (true)
@@ -260,10 +315,10 @@ public class RGame : MonoBehaviourPunCallbacks
     [PunRPC]
     private void TeamSpawnPosSend(int spawnA_RPC, int spawnB_RPC)
     {
-        
+        Debug.Log("##º¸³¿");
 
 
-        if(MYTEAM == 0)
+        if (MYTEAM == 0)
         {
             SpawnPos_Trans = Spawnpos[spawnA_RPC].GetComponentsInChildren<Transform>();
             for (int i = 0; i < 5; i++)
@@ -318,7 +373,7 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public void EndTimeSet_M()
     {
-        pv.RPC("SendGameTime", RpcTarget.AllBuffered, PhotonNetwork.Time, Random.Range(30.0f, 120.0f));
+        pv.RPC("SendGameTime", RpcTarget.AllBuffered, PhotonNetwork.Time, Random.Range(10.0f, 20.0f));
     }
     [PunRPC]
     private void SendGameTime(double StartTime_rpc,float GameTime_rpc)
@@ -357,23 +412,67 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public void PlayerSafeAreacheck()
     {
-        if(StatManager.instance.isInSafeArea == false)
+        Debug.Log("##º¸³¿");
+        if (StatManager.instance.isInSafeArea == false)
         {
+            
             StatManager.instance.HP = 0;
-            pv.RPC("PlayerKilled_TimesUP",RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX);
+            pv.RPC("PlayerKilledORSafe_TimesUP",RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX,1); // Á×À½
+        }
+        else
+        {
+            if (MYTEAM == 0 && TeamPlayerState_A[MYTEAM_IDX] == 2)
+            {
+                pv.RPC("PlayerKilledORSafe_TimesUP", RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX, 1); // Á×À½
+            }
+            else if(MYTEAM == 1 && TeamPlayerState_B[MYTEAM_IDX] == 2)
+            {
+                pv.RPC("PlayerKilledORSafe_TimesUP", RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX, 1); // Á×À½
+            }
+            else
+            {
+                pv.RPC("PlayerKilledORSafe_TimesUP", RpcTarget.AllBuffered, MYTEAM, MYTEAM_IDX, 0); //»ýÁ¸
+            }
+                
         }
     }
 
     [PunRPC]
-    private void PlayerKilled_TimesUP(int KilledPL_Team,int KilledPL_T_IDX)
+    private void PlayerKilledORSafe_TimesUP(int PL_Team,int PL_T_IDX, int SafeOrKilled)
     {
-        if (KilledPL_Team == 0)
+        Debug.Log("##º¸³¿");
+        if (SafeOrKilled == 1)
         {
-            TeamPlayerState_A[KilledPL_T_IDX] = 2;
+            if (PL_Team == 0)
+            {
+                TeamPlayerState_A[PL_T_IDX] = 2;
+            }
+            else
+            {
+                TeamPlayerState_B[PL_T_IDX] = 2;
+            }
         }
         else
         {
-            TeamPlayerState_B[KilledPL_T_IDX] = 2;
+            if (PL_Team == 0)
+            {
+                GameOver_A_Safe++;
+            }
+            else
+            {
+                GameOver_B_Safe++;
+            }
         }
+
+        Debug.Log("!! " + PL_Team + "  " + PL_T_IDX + " ¹ÞÀ½ ");
+
+        GameOver_SendCnt++;
+
+    }
+
+    [PunRPC]
+    private void RoundOver_OK()
+    {
+        OK_Cnt++;
     }
 }

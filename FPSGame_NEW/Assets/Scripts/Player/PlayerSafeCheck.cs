@@ -22,7 +22,7 @@ public class PlayerSafeCheck : MonoBehaviourPunCallbacks
     {
         if (!pv.IsMine) return;
 
-        if(other.gameObject.layer == 17)
+        if(other.gameObject.layer == 18)
         {
             StatManager.instance.SafeTx.SetActive(true);
             StatManager.instance.isInSafeArea = true;
@@ -32,7 +32,7 @@ public class PlayerSafeCheck : MonoBehaviourPunCallbacks
     {
         if (!pv.IsMine) return;
 
-        if (other.gameObject.layer == 17)
+        if (other.gameObject.layer == 18)
         {
             StatManager.instance.SafeTx.SetActive(false);
             StatManager.instance.isInSafeArea = false;

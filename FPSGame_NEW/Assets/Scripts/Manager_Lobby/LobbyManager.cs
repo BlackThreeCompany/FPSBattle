@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public Dropdown GameModeSelect;
@@ -21,6 +22,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
 
     public PhotonView pv;
+
+    RoomOptions roomOptions = new RoomOptions();
     public void GameModeChange()
     {
         NowGameMode = GameModeSelect.value;
@@ -57,11 +60,33 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        PhotonNetwork.CreateRoom("개인전" + Random.Range(0,1000), new RoomOptions { MaxPlayers = 10 ,PublishUserId = true});
+        roomOptions.MaxPlayers = 10;
+        roomOptions.PublishUserId = true;
+        roomOptions.CustomRoomProperties = new Hashtable()
+        {
+            {"RedScore", 0 },
+            {"BlueScore", 0 },
+            {"RedSafe", 0 },
+            {"BlueSafe", 0 }
+        };
+
+
+        PhotonNetwork.CreateRoom("개인전" + Random.Range(0,1000), roomOptions);
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        PhotonNetwork.CreateRoom("개인전" + Random.Range(0, 1000), new RoomOptions { MaxPlayers = 10 , PublishUserId = true });
+        roomOptions.MaxPlayers = 10;
+        roomOptions.PublishUserId = true;
+        roomOptions.CustomRoomProperties = new Hashtable()
+        {
+            {"RedScore", 0 },
+            {"BlueScore", 0 },
+            {"RedSafe", 0 },
+            {"BlueSafe", 0 }
+        };
+
+
+        PhotonNetwork.CreateRoom("개인전" + Random.Range(0, 1000), roomOptions);
     }
     public override void OnJoinedRoom()
     {

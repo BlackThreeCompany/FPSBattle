@@ -98,6 +98,8 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
 
     public void Finished_PlayerSpawn(Vector3 spawnPos, Quaternion spawnRot)
     {
+        Debug.Log("##보냄");
         Player = PhotonNetwork.Instantiate("Player", spawnPos, spawnRot);
+        Debug.Log("##보냄");
     }
 }

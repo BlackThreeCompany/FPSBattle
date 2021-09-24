@@ -6,7 +6,7 @@ using Photon.Realtime;
 public class GunController : MonoBehaviourPunCallbacks
 {
 
-    public LayerMask IgnoreMe;
+    //public LayerMask IgnoreMe;
 
     public Player_Pun playerPun;
 
@@ -74,6 +74,8 @@ public class GunController : MonoBehaviourPunCallbacks
         tr = GetComponent<Transform>();
         sniperAni = Sniper1.GetComponent<Animator>();
 
+        
+
     }
     void Start()
     {
@@ -98,12 +100,22 @@ public class GunController : MonoBehaviourPunCallbacks
         {
             return;
         }
+       
 
-        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit1, IgnoreMe))
+        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit1))
         {
 
             HitPoint.SetActive(true);
+            Debug.Log(hit1.transform.gameObject);
+            if(hit1.transform.gameObject.layer == 12 || hit1.transform.gameObject.layer == 17)
+            {
+                Debug.DrawRay(Cam.transform.position, Cam.transform.forward * 1000f, Color.green);
+                HitPoint.SetActive(false);
 
+                Gundir = Cam.transform.forward;
+
+                return;
+            }
 
             Debug.DrawRay(Cam.transform.position, Cam.transform.forward * hit1.distance, Color.green);
             HitPoint.transform.position = hit1.point;

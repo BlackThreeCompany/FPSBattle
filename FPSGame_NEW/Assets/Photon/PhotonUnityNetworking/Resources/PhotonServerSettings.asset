@@ -56,6 +56,9 @@ MonoBehaviour:
   - R_PLAYERKILLED
   - SendGameTime
   - PlayerKilled_TimesUP
+  - RoundOver_OK
+  - TOSCORESCENE_RPC
+  - PlayerKilledORSafe_TimesUP
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
