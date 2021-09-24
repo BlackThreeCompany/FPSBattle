@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     void Awake()
     {
         instance = this;
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     // Update is called once per frame
