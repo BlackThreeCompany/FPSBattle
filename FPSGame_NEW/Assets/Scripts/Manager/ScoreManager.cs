@@ -14,6 +14,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     public Text RED_SCORE;
     public Text BLUE_SCORE;
 
+    public int GameWin = 0; //1:RED 2:BLUE
     Hashtable CP = new Hashtable();
     private void Awake()
     {
@@ -24,18 +25,44 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         RED_SCORE.text = CP["RedScore"].ToString();
         BLUE_SCORE.text = CP["BlueScore"].ToString();
 
+        if (int.Parse( CP["RedScore"].ToString() )>= 5)
+        {
+            GameWin = 1;
+            PhotonNetwork.AutomaticallySyncScene = false;
 
+            Invoke("GOLOBBYSCENE", 5);
+        }
+        else if (int.Parse(CP["BlueScore"].ToString()) >= 5)
+        {
+            GameWin = 2;
+            PhotonNetwork.AutomaticallySyncScene = false;
+
+            Invoke("GOLOBBYSCENE", 5);
+        }
+        else
+        {
+            Invoke("GOGAMESCENE", 5);
+        }
 
         
 
-        if (PhotonNetwork.IsMasterClient)
-            Invoke("GOGAMESCENE",5);
+        
+        
     }
 
     public void GOGAMESCENE()
-    {
-        PhotonNetwork.LoadLevel("TestMap1");
+    { 
+        if(PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel("TestMap1");
+        else
+        {
+            Invoke("GOGAMESCENE",1);
+        }
     }
 
+    public void GOLOBBYSCENE()
+    {
+        PhotonNetwork.LoadLevel("Lobby");
+    }
 
 }
