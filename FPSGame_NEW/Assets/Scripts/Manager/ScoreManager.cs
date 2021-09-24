@@ -24,7 +24,12 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         RED_SCORE.text = CP["RedScore"].ToString();
         BLUE_SCORE.text = CP["BlueScore"].ToString();
 
-        Invoke("GOGAMESCENE",5);
+
+
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+        if (PhotonNetwork.IsMasterClient)
+            Invoke("GOGAMESCENE",5);
     }
 
     public void GOGAMESCENE()
