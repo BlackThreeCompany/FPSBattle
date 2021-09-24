@@ -128,7 +128,6 @@ MonoBehaviour:
   CurrentRecoil4: {x: 0, y: 0, z: 0}
   MainCameraVector: {x: 0, y: 0, z: 0}
   RotationOutput: {x: 0, y: 0, z: 0}
-  aim: 0
 --- !u!1 &251478280770358352
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,7 +2514,6 @@ MonoBehaviour:
   CurrentRecoil4: {x: 0, y: 0, z: 0}
   MainCameraVector: {x: 0, y: 0, z: 0}
   RotationOutput: {x: 0, y: 0, z: 0}
-  aim: 0
 --- !u!1 &2588473638662636129
 GameObject:
   m_ObjectHideFlags: 0
@@ -4242,7 +4240,6 @@ MonoBehaviour:
   CurrentRecoil4: {x: 0, y: 0, z: 0}
   MainCameraVector: {x: 0, y: 0, z: 0}
   RotationOutput: {x: 0, y: 0, z: 0}
-  aim: 0
 --- !u!95 &1758939586877827891
 Animator:
   serializedVersion: 3
@@ -5328,7 +5325,6 @@ MonoBehaviour:
   CurrentRecoil4: {x: 0, y: 0, z: 0}
   MainCameraVector: {x: 0, y: 0, z: 0}
   RotationOutput: {x: 0, y: 0, z: 0}
-  aim: 0
 --- !u!1 &5749702840694200054
 GameObject:
   m_ObjectHideFlags: 0
@@ -6682,7 +6678,6 @@ MonoBehaviour:
   CurrentRecoil4: {x: 0, y: 0, z: 0}
   MainCameraVector: {x: 0, y: 0, z: 0}
   RotationOutput: {x: 0, y: 0, z: 0}
-  aim: 0
 --- !u!1 &6997082340350218119
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,6 +29,8 @@ public class WeaponManager : MonoBehaviour
     public int ShotGunAmmo;
     public int sniperAmmo;
 
+    public bool aim;
+
     public float FireSpeed;
     public int damage;
     public float ReboundPower;

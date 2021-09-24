@@ -138,30 +138,36 @@ public class GunController : MonoBehaviourPunCallbacks
 
     void Aim()
     {
-        if(Input.GetMouseButton(1))
+        if(CurrentHand == 7)
         {
-            if (isLift1)
+            if (Input.GetMouseButton(1))
             {
-                if (CurrentHand == 7)//스나이퍼
+                if (isLift1)
                 {
-                    sniperAni.SetBool("Aim", true);
-                    GameManager.instance.ScopeAimEnable();
-                    
+                    if (CurrentHand == 7)//스나이퍼
+                    {
+                        sniperAni.SetBool("Aim", true);
+                        WeaponManager.instance.aim = true;
+                        GameManager.instance.ScopeAimEnable();
+
+                    }
+                }
+                else if (isLift2)
+                {
+
+                }
+                else if (isLift3)
+                {
+
                 }
             }
-            else if (isLift2)
-            {
 
-            }
-            else if (isLift3)
+            else
             {
-
+                sniperAni.SetBool("Aim", false);
+                WeaponManager.instance.aim = false;
+                GameManager.instance.ScopeAimDisable();
             }
-        }
-        else
-        {
-            sniperAni.SetBool("Aim", false);
-            GameManager.instance.ScopeAimDisable();
         }
         
     }
