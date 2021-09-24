@@ -42,7 +42,6 @@ public class Recoil : MonoBehaviour
     [Space(10)]
     public Vector3 RotationOutput;
 
-    public bool aim;
 
     void FixedUpdate()
     {
@@ -59,14 +58,14 @@ public class Recoil : MonoBehaviour
     public void Fire()
     {
         cnt++;
-        if (aim == true)
+        if (WeaponManager.instance.aim == true)
         {
             CurrentRecoil1 += new Vector3(RecoilRotation_Aim.x, Random.Range(-RecoilRotation_Aim.y, RecoilRotation_Aim.y), Random.Range(-RecoilRotation_Aim.z, RecoilRotation_Aim.z));
             CurrentRecoil3 += new Vector3(Random.Range(-RecoilKickBack_Aim.x, RecoilKickBack_Aim.x), Random.Range(-RecoilKickBack_Aim.y, RecoilKickBack_Aim.y), RecoilKickBack_Aim.z);
             CameraMove.instance.AddRotation(Random.Range(-RecoilKickBack_Aim.x, RecoilKickBack_Aim.x), Random.Range(-RecoilKickBack_Aim.y, RecoilKickBack_Aim.y), 0);
             CameraMove.instance.DownTime = 0.5f;
         }
-        if (aim == false)
+        if (WeaponManager.instance.aim == false)
         {
             CurrentRecoil1 += new Vector3(RecoilRotation.x, Random.Range(-RecoilRotation.y, RecoilRotation.y), Random.Range(-RecoilRotation.z, RecoilRotation.z));
             CurrentRecoil3 += new Vector3(Random.Range(-RecoilKickBack.x, RecoilKickBack.x), Random.Range(-RecoilKickBack.y, RecoilKickBack.y), RecoilKickBack.z);
