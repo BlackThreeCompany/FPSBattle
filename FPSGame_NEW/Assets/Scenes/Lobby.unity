@@ -1840,6 +1840,38 @@ MonoBehaviour:
   MatchedPn: {fileID: 1259406484}
   NowGameMode: 0
   pv: {fileID: 1543459809}
+  Spawnpos: []
+  TeamPlayerToID_A:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  TeamPlayerToID_B:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  TeamPlayerState_A: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  TeamPlayerState_B: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  PlayerFirstCheck: 000000000000000000000000
+  TeamABIdx: 0000000000000000
+  NowPlayerCnt: 0
 --- !u!4 &1543459808
 Transform:
   m_ObjectHideFlags: 0
