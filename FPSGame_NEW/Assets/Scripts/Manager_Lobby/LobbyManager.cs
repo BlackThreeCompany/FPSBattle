@@ -24,7 +24,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public PhotonView pv;
 
     RoomOptions roomOptions = new RoomOptions();
-
+    
 
 
 
@@ -237,11 +237,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
                     
                     Debug.Log("MASDTERID : " + TeamPlayerToID_A[TeamABIdx[0]]);
+
+                    Hashtable playerCP = new Hashtable
+                    {
+                        {"Team","A" },
+                        {"Num",TeamABIdx[0].ToString() }
+
+                    };
+                    Debug.Log(playerCP["Team"]);
+                    PhotonNetwork.PlayerList[RandomIdx].SetCustomProperties(playerCP);
+                    playerCP = PhotonNetwork.PlayerList[RandomIdx].CustomProperties;
+                    Debug.Log(playerCP["Team"]);
                     TeamABIdx[0]++;
                     Debug.Log("A:" + TeamABIdx[0].ToString());
                     Cnt++;
 
-
+                    
 
 
                 }
@@ -259,6 +270,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
                     
                     Debug.Log("MASDTERID : " + TeamPlayerToID_B[TeamABIdx[1]]);
+
+                    Hashtable playerCP = new Hashtable
+                    {
+                        {"Team","B" },
+                        {"Num",TeamABIdx[0] }
+
+                    };
+                    PhotonNetwork.PlayerList[RandomIdx].SetCustomProperties(playerCP);
+
                     TeamABIdx[1]++;
                     Debug.Log("B:" + TeamABIdx[1].ToString());
                     Cnt++;
@@ -269,6 +289,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
 
         }
+
+
+
+
+
 
     }
 

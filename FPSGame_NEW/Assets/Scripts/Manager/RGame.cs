@@ -78,6 +78,7 @@ public class RGame : MonoBehaviourPunCallbacks
         if (pv.IsMine)
         {
             //SelectTeam();
+            LoadTeam();
             SelectSpawn();
 
             Invoke("EndTimeSet_M",Random.Range(5.0f,10.0f));
@@ -210,6 +211,46 @@ public class RGame : MonoBehaviourPunCallbacks
         pv.RPC("TeamSelectFinished",RpcTarget.AllBuffered);
 
 
+    }
+
+
+
+    public void LoadTeam()
+    {
+        NowPlayerCnt = PhotonNetwork.CurrentRoom.PlayerCount;
+        for (int i=0;i< NowPlayerCnt; i++)
+        {
+            Hashtable playerCP = PhotonNetwork.PlayerList[i].CustomProperties;
+            int playernum = int.Parse(playerCP["Num"].ToString());
+
+            if (playerCP["Team"].ToString() == "A")
+            {
+                TeamPlayer_A[playernum] = PhotonNetwork.PlayerList[i];
+
+                TeamPlayerToID_A[playernum] = PhotonNetwork.PlayerList[i].UserId;
+                TeamPlayerState_A[playernum] = 1;
+                Debug.Log("MASDTERID1 : " + TeamPlayerToID_A[playernum]);
+
+                pv.RPC("TeamSelectSend", RpcTarget.AllBuffered, 0, TeamPlayerToID_A[playernum], playernum);
+                Debug.Log("MASDTERID : " + TeamPlayerToID_A[playernum]);
+                Debug.Log("A:" + playernum.ToString());
+                
+            }
+            else if(playerCP["Team"].ToString() == "B")
+            {
+                TeamPlayer_B[playernum] = PhotonNetwork.PlayerList[i];
+                TeamPlayerToID_B[playernum] = PhotonNetwork.PlayerList[i].UserId;
+                TeamPlayerState_B[playernum] = 1;
+                Debug.Log("MASDTERID1 : " + TeamPlayerToID_B[playernum]);
+
+                pv.RPC("TeamSelectSend", RpcTarget.AllBuffered, 1, TeamPlayerToID_B[playernum], playernum);
+                Debug.Log("MASDTERID : " + TeamPlayerToID_B[playernum]);
+             
+                Debug.Log("B:" + playernum.ToString());
+            }
+        }
+
+        pv.RPC("TeamSelectFinished", RpcTarget.AllBuffered);
     }
 
 
