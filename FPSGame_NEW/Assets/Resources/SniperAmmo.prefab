@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7160121218566780053}
   - component: {fileID: 3371780147395148946}
   - component: {fileID: 7694830476411838714}
+  - component: {fileID: -2371059250601634523}
   m_Layer: 6
   m_Name: SniperAmmo
   m_TagString: Item
@@ -165,3 +166,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-2371059250601634523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919225790314925032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c7cb63867cdb54ab6167eb00e37db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

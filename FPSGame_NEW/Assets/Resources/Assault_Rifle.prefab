@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 5507118712477233811}
   - component: {fileID: 1305504791357775144}
   - component: {fileID: -3627897842867890798}
+  - component: {fileID: -636138021783928886}
   m_Layer: 6
   m_Name: Assault_Rifle
   m_TagString: Item
@@ -389,7 +390,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -3627897842867890798}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -409,3 +411,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-636138021783928886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719131515888008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c7cb63867cdb54ab6167eb00e37db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemCnt: 0

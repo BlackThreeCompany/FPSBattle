@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -6273106632653347426}
   - component: {fileID: -1916749333087670887}
   - component: {fileID: -6816997370937167375}
+  - component: {fileID: 3810757079112523719}
   m_Layer: 6
   m_Name: ShotGunAmmo
   m_TagString: Item
@@ -165,3 +166,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &3810757079112523719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5840846829915822819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c7cb63867cdb54ab6167eb00e37db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

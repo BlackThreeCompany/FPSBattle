@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 7116655047413320880}
   - component: {fileID: 7952020567753388376}
   - component: {fileID: 9081090607482222947}
+  - component: {fileID: 9150837449723649561}
   m_Layer: 6
   m_Name: Handgun
   m_TagString: Item
@@ -308,7 +309,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 9081090607482222947}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -328,6 +330,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &9150837449723649561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669814075106190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c7cb63867cdb54ab6167eb00e37db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemCnt: 0
 --- !u!1 &1672287814348484
 GameObject:
   m_ObjectHideFlags: 0

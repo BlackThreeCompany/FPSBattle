@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -1533869395973984411}
   - component: {fileID: -5484137342709997272}
   - component: {fileID: -8848023135704945967}
+  - component: {fileID: -3562022135797227573}
   m_Layer: 6
   m_Name: 7.62mm
   m_TagString: Item
@@ -146,3 +147,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pv: {fileID: -5484137342709997272}
+--- !u!114 &-3562022135797227573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7866901554916376059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c7cb63867cdb54ab6167eb00e37db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
