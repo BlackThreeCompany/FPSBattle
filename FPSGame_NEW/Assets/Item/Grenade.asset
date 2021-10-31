@@ -15,4 +15,6 @@ MonoBehaviour:
   itemName: Grenade
   itemImage: {fileID: 21300000, guid: 194c5953aaf9af747a6d73bfd39ba54c, type: 3}
   itemPrefab: {fileID: 8414854629451895517, guid: 80f5d061b794a5e4a85a14982abaee83, type: 3}
+  weight: 100
+  itemCnt: 1
   itemType: 7

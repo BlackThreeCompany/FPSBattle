@@ -15,4 +15,6 @@ MonoBehaviour:
   itemName: SniperAmmo
   itemImage: {fileID: 21300000, guid: ca00c51add69a464daaab65148524f85, type: 3}
   itemPrefab: {fileID: 1919225790314925032, guid: 39cc0484694df3044b26ca955fac8fcf, type: 3}
+  weight: 25
+  itemCnt: 5
   itemType: 6

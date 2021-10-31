@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     bool isAim;
 
-    public GameObject WeaponCamera;
     public PhotonView pv;
     void Awake()
     {
@@ -147,7 +146,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         yield return new WaitForSecondsRealtime(0.15f);
 
         AimDisable();
-        WeaponCamera.SetActive(false);
         ScopeAim.SetActive(true);
     }
 
@@ -159,7 +157,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void ScopeAimDisable()
     {
         AimEnable();
-        WeaponCamera.SetActive(true);
         ScopeAim.SetActive(false);
     }
 }

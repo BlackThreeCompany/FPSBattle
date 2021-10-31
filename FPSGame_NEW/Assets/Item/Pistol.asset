@@ -15,4 +15,6 @@ MonoBehaviour:
   itemName: Pistol
   itemImage: {fileID: 21300000, guid: d6e4dc2ab496ac845a119b14c5abbb91, type: 3}
   itemPrefab: {fileID: 1669814075106190, guid: ea530e89dc913d14480baec0a57c7801, type: 3}
+  weight: 50
+  itemCnt: 1
   itemType: 3

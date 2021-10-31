@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -6484128947765975696}
   - component: {fileID: -974067199008689944}
   - component: {fileID: 2327231720814336085}
+  - component: {fileID: 4473648142850668948}
   m_Layer: 6
   m_Name: ShotGun
   m_TagString: Item
@@ -164,3 +165,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &4473648142850668948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4189298330929909640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c7cb63867cdb54ab6167eb00e37db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemCnt: 0

@@ -10,6 +10,8 @@ public class Item : ScriptableObject //MonoBehaviour은 GameObject에 스크립�
     public string itemName;
     public Sprite itemImage; //Image는 캔버스가 필요, Sprite 캔버스 필요X
     public GameObject itemPrefab;
+    public int weight;
+    public int itemCnt;
 
     public enum ItemType
     { 
