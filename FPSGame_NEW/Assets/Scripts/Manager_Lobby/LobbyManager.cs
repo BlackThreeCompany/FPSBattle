@@ -97,6 +97,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
+
+        roomOptions.BroadcastPropsChangeToAll = false;
         roomOptions.MaxPlayers = 10;
         roomOptions.PublishUserId = true;
         roomOptions.CustomRoomProperties = new Hashtable()
@@ -112,6 +114,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
+        roomOptions.BroadcastPropsChangeToAll = false;
         roomOptions.MaxPlayers = 10;
         roomOptions.PublishUserId = true;
         roomOptions.CustomRoomProperties = new Hashtable()
@@ -274,7 +277,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                     Hashtable playerCP = new Hashtable
                     {
                         {"Team","B" },
-                        {"Num",TeamABIdx[0] }
+                        {"Num",TeamABIdx[1].ToString() }
 
                     };
                     PhotonNetwork.PlayerList[RandomIdx].SetCustomProperties(playerCP);
