@@ -70,6 +70,9 @@ public class RGame : MonoBehaviourPunCallbacks
         Hashtable CP = PhotonNetwork.CurrentRoom.CustomProperties;
 
         GameScoreTx.text = CP["RedScore"] + " : " + CP["BlueScore"];
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     void Start()
     {
@@ -415,7 +418,7 @@ public class RGame : MonoBehaviourPunCallbacks
 
     public void EndTimeSet_M()
     {
-        pv.RPC("SendGameTime", RpcTarget.AllBuffered, PhotonNetwork.Time, Random.Range(10.0f, 20.0f));
+        pv.RPC("SendGameTime", RpcTarget.AllBuffered, PhotonNetwork.Time, Random.Range(40.0f, 50.0f));
     }
     [PunRPC]
     private void SendGameTime(double StartTime_rpc,float GameTime_rpc)

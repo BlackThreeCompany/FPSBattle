@@ -103,6 +103,9 @@ public class Inventory : MonoBehaviour
         ThrowBG.SetActive(true);
         InventoryBG.SetActive(true);
         EquipmentBG.SetActive(true);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     void CloseInventory()
@@ -110,6 +113,9 @@ public class Inventory : MonoBehaviour
         ThrowBG.SetActive(false);
         InventoryBG.SetActive(false);
         EquipmentBG.SetActive(false);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void AcquireItem(Item _item,int _count = 1)
