@@ -31,6 +31,8 @@ public class Inventory : MonoBehaviour
 
     public GameObject InventoryBG;
     public GameObject EquipmentBG;
+    public GameObject ThrowBG;
+    public GameObject InputNum;
     public GameObject SlotsParent;
 
     public Text InventoryCurrentVolumeTxt;
@@ -98,12 +100,14 @@ public class Inventory : MonoBehaviour
 
     void OpenInventory()
     {
+        ThrowBG.SetActive(true);
         InventoryBG.SetActive(true);
         EquipmentBG.SetActive(true);
     }
 
     void CloseInventory()
     {
+        ThrowBG.SetActive(false);
         InventoryBG.SetActive(false);
         EquipmentBG.SetActive(false);
     }
@@ -334,6 +338,26 @@ public class Inventory : MonoBehaviour
                     }
                     return;
                 }
+            }
+        }
+    }
+
+    public void DeleteItem(int cnt,Item item)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null) continue;
+            if (slots[i].item.itemName == item.itemName)
+            {
+                slots[i].SetSloatCount(-cnt);
+                if (Inventory.instnace.InventoryCurrentVolume - (cnt) * item.weight >= 0)
+                {
+                    Inventory.instnace.InventoryCurrentVolume -= (cnt) * item.weight;
+                }
+                else Inventory.instnace.InventoryCurrentVolume = 0;
+
+
+                return;
             }
         }
     }

@@ -18,6 +18,8 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
     public Text text_cnt;
     public GameObject CntImage;
 
+    Vector2 MousePosition;
+
     //이미지 투명도 조절
     private void SetColor(float _alpha)
     {
@@ -77,16 +79,11 @@ public class Sloat : MonoBehaviour , IPointerClickHandler //IPointerClickHandler
         {
             if(item != null)
             {
-                if(item.itemType == Item.ItemType.Equipment )
-                {
-                    //장착
-                }
-                else
-                {
-                    //소모
-                    Debug.Log(item.itemName + " 을 사용했습니다");
-                    SetSloatCount(-1);
-                }
+                MousePosition = Input.mousePosition;
+                Inventory.instnace.InputNum.SetActive(true);
+                Inventory.instnace.InputNum.transform.position = MousePosition;
+                ThrowItems.instance.CopyItem(item);
+                //SetSloatCount(-1);
             }
         }
     }
